@@ -17,7 +17,7 @@ export function BlendRunResults({ result }: { result: BlendResult }) {
     <Panel className="min-w-0 space-y-5 p-5" aria-label="Calculated blend research results">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div><p className="research-eyebrow">Latest calculated research run</p><h2 className="mt-1 text-lg font-semibold">QAOA-selected peptide candidates</h2></div>
-        <StatusPill tone="teal">Qiskit simulator result</StatusPill>
+        <StatusPill tone="blue">Qiskit simulator result</StatusPill>
       </div>
       <p className="text-sm leading-6 text-[#526A75]">
         {result.candidates.length} whole-peptide variables, select {result.goals.blend_size}. pH {result.goals.ph};

@@ -85,7 +85,7 @@ export function PeptideDesigner() {
         eyebrow="Candidate configuration"
         title="Peptide Designer"
         description="Define a bounded candidate pool and research constraints before blend optimization. Substitutions create candidate variants; the QAOA workflow later selects whole candidates."
-        action={<StatusPill tone="teal">Database + quantum research</StatusPill>}
+        action={<StatusPill tone="blue">Database + quantum research</StatusPill>}
       />
 
       <PeptideBlendResearch />

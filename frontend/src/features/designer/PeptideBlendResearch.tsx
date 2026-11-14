@@ -88,7 +88,7 @@ export function PeptideBlendResearch() {
       <Panel className="min-w-0 space-y-5 p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3"><Database className="h-5 w-5 text-teal-700" /><div><p className="research-eyebrow">Live local database + QAOA</p><h2 className="mt-1 text-lg font-semibold">Find a chemical-property research blend</h2></div></div>
-          <StatusPill tone={catalog ? 'teal' : 'amber'}>{catalog ? `${catalog.catalog.imported_source_records.toLocaleString()} imported source records` : 'Connecting to catalog'}</StatusPill>
+          <StatusPill tone={catalog ? 'blue' : 'amber'}>{catalog ? `${catalog.catalog.imported_source_records.toLocaleString()} imported source records` : 'Connecting to catalog'}</StatusPill>
         </div>
         <p className="text-sm leading-6 text-[#526A75]">Set desired chemical properties, shortlist up to eight known peptide sequences, then use a real Qiskit circuit to select whole candidates. Classical filtering searches the large catalog; quantum simulation optimizes only the small pool.</p>
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs leading-6 text-amber-900">This selects research candidates by estimated charge, hydropathy, and motif diversity. It does not predict appetite effects, muscle growth, physical compatibility, or efficacy of a mixture. Scores assume linear free-termini sequences; chemical forms are not verified.</div>
