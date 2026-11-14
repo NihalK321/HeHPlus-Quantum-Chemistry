@@ -23,7 +23,7 @@ export function QaoaConvergenceChart() {
             width={54}
           />
           <Tooltip
-            contentStyle={{ border: '1px solid #DCE7EC', borderRadius: 8, boxShadow: '0 8px 18px rgba(23,43,58,.08)', fontSize: 12 }}
+            contentStyle={{ border: '1px solid #D9E0E7', borderRadius: 8, boxShadow: '0 8px 18px rgba(23,43,58,.08)', fontSize: 12 }}
             cursor={{ stroke: '#9CBEC0', strokeDasharray: '3 3' }}
             formatter={(value) => [`${Number(value).toFixed(2)} a.u.`, 'Demo objective']}
             labelFormatter={(label) => `Iteration ${label}`}

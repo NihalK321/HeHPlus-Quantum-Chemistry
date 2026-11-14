@@ -7,7 +7,7 @@ import { MockDataNotice } from '../shared/MockDataNotice'
 import { LatestBlendRun } from './LatestBlendRun'
 
 const readiness = [
-  { label: 'Candidate pool', detail: '8 display-only candidates staged', tone: 'teal' as const, icon: ListChecks },
+  { label: 'Candidate pool', detail: '8 display-only candidates staged', tone: 'blue' as const, icon: ListChecks },
   { label: 'Chemistry descriptors', detail: 'Awaiting documented calculation method', tone: 'amber' as const, icon: Beaker },
   { label: 'Exact baseline', detail: 'Awaiting backend enumeration', tone: 'amber' as const, icon: Activity },
 ]
@@ -53,35 +53,35 @@ export function ResearchDashboard() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Current configuration</p>
-              <h2 id="configuration-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">Research inputs</h2>
+              <h2 id="configuration-heading" className="mt-1 text-lg font-semibold text-[#28323C]">Research inputs</h2>
             </div>
             <StatusPill tone="demo">Demo fixture</StatusPill>
           </div>
           <dl className="mt-5 grid gap-x-6 gap-y-5 sm:grid-cols-2">
             <div>
               <dt className="text-xs font-medium text-[#6B818B]">Target pH</dt>
-              <dd className="mt-1 text-sm font-semibold text-[#172B3A]">{demoBlendConfiguration.targetPh}</dd>
+              <dd className="mt-1 text-sm font-semibold text-[#28323C]">{demoBlendConfiguration.targetPh}</dd>
               <p className="mt-1 text-xs text-[#718791]">UI setting; no calculation performed</p>
             </div>
             <div>
               <dt className="text-xs font-medium text-[#6B818B]">Temperature context</dt>
-              <dd className="mt-1 text-sm font-semibold text-[#172B3A]">{demoBlendConfiguration.temperature}</dd>
+              <dd className="mt-1 text-sm font-semibold text-[#28323C]">{demoBlendConfiguration.temperature}</dd>
               <p className="mt-1 text-xs text-[#718791]">UI setting; no experimental record</p>
             </div>
             {demoBlendConfiguration.propertyWeights.map((weight) => (
               <div key={weight.label}>
                 <dt className="text-xs font-medium text-[#6B818B]">{weight.label}</dt>
                 <dd className="mt-1 flex items-center gap-3">
-                  <span className="text-sm font-semibold text-[#172B3A]">{Math.round(weight.value * 100)}%</span>
+                  <span className="text-sm font-semibold text-[#28323C]">{Math.round(weight.value * 100)}%</span>
                   <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#EAF0F2]" aria-hidden="true">
-                    <span className="block h-full rounded-full bg-teal-700" style={{ width: `${weight.value * 100}%` }} />
+                    <span className="block h-full rounded-full bg-blue-700" style={{ width: `${weight.value * 100}%` }} />
                   </span>
                 </dd>
               </div>
             ))}
           </dl>
           <div className="mt-6 flex justify-end border-t border-[#E5EEF0] pt-4">
-            <Link className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800" to="/designer">
+            <Link className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800" to="/designer">
               Edit research inputs <ArrowRight size={15} />
             </Link>
           </div>
@@ -91,7 +91,7 @@ export function ResearchDashboard() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Selected blend</p>
-              <h2 id="blend-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">Draft candidate subset</h2>
+              <h2 id="blend-heading" className="mt-1 text-lg font-semibold text-[#28323C]">Draft candidate subset</h2>
             </div>
             <StatusPill tone="amber">Not optimized</StatusPill>
           </div>
@@ -99,7 +99,7 @@ export function ResearchDashboard() {
             {selectedCandidates.map((candidate) => (
               <li key={candidate.id} className="flex items-center justify-between gap-3 py-3">
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[#27424E]">{candidate.id} · {candidate.label}</p>
+                  <p className="text-sm font-semibold text-[#394957]">{candidate.id} · {candidate.label}</p>
                   <p className="mt-0.5 truncate font-mono text-xs tracking-[0.08em] text-[#5E747F]">{candidate.sequence}</p>
                 </div>
                 <StatusPill tone="slate">Candidate</StatusPill>
@@ -117,7 +117,7 @@ export function ResearchDashboard() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Optimization trace</p>
-              <h2 id="convergence-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">Demo objective trace</h2>
+              <h2 id="convergence-heading" className="mt-1 text-lg font-semibold text-[#28323C]">Demo objective trace</h2>
               <p className="mt-1 text-xs text-[#718791]">Illustrative values in arbitrary units; not a QAOA execution.</p>
             </div>
             <StatusPill tone="demo">DEMO</StatusPill>
@@ -128,7 +128,7 @@ export function ResearchDashboard() {
                 <CartesianGrid stroke="#E5EEF0" strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="iteration" tick={{ fill: '#6B818B', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#C9D9DE' }} label={{ value: 'Iteration', position: 'insideBottom', offset: -2, fill: '#6B818B', fontSize: 11 }} />
                 <YAxis tick={{ fill: '#6B818B', fontSize: 11 }} tickLine={false} axisLine={false} domain={[0.5, 1.05]} label={{ value: 'Demo objective (a.u.)', angle: -90, position: 'insideLeft', fill: '#6B818B', fontSize: 11, dx: -3 }} />
-                <Tooltip formatter={(value) => [`${Number(value).toFixed(2)} a.u.`, 'Demo objective']} contentStyle={{ border: '1px solid #DCE7EC', borderRadius: 8, boxShadow: '0 4px 16px rgba(23,43,58,0.08)' }} />
+                <Tooltip formatter={(value) => [`${Number(value).toFixed(2)} a.u.`, 'Demo objective']} contentStyle={{ border: '1px solid #D9E0E7', borderRadius: 8, boxShadow: '0 4px 16px rgba(23,43,58,0.08)' }} />
                 <Line type="monotone" dataKey="objective" stroke="#087E78" strokeWidth={2.25} dot={{ r: 3, fill: '#087E78' }} activeDot={{ r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
@@ -137,17 +137,17 @@ export function ResearchDashboard() {
 
         <Panel className="p-5" aria-labelledby="readiness-heading">
           <p className="research-eyebrow">Workflow readiness</p>
-          <h2 id="readiness-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">What is connected?</h2>
+          <h2 id="readiness-heading" className="mt-1 text-lg font-semibold text-[#28323C]">What is connected?</h2>
           <div className="mt-5 space-y-4">
             {readiness.map((item) => {
               const Icon = item.icon
               return (
                 <div key={item.label} className="flex items-start gap-3">
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[#EFF6F5] text-teal-700"><Icon size={16} /></span>
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[#EFF6F5] text-blue-700"><Icon size={16} /></span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
-                      <p className="text-sm font-semibold text-[#27424E]">{item.label}</p>
-                      <StatusPill tone={item.tone}>{item.tone === 'teal' ? 'Ready for UI' : 'Pending'}</StatusPill>
+                      <p className="text-sm font-semibold text-[#394957]">{item.label}</p>
+                      <StatusPill tone={item.tone}>{item.tone === 'blue' ? 'Ready for UI' : 'Pending'}</StatusPill>
                     </div>
                     <p className="mt-1 text-xs leading-5 text-[#718791]">{item.detail}</p>
                   </div>
@@ -155,7 +155,7 @@ export function ResearchDashboard() {
               )
             })}
           </div>
-          <Link className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800" to="/optimization">
+          <Link className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800" to="/optimization">
             Open optimization workspace <ArrowRight size={15} />
           </Link>
         </Panel>
@@ -166,7 +166,7 @@ export function ResearchDashboard() {
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#F2F6F7] text-[#52707B]"><Atom size={18} /></span>
           <div>
             <p className="research-eyebrow">Research guardrail</p>
-            <h2 id="guardrails-heading" className="mt-1 text-base font-semibold text-[#172B3A]">Keep evidence types separate</h2>
+            <h2 id="guardrails-heading" className="mt-1 text-base font-semibold text-[#28323C]">Keep evidence types separate</h2>
             <p className="mt-1.5 max-w-4xl text-sm leading-6 text-[#5E747F]">The interface distinguishes UI fixtures, calculated descriptors, simulated QAOA output, and hardware measurements. A chemistry proxy or structural hypothesis is never presented as clinical safety, synergy, or laboratory-confirmed compatibility.</p>
           </div>
         </div>

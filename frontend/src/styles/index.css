@@ -4,12 +4,12 @@
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  --color-research-ink: #172b3a;
-  --color-research-teal: #087e78;
-  --color-research-teal-dark: #05635f;
-  --color-research-border: #dce7ec;
+  --color-research-ink: #28323c;
+  --color-research-blue: #5B9BD5;
+  --color-research-blue-dark: #3F78AA;
+  --color-research-border: #d9e0e7;
   --color-research-muted: #5e747f;
-  --color-research-bg: #f8fafc;
+  --color-research-bg: #f3f5f7;
 
   --shadow-research-panel: 0 1px 2px rgb(23 43 58 / 5%), 0 8px 20px rgb(23 43 58 / 4%);
 }
@@ -24,8 +24,8 @@
   html {
     min-width: 320px;
     min-height: 100%;
-    background: #f8fafc;
-    color: #172b3a;
+    background: #f3f5f7;
+    color: #28323c;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -35,8 +35,8 @@
     min-width: 320px;
     min-height: 100svh;
     margin: 0;
-    background: #f8fafc;
-    color: #172b3a;
+    background: #f3f5f7;
+    color: #28323c;
     font-family: var(--font-sans);
   }
 
@@ -58,19 +58,19 @@
   }
 
   ::selection {
-    background: #bfebe8;
-    color: #172b3a;
+    background: #CFE4F8;
+    color: #28323c;
   }
 
   :focus-visible {
-    outline: 2px solid #087e78;
+    outline: 2px solid #5B9BD5;
     outline-offset: 3px;
   }
 }
 
 @layer components {
   .research-panel {
-    border: 1px solid #dce7ec;
+    border: 1px solid #d9e0e7;
     border-radius: 0.75rem;
     background: #fff;
     box-shadow: var(--shadow-research-panel);
@@ -81,24 +81,24 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #087e78;
+    color: #5B9BD5;
   }
 
   .research-label {
     display: block;
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #36505c;
+    color: #465563;
   }
 
   .research-input,
   .research-select,
   .research-textarea {
     width: 100%;
-    border: 1px solid #c9d9de;
+    border: 1px solid #cbd5df;
     border-radius: 0.5rem;
     background: #fff;
-    color: #172b3a;
+    color: #28323c;
     outline: none;
     transition: border-color 150ms ease, box-shadow 150ms ease;
   }
@@ -123,19 +123,19 @@
   .research-input:focus,
   .research-select:focus,
   .research-textarea:focus {
-    border-color: #087e78;
-    box-shadow: 0 0 0 3px rgb(8 126 120 / 12%);
+    border-color: #5B9BD5;
+    box-shadow: 0 0 0 3px rgb(91 155 213 / 14%);
   }
 
   .research-table {
     width: 100%;
     border-collapse: collapse;
-    color: #36505c;
+    color: #465563;
     font-size: 0.8125rem;
   }
 
   .research-table th {
-    border-bottom: 1px solid #dce7ec;
+    border-bottom: 1px solid #d9e0e7;
     padding: 0 0.75rem 0.625rem;
     color: #6a818b;
     font-size: 0.6875rem;
@@ -146,7 +146,7 @@
   }
 
   .research-table td {
-    border-bottom: 1px solid #edf2f4;
+    border-bottom: 1px solid #e9edf1;
     padding: 0.875rem 0.75rem;
     vertical-align: top;
   }
@@ -156,7 +156,7 @@
   }
 
   .research-table tbody tr:hover {
-    background: #f8fbfb;
+    background: #f1f6fb;
   }
 }
 

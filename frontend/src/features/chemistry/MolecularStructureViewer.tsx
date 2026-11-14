@@ -151,13 +151,13 @@ export function MolecularStructureViewer({ initialStructure }: { initialStructur
     <div className="space-y-4">
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div>
-          <p className="text-sm font-semibold text-[#27424E]">Interactive structure viewer</p>
+          <p className="text-sm font-semibold text-[#394957]">Interactive structure viewer</p>
           <p className="mt-1 text-xs leading-5 text-[#6B818B]">{source === 'backend' ? 'Displaying PDB coordinates returned directly by the molecular modeling backend.' : 'Inspect the atomic coordinates in a local PDB, SDF, or MOL file.'}</p>
         </div>
-        <StatusPill tone={structureText ? 'teal' : 'amber'}>{structureText ? source === 'backend' ? 'Backend model loaded' : 'Local structure loaded' : 'No structure loaded'}</StatusPill>
+        <StatusPill tone={structureText ? 'blue' : 'amber'}>{structureText ? source === 'backend' ? 'Backend model loaded' : 'Local structure loaded' : 'No structure loaded'}</StatusPill>
       </div>
 
-      <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-[#B9CDD3] bg-[#FBFDFD] px-4 py-3 text-sm font-semibold text-[#31515C] transition hover:border-teal-600 hover:bg-teal-50">
+      <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-[#B9CDD3] bg-[#F8FAFC] px-4 py-3 text-sm font-semibold text-[#31515C] transition hover:border-blue-600 hover:bg-blue-50">
         <Upload className="h-4 w-4" aria-hidden="true" />
         <span>{source === 'backend' ? 'Optional: load a different structure file' : fileName ? `Replace ${fileName}` : 'Choose a local PDB, SDF, or MOL file'}</span>
         <input accept=".pdb,.sdf,.mol" className="sr-only" onChange={handleFile} type="file" />
@@ -171,12 +171,12 @@ export function MolecularStructureViewer({ initialStructure }: { initialStructur
 
       {structureText ? (
         <>
-          <div className="flex flex-wrap items-center gap-2 rounded-lg border border-[#DCE7EC] bg-[#FBFDFD] p-2">
+          <div className="flex flex-wrap items-center gap-2 rounded-lg border border-[#D9E0E7] bg-[#F8FAFC] p-2">
             <span className="px-2 text-xs font-semibold text-[#5D747E]">Representation</span>
             {(['stick', 'sphere', 'cartoon'] as const).map((option) => (
               <button
                 className={`rounded-md px-2.5 py-1.5 text-xs font-semibold capitalize transition ${
-                  representation === option ? 'bg-teal-700 text-white' : 'text-[#47616B] hover:bg-teal-50 hover:text-teal-800'
+                  representation === option ? 'bg-blue-700 text-white' : 'text-[#47616B] hover:bg-blue-50 hover:text-blue-800'
                 }`}
                 key={option}
                 onClick={() => setRepresentation(option)}
@@ -193,16 +193,16 @@ export function MolecularStructureViewer({ initialStructure }: { initialStructur
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-lg border border-[#DCE7EC] bg-[#F8FAFC]">
+          <div className="relative overflow-hidden rounded-lg border border-[#D9E0E7] bg-[#F3F5F7]">
             <div aria-label="Interactive 3D molecular structure" className="relative h-[28rem] w-full" ref={containerRef} />
-            <div className="pointer-events-none absolute bottom-3 left-3 rounded-md border border-[#DCE7EC] bg-white/95 px-2.5 py-1.5 text-[11px] text-[#5D747E] shadow-sm">
+            <div className="pointer-events-none absolute bottom-3 left-3 rounded-md border border-[#D9E0E7] bg-white/95 px-2.5 py-1.5 text-[11px] text-[#5D747E] shadow-sm">
               <span className="inline-flex items-center gap-1"><Rotate3D className="h-3.5 w-3.5" aria-hidden="true" /> Drag to rotate</span>
               <span className="mx-2 text-[#B4C4C9]">·</span>
               <span className="inline-flex items-center gap-1"><ZoomIn className="h-3.5 w-3.5" aria-hidden="true" /> Scroll to zoom</span>
             </div>
           </div>
 
-          <div className="rounded-md border border-[#DCE7EC] bg-[#FBFDFD] px-3 py-2 text-xs leading-5 text-[#5D747E]">
+          <div className="rounded-md border border-[#D9E0E7] bg-[#F8FAFC] px-3 py-2 text-xs leading-5 text-[#5D747E]">
             {selectedAtom ? `Selected atom: ${selectedAtom}` : 'Select an atom in the loaded structure to inspect the residue and chain values supplied by the file.'}
           </div>
         </>
