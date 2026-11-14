@@ -14,4 +14,7 @@ export const proposedEndpoints = {
   peptideLibrary: 'peptides',
   peptideLibraryRecord: (id: string) => `peptides/${encodeURIComponent(id)}`,
   peptideLibraryStats: 'peptides/stats',
+  peptideCatalog: 'peptide-catalog',
+  peptideCatalogRecord: (id: string) => `peptide-catalog/${encodeURIComponent(id)}`,
+  peptideCatalogStats: 'peptide-catalog/stats',
 } as const

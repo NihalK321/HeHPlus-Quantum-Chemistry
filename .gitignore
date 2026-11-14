@@ -205,6 +205,12 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
+# Locally imported expanded peptide catalog. Recreate it with the documented
+# importer; do not commit the multi-megabyte SQLite snapshot or its journals.
+data/pepperq_extras.sqlite
+data/pepperq_extras.sqlite-shm
+data/pepperq_extras.sqlite-wal
+
 # Ruff stuff:
 .ruff_cache/
 

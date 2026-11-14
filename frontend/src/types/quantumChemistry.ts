@@ -39,6 +39,8 @@ export interface HehMethodConfiguration {
   ansatz: string | null
   classicalOptimizer: string | null
   classicalReferenceMethod: string | null
+  estimator: string | null
+  executionContext: string | null
   qubitCount: number | null
   variationalParameterCount: number | null
   circuitDepth: number | null
@@ -74,7 +76,25 @@ export interface HehCircuitMetadata {
   depth: number | null
   gateCount: number | null
   diagramSvg: string | null
+  imageUrl: string | null
+  imageAlt: string | null
+  imageCaption: string | null
   provenance: HehCalculationProvenance
+}
+
+/** Source hashes and software versions retained with a checked-in result export. */
+export interface HehArtifactProvenance {
+  calculationSource: {
+    fileName: string
+    sha256: string
+    createdAtUtc: string
+  }
+  circuitImageSource?: {
+    fileName: string
+    sha256: string
+    bondDistanceAngstrom: number
+  }
+  packageVersions: Record<string, string>
 }
 
 export interface HehExperiment {
@@ -96,6 +116,7 @@ export interface HehExperiment {
   convergenceHistory: HehConvergenceHistory[]
   circuitMetadata: HehCircuitMetadata | null
   provenance: HehCalculationProvenance
+  artifactProvenance?: HehArtifactProvenance
 }
 
 export function createUnavailableHehExperiment(): HehExperiment {
@@ -121,6 +142,8 @@ export function createUnavailableHehExperiment(): HehExperiment {
       ansatz: null,
       classicalOptimizer: null,
       classicalReferenceMethod: null,
+      estimator: null,
+      executionContext: null,
       qubitCount: null,
       variationalParameterCount: null,
       circuitDepth: null,

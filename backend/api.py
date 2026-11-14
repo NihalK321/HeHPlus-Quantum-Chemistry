@@ -9,6 +9,8 @@ from fastapi.responses import Response
 
 from .optimizer import optimize
 from .peptide_library.api_router import router as peptide_library_router
+from .peptide_library.catalog_router import router as peptide_catalog_router
+from .peptide_library.extra_api import router as peptide_extras_router
 from .schema import OptimizationRequest, OptimizationResult, PeptideLookupRequest
 from .peptide_database import PeptideDatabase
 
@@ -29,8 +31,17 @@ app.add_middleware(
 app.include_router(peptide_library_router, prefix="/api", tags=["Peptide library"])
 app.include_router(peptide_library_router, prefix="/api/v1", include_in_schema=False)
 
+# Keep the supplied extra router available as an additive, source-shaped API.
+# The separate merged router is what the Designer uses: it reads both local
+# catalogs, deduplicates exact sequences, and preserves their provenance.
+app.include_router(peptide_extras_router)
+app.include_router(peptide_catalog_router, prefix="/api")
+app.include_router(peptide_catalog_router, prefix="/api/v1", include_in_schema=False)
+
 
 @app.get("/health")
+@app.get("/api/health", include_in_schema=False)
+@app.get("/api/v1/health", include_in_schema=False)
 def health():
     return {"status": "ok"}
 
