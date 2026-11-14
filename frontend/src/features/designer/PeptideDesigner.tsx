@@ -2,8 +2,10 @@ import { useMemo, useState } from 'react'
 import { Dna, FlaskConical, Save, SlidersHorizontal } from 'lucide-react'
 import { demoBlendConfiguration, demoCandidates } from '../../demo/researchDemo'
 import { Button, Panel, SectionHeading, StatusPill } from '../../components/ui'
+import type { SelectedPeptideCandidate } from '../../types/peptideLibrary'
 import { MockDataNotice } from '../shared/MockDataNotice'
 import { CandidatePoolTable } from './CandidatePoolTable'
+import { PeptideLibraryPanel } from './PeptideLibraryPanel'
 
 const aminoAcids = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
 
@@ -32,6 +34,7 @@ export function PeptideDesigner() {
   const [replacement, setReplacement] = useState('Y')
   const [weights, setWeights] = useState(demoBlendConfiguration.propertyWeights)
   const [draftStatus, setDraftStatus] = useState('Interface draft has not been submitted.')
+  const [libraryCandidates, setLibraryCandidates] = useState<SelectedPeptideCandidate[]>([])
 
   const activeCandidate = useMemo(
     () => demoCandidates.find((candidate) => candidate.id === activeCandidateId) ?? demoCandidates[0],
@@ -40,6 +43,10 @@ export function PeptideDesigner() {
   const substitutedResidue = activeCandidate.sequence.at(position - 1) ?? '—'
   const variantSequence = replaceResidue(activeCandidate.sequence, position, replacement)
   const selectedCandidates = demoCandidates.filter((candidate) => selectedIds.has(candidate.id))
+  const librarySelectedIds = useMemo(
+    () => new Set(libraryCandidates.map((candidate) => candidate.peptideId)),
+    [libraryCandidates],
+  )
 
   function toggleCandidate(candidateId: string) {
     setSelectedIds((current) => {
@@ -62,6 +69,15 @@ export function PeptideDesigner() {
     setWeights((current) => current.map((weight) => (weight.label === label ? { ...weight, value } : weight)))
   }
 
+  function toggleLibraryCandidate(candidate: SelectedPeptideCandidate) {
+    setLibraryCandidates((current) => {
+      if (current.some((selected) => selected.peptideId === candidate.peptideId)) {
+        return current.filter((selected) => selected.peptideId !== candidate.peptideId)
+      }
+      return current.length < 8 ? [...current, candidate] : current
+    })
+  }
+
   return (
     <div className="space-y-6">
       <SectionHeading
@@ -71,7 +87,7 @@ export function PeptideDesigner() {
         action={<StatusPill tone="demo">DEMO UI fixture</StatusPill>}
       />
 
-      <MockDataNotice detail="Sequences, targets, weights, and selected candidates below are centralized display fixtures. They are not a chemistry dataset, a search of sequence space, or a submitted experiment." />
+      <MockDataNotice detail="The configuration controls, weights, and legacy candidate preview below are centralized display fixtures. They are not a chemistry dataset, a search of sequence space, or a submitted experiment. The imported peptide library is labeled separately and only shows records returned by its local API." />
 
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <Panel className="p-5">
@@ -117,6 +133,32 @@ export function PeptideDesigner() {
           <p className="mt-4 text-xs leading-5 text-[#657B85]">The 56-subset count applies only to the stated 8-candidate, 3-selection reference configuration. It is not an optimization result.</p>
         </Panel>
       </div>
+
+      <PeptideLibraryPanel
+        maxSelections={8}
+        onToggle={toggleLibraryCandidate}
+        selectedIds={librarySelectedIds}
+      />
+
+      {libraryCandidates.length > 0 && (
+        <Panel className="p-5" aria-labelledby="future-qaoa-candidates-heading">
+          <p className="research-eyebrow">Future QAOA hand-off</p>
+          <div className="mt-1 flex flex-wrap items-baseline justify-between gap-3">
+            <h2 className="text-lg font-semibold text-[#172B3A]" id="future-qaoa-candidates-heading">Validated imported candidates</h2>
+            <StatusPill tone={libraryCandidates.length === 8 ? 'teal' : 'amber'}>{libraryCandidates.length} of 8 selected</StatusPill>
+          </div>
+          <p className="mt-2 text-sm leading-6 text-[#657B85]">This typed selection retains peptide IDs, sequences, source accessions, and special-handling flags for a future blend-optimization contract. It has not been scored or sent to QAOA.</p>
+          <ul className="mt-4 grid gap-2 text-sm sm:grid-cols-2 xl:grid-cols-4">
+            {libraryCandidates.map((candidate) => (
+              <li className="rounded-md border border-[#DCE7EC] bg-[#FCFEFE] p-3" key={candidate.peptideId}>
+                <p className="font-semibold text-[#27424E]">{candidate.name}</p>
+                <p className="mt-1 break-all font-mono text-xs tracking-[0.07em] text-[#526A75]">{candidate.sequence}</p>
+                <p className="mt-2 text-[11px] text-[#718791]">{candidate.sourceDatabase} · {candidate.sourceAccession}</p>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
 
       <Panel className="overflow-hidden">
         <div className="flex flex-col gap-3 border-b border-[#DCE7EC] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
