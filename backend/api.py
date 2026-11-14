@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 
 from .optimizer import optimize
+from .peptide_library.api_router import router as peptide_library_router
 from .schema import OptimizationRequest, OptimizationResult, PeptideLookupRequest
 from .peptide_database import PeptideDatabase
 
@@ -21,6 +22,12 @@ app.add_middleware(
     allow_headers=["Content-Type"],
     expose_headers=["Content-Disposition"],
 )
+
+# The provenance-rich local library is separate from the existing DBAASP
+# sequence-lookup and conformation-search routes.  Keep both the documented
+# `/api/peptides` surface and a `/api/v1` alias for the React API client.
+app.include_router(peptide_library_router, prefix="/api", tags=["Peptide library"])
+app.include_router(peptide_library_router, prefix="/api/v1", include_in_schema=False)
 
 
 @app.get("/health")

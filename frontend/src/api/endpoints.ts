@@ -1,6 +1,6 @@
 /**
- * Proposed client-side route names. These are not an approved backend
- * contract; update them only after the FastAPI schema is agreed by the team.
+ * Existing and proposed client-side route names. Peptide-library routes map
+ * to the local FastAPI contract under the configured `/api/v1` base URL.
  */
 export const proposedEndpoints = {
   health: 'health',
@@ -11,4 +11,7 @@ export const proposedEndpoints = {
   comparison: 'comparisons',
   tradeoffs: 'tradeoffs',
   noiseExperiments: 'noise/experiments',
+  peptideLibrary: 'peptides',
+  peptideLibraryRecord: (id: string) => `peptides/${encodeURIComponent(id)}`,
+  peptideLibraryStats: 'peptides/stats',
 } as const
