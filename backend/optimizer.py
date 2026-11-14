@@ -39,7 +39,7 @@ def optimize(request: OptimizationRequest) -> OptimizationResult:
         message = "All configurations evaluated; minimum is exact within this grid."
         execution_backend = "exhaustive_search"
     else:
-        from .quantum import qaoa_probabilities
+        from .quantum import print_qaoa_circuit, qaoa_probabilities
 
         spread = float(np.ptp(energies))
         scaled = (energies - energies.min()) / spread if spread > 0 else np.zeros_like(energies)
@@ -49,6 +49,7 @@ def optimize(request: OptimizationRequest) -> OptimizationResult:
 
         initial = rng.uniform(0.1, np.pi, size=2 * request.layers)
         fitted = minimize(objective, initial, method="COBYLA", options={"maxiter": request.max_iterations})
+        print_qaoa_circuit(energies, fitted.x, problem.sequence, [torsion.name for torsion in problem.torsions])
         probabilities = qaoa_probabilities(energies, fitted.x)
         probabilities = np.maximum(probabilities, 0)
         probabilities /= probabilities.sum()
@@ -72,6 +73,7 @@ def optimize(request: OptimizationRequest) -> OptimizationResult:
         configurations=problem.configurations,
         best_configuration=best,
         best_structure_molblock=problem.structures[best.bitstring],
+        best_structure_pdb=problem.pdb_structures[best.bitstring],
         probabilities={item.bitstring: float(probability) for item, probability in zip(problem.configurations, probabilities)},
         counts=counts,
         benchmark=compare_results(problem.configurations, probabilities, best),

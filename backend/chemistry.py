@@ -21,6 +21,7 @@ class ChemistryProblem:
     torsions: list[Torsion]
     configurations: list[Configuration]
     structures: dict[str, str]
+    pdb_structures: dict[str, str]
 
 
 def _backbone_torsions(molecule) -> list[Torsion]:
@@ -66,6 +67,7 @@ def build_problem(request: OptimizationRequest) -> ChemistryProblem:
     torsions = available[:request.torsion_count]
     configurations = []
     structures = {}
+    pdb_structures = {}
     for bits in product("01", repeat=request.torsion_count):
         bitstring = "".join(bits)
         angles = [request.angle_options[int(bit)] for bit in reversed(bits)]
@@ -84,4 +86,7 @@ def build_problem(request: OptimizationRequest) -> ChemistryProblem:
             raise ValueError("A configuration produced a non-finite energy; try other angles.")
         configurations.append(Configuration(bitstring=bitstring, angles_degrees=angles, energy_kcal_mol=energy))
         structures[bitstring] = Chem.MolToMolBlock(candidate)
-    return ChemistryProblem(request.sequence, torsions, configurations, structures)
+        # Export directly from the molecule to preserve residue and atom names
+        # for PDB viewers. Converting from MOL text would lose those labels.
+        pdb_structures[bitstring] = Chem.MolToPDBBlock(candidate)
+    return ChemistryProblem(request.sequence, torsions, configurations, structures, pdb_structures)

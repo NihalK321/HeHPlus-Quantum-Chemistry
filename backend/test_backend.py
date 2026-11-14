@@ -136,3 +136,35 @@ def test_http_contract():
             "Origin": "http://localhost:5173", "Access-Control-Request-Method": "POST",
         })
         assert preflight.headers["access-control-allow-origin"] == "http://localhost:5173"
+
+
+def test_pdb_export_preserves_residues_and_selected_geometry(problem):
+    for configuration in problem.configurations:
+        pdb = problem.pdb_structures[configuration.bitstring]
+        molecule = Chem.MolFromPDBBlock(pdb, removeHs=False)
+        original = Chem.MolFromMolBlock(problem.structures[configuration.bitstring], removeHs=False)
+        assert molecule is not None
+        assert molecule.GetNumAtoms() == original.GetNumAtoms()
+        assert np.allclose(molecule.GetConformer().GetPositions(),
+                           original.GetConformer().GetPositions(), atol=0.001)
+        residues = {atom.GetPDBResidueInfo().GetResidueNumber(): atom.GetPDBResidueInfo().GetResidueName()
+                    for atom in molecule.GetAtoms() if atom.GetPDBResidueInfo().GetName().strip() == "CA"}
+        assert residues == {1: "GLY", 2: "ALA", 3: "GLY", 4: "ALA"}
+
+
+def test_pdb_download_endpoints():
+    with TestClient(app) as client:
+        response = client.get("/structure.pdb", params={"sequence": "GA", "torsion_count": 2})
+        assert response.status_code == 200
+        assert response.headers["content-type"].startswith("chemical/x-pdb")
+        assert response.headers["content-disposition"].startswith('attachment; filename="peptide_GA_classical_')
+        assert response.headers["content-disposition"].endswith('.pdb"')
+        assert Chem.MolFromPDBBlock(response.text) is not None
+        assert client.get("/structure.pdb", params={"sequence": "AX"}).status_code == 422
+        assert client.get("/structure.pdb", params={"sequence": "GA", "torsion_count": 3}).status_code == 422
+        request = {"sequence": "GA", "torsion_count": 2, "method": "qaoa", "max_iterations": 20}
+        downloaded = client.post("/optimize/pdb", json=request)
+        result = client.post("/optimize", json=request).json()
+        assert downloaded.status_code == 200
+        assert downloaded.text == result["best_structure_pdb"]
+        assert "_qaoa_" in downloaded.headers["content-disposition"]

@@ -58,6 +58,7 @@ Key response fields:
 | `configurations` | Plot every configuration's MMFF94 energy in kcal/mol |
 | `best_configuration` | Show the classical minimum or lowest-energy sampled QAOA outcome |
 | `best_structure_molblock` | Load the selected 3D structure into a molecular viewer |
+| `best_structure_pdb` | PDB text of the same selected structure, with peptide residue labels |
 | `probabilities` | Plot the ideal circuit distribution (classical mode: equal mass on exact optima) |
 | `counts` | Plot sampled circuit outcomes; empty for classical enumeration |
 | `benchmark` | Exact minimum, energy gap, and optimum probabilities versus uniform sampling |
@@ -71,6 +72,30 @@ for the other torsions. Each configuration includes decoded angles.
 The default CORS origins cover localhost and 127.0.0.1 on ports 3000 and 5173.
 Set `PEPTIDE_CORS_ORIGINS` to a comma-separated list to use another frontend.
 
+### Download a PDB file for an upload-only viewer
+
+With the API running, open this address in a browser:
+
+http://127.0.0.1:8000/structure.pdb?sequence=GAGA&torsion_count=3
+
+The response downloads a `.pdb` file for the best configuration found by the
+classical search. Upload that file in the frontend's molecular viewer. Change
+`sequence`, `torsion_count`, or `seed` in the URL as needed; normal optimization
+limits apply. This GET endpoint uses the default angle options.
+
+For QAOA or custom settings, use `POST /optimize/pdb` in `/docs` with the same
+JSON body as `/optimize`, then use the response's Download file link. For example:
+
+```powershell
+Invoke-WebRequest -Uri http://127.0.0.1:8000/optimize/pdb -Method Post -ContentType application/json -Body '{"sequence":"GAGA","method":"qaoa"}' -OutFile .\GAGA_qaoa.pdb
+```
+
+Both `/optimize` and `/optimize/pdb` use the same solver; the latter returns a
+file attachment. A frontend can also save `best_structure_pdb` from an existing
+JSON result to avoid rerunning optimization. PDB is exported from the original
+RDKit molecule so residue labels are retained. It contains the generated model,
+not a structure retrieved from the Protein Data Bank or verified experimentally.
+
 ## Python entry point
 
 ```python
@@ -81,6 +106,18 @@ result = optimize(OptimizationRequest(sequence="GAGA", method="classical"))
 print(result.best_configuration)
 print(result.benchmark)
 ```
+
+### View the quantum circuit in the console
+
+Requests using `"method": "qaoa"` print the final fitted circuit in the terminal
+running Uvicorn. The output includes qubit-to-torsion mappings, gamma/beta
+parameters, an overview, and an equivalent circuit expanded into H, RZ, RX,
+and CX gates. It prints once after fitting, not on every optimizer evaluation.
+Classical requests do not construct or print a quantum circuit.
+
+Try `POST /optimize` in `/docs` with `{"sequence":"GAGA","method":"qaoa"}`,
+then look at the server terminal. If running tests, use pytest's `-s` option to
+see console output that pytest normally captures.
 
 ## Responsibilities
 

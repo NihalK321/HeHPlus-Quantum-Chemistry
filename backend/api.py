@@ -5,6 +5,7 @@ from functools import lru_cache
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 
 from .optimizer import optimize
 from .schema import OptimizationRequest, OptimizationResult, PeptideLookupRequest
@@ -18,6 +19,7 @@ app.add_middleware(
     allow_origins=[origin.strip() for origin in origins.split(",") if origin.strip()],
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
+    expose_headers=["Content-Disposition"],
 )
 
 
@@ -50,6 +52,33 @@ def optimize_peptide(request: OptimizationRequest):
         return optimize(request)
     except ValueError as error:
         raise HTTPException(status_code=422, detail=str(error)) from error
+
+
+def _pdb_download(result: OptimizationResult) -> Response:
+    filename = f"peptide_{result.sequence}_{result.method}_{result.best_configuration.bitstring}.pdb"
+    return Response(
+        content=result.best_structure_pdb,
+        media_type="chemical/x-pdb",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@app.get("/structure.pdb", response_class=Response,
+         responses={200: {"content": {"chemical/x-pdb": {}}, "description": "Download the classical best configuration as PDB."}})
+def download_structure(sequence: str = "GAGA", torsion_count: int = 3, seed: int = 42):
+    """Browser-friendly download using the default angles and classical search."""
+    try:
+        request = OptimizationRequest(sequence=sequence, torsion_count=torsion_count, seed=seed)
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
+    return _pdb_download(optimize_peptide(request))
+
+
+@app.post("/optimize/pdb", response_class=Response,
+          responses={200: {"content": {"chemical/x-pdb": {}}, "description": "Download the selected optimized configuration as PDB."}})
+def optimize_peptide_pdb(request: OptimizationRequest):
+    """Accept the same settings as /optimize, including QAOA and custom angles."""
+    return _pdb_download(optimize_peptide(request))
 
 
 @lru_cache(maxsize=1)

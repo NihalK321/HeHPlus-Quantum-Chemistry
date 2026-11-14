@@ -76,6 +76,7 @@ class OptimizationResult(Model):
     configurations: list[Configuration]
     best_configuration: Configuration
     best_structure_molblock: str
+    best_structure_pdb: str
     probabilities: dict[str, float]
     counts: dict[str, int]
     benchmark: BenchmarkResult
