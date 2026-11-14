@@ -51,10 +51,10 @@ export function GeneratedMolecularStructure() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h3 className="text-base font-semibold text-[#172B3A]">Structure stats</h3>
+          <h3 className="text-base font-semibold text-[#28323C]">Structure stats</h3>
           <p className="mt-1 text-xs leading-5 text-[#667E88]">A short peptide model loaded directly from the backend, without downloading or uploading a file.</p>
         </div>
-        <StatusPill tone={loading ? 'slate' : result ? 'teal' : 'amber'}>
+        <StatusPill tone={loading ? 'slate' : result ? 'blue' : 'amber'}>
           {loading ? 'Generating model' : result ? 'Calculated conformer' : 'Model unavailable'}
         </StatusPill>
       </div>
@@ -78,7 +78,7 @@ export function GeneratedMolecularStructure() {
       {inputError && <p className="text-sm text-red-700" id="structure-sequence-error" role="alert">{inputError}</p>}
 
       {loading && (
-        <div aria-live="polite" className="flex h-[28rem] items-center justify-center gap-3 rounded-lg border border-[#DCE7EC] bg-[#F8FAFC] text-sm text-[#526D78]" role="status">
+        <div aria-live="polite" className="flex h-[28rem] items-center justify-center gap-3 rounded-lg border border-[#D9E0E7] bg-[#F3F5F7] text-sm text-[#526D78]" role="status">
           <LoaderCircle className="h-5 w-5 animate-spin" aria-hidden="true" /> Building the 3D peptide model…
         </div>
       )}
@@ -87,9 +87,9 @@ export function GeneratedMolecularStructure() {
       {result && (
         <>
           <dl className="grid grid-cols-2 gap-2 rounded-lg bg-[#F4F8F9] p-3 text-xs sm:grid-cols-3">
-            <div><dt className="text-[#667E88]">Modeled sequence</dt><dd className="mt-1 font-mono font-semibold text-[#27424E]">{result.sequence}</dd></div>
-            <div><dt className="text-[#667E88]">Residues</dt><dd className="mt-1 font-semibold text-[#27424E]">{result.sequence.length}</dd></div>
-            <div><dt className="text-[#667E88]">Selected grid configuration</dt><dd className="mt-1 font-mono font-semibold text-[#27424E]">{result.best_configuration.bitstring}</dd></div>
+            <div><dt className="text-[#667E88]">Modeled sequence</dt><dd className="mt-1 font-mono font-semibold text-[#394957]">{result.sequence}</dd></div>
+            <div><dt className="text-[#667E88]">Residues</dt><dd className="mt-1 font-semibold text-[#394957]">{result.sequence.length}</dd></div>
+            <div><dt className="text-[#667E88]">Selected grid configuration</dt><dd className="mt-1 font-mono font-semibold text-[#394957]">{result.best_configuration.bitstring}</dd></div>
           </dl>
           <MolecularStructureViewer
             initialStructure={{ text: result.best_structure_pdb, name: `${result.sequence}.pdb` }}

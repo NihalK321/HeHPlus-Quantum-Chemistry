@@ -37,10 +37,10 @@ export function QuantumOptimizationEngine() {
       <div className="grid gap-5 xl:grid-cols-[0.93fr_1.07fr]">
         <Panel className="p-5">
           <div className="flex items-start gap-3">
-            <span className="rounded-lg bg-[#EAF5F4] p-2 text-teal-700"><Cpu size={18} aria-hidden="true" /></span>
+            <span className="rounded-lg bg-[#EAF5F4] p-2 text-blue-700"><Cpu size={18} aria-hidden="true" /></span>
             <div>
               <p className="research-eyebrow">Algorithm settings</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]">QAOA run configuration</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]">QAOA run configuration</h2>
               <p className="mt-1 text-sm leading-6 text-[#657B85]">Fields are prepared for a future agreed API contract; changing them does not execute an experiment.</p>
             </div>
           </div>
@@ -80,21 +80,21 @@ export function QuantumOptimizationEngine() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Candidate selection context</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]">Whole-candidate blend preview</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]">Whole-candidate blend preview</h2>
             </div>
             <StatusPill tone="demo">Display-only selection</StatusPill>
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {selectedCandidates.map((candidate) => (
-              <article key={candidate.id} className="rounded-lg border border-[#DCE7EC] bg-[#FBFDFD] p-3">
-                <p className="font-mono text-[11px] text-teal-700">{candidate.id}</p>
-                <p className="mt-1 text-sm font-semibold text-[#27424E]">{candidate.label}</p>
+              <article key={candidate.id} className="rounded-lg border border-[#D9E0E7] bg-[#F8FAFC] p-3">
+                <p className="font-mono text-[11px] text-blue-700">{candidate.id}</p>
+                <p className="mt-1 text-sm font-semibold text-[#394957]">{candidate.label}</p>
                 <p className="mt-2 break-all font-mono text-xs tracking-[0.08em] text-[#647A84]">{candidate.sequence}</p>
               </article>
             ))}
           </div>
-          <div className="mt-5 rounded-lg border border-[#DCE7EC] bg-[#F7FBFB] p-4 text-sm leading-6 text-[#516973]">
-            <div className="flex items-start gap-2"><Database className="mt-0.5 shrink-0 text-teal-700" size={16} aria-hidden="true" /><p>Candidate IDs, descriptors, pairwise proxy terms, and the exact scoring contract must come from agreed backend responses before this preview can become an executable QUBO.</p></div>
+          <div className="mt-5 rounded-lg border border-[#D9E0E7] bg-[#F7FBFB] p-4 text-sm leading-6 text-[#516973]">
+            <div className="flex items-start gap-2"><Database className="mt-0.5 shrink-0 text-blue-700" size={16} aria-hidden="true" /><p>Candidate IDs, descriptors, pairwise proxy terms, and the exact scoring contract must come from agreed backend responses before this preview can become an executable QUBO.</p></div>
           </div>
         </Panel>
       </div>
@@ -102,14 +102,14 @@ export function QuantumOptimizationEngine() {
       <div className="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
         <Panel className="p-5">
           <p className="research-eyebrow">Cost-function form</p>
-          <h2 className="mt-1 text-lg font-semibold text-[#172B3A]">QUBO readiness</h2>
+          <h2 className="mt-1 text-lg font-semibold text-[#28323C]">QUBO readiness</h2>
           <div className="mt-4 space-y-5">
             <label className="block">
-              <span className="flex items-center justify-between text-sm font-medium text-[#36505C]"><span>γ — pairwise proxy weight</span><span className="font-mono text-xs text-teal-700">{gamma.toFixed(2)}</span></span>
+              <span className="flex items-center justify-between text-sm font-medium text-[#36505C]"><span>γ — pairwise proxy weight</span><span className="font-mono text-xs text-blue-700">{gamma.toFixed(2)}</span></span>
               <input className="mt-2 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#D8E6E8] accent-[#087E78]" max="2" min="0" onChange={(event) => setGamma(Number(event.target.value))} step="0.05" type="range" value={gamma} />
             </label>
             <label className="block">
-              <span className="flex items-center justify-between text-sm font-medium text-[#36505C]"><span>λ — cardinality penalty</span><span className="font-mono text-xs text-teal-700">{lambda.toFixed(2)}</span></span>
+              <span className="flex items-center justify-between text-sm font-medium text-[#36505C]"><span>λ — cardinality penalty</span><span className="font-mono text-xs text-blue-700">{lambda.toFixed(2)}</span></span>
               <input className="mt-2 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#D8E6E8] accent-[#087E78]" max="5" min="0" onChange={(event) => setLambda(Number(event.target.value))} step="0.1" type="range" value={lambda} />
             </label>
           </div>
@@ -120,7 +120,7 @@ export function QuantumOptimizationEngine() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Optimization trace</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]">Illustrative convergence trajectory</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]">Illustrative convergence trajectory</h2>
               <p className="mt-1 text-sm leading-6 text-[#657B85]">Rendered from centralized demo data to validate the visualization only.</p>
             </div>
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-700"><Activity size={14} aria-hidden="true" /> DEMO only</span>

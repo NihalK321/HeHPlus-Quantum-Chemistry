@@ -11,7 +11,7 @@ const Plot = lazy(async () => {
 })
 
 function PlotLoadingState({ label }: { label: string }) {
-  return <div className="grid h-[22rem] place-items-center rounded-lg border border-dashed border-[#C9D9DE] bg-[#FBFDFD] text-sm text-[#718791]">Loading {label}…</div>
+  return <div className="grid h-[22rem] place-items-center rounded-lg border border-dashed border-[#C9D9DE] bg-[#F8FAFC] text-sm text-[#718791]">Loading {label}…</div>
 }
 
 export function TradeoffVisualizations({ chargeWeight, hydropathyWeight }: { chargeWeight: number; hydropathyWeight: number }) {
@@ -27,10 +27,10 @@ export function TradeoffVisualizations({ chargeWeight, hydropathyWeight }: { cha
 
   return (
     <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
-      <div className="rounded-lg border border-[#DCE7EC] bg-white p-4">
+      <div className="rounded-lg border border-[#D9E0E7] bg-white p-4">
         <div className="mb-2 flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h3 className="text-sm font-semibold text-[#27424E]">Demo objective trade-off scatter</h3>
+            <h3 className="text-sm font-semibold text-[#394957]">Demo objective trade-off scatter</h3>
             <p className="mt-1 text-xs text-[#718791]">Axes are display-only normalized objectives (a.u.), not chemical measurements.</p>
           </div>
           <span className="rounded-md bg-violet-50 px-2 py-1 text-[11px] font-semibold text-violet-800">Lazy-loaded Plotly</span>
@@ -59,7 +59,7 @@ export function TradeoffVisualizations({ chargeWeight, hydropathyWeight }: { cha
               height: 330,
               margin: { l: 58, r: 20, t: 16, b: 54 },
               paper_bgcolor: '#FFFFFF',
-              plot_bgcolor: '#FBFDFD',
+              plot_bgcolor: '#F8FAFC',
               font: { family: 'Inter, system-ui, sans-serif', color: '#36505C', size: 12 },
               showlegend: true,
               legend: { orientation: 'h', y: 1.12, x: 0 },
@@ -73,9 +73,9 @@ export function TradeoffVisualizations({ chargeWeight, hydropathyWeight }: { cha
         </Suspense>
       </div>
 
-      <div className="rounded-lg border border-[#DCE7EC] bg-white p-4">
+      <div className="rounded-lg border border-[#D9E0E7] bg-white p-4">
         <div className="mb-2">
-          <h3 className="text-sm font-semibold text-[#27424E]">Demo pairwise proxy matrix</h3>
+          <h3 className="text-sm font-semibold text-[#394957]">Demo pairwise proxy matrix</h3>
           <p className="mt-1 text-xs text-[#718791]">A display proxy is not a compatibility, binding, or synergy result.</p>
         </div>
         <Suspense fallback={<PlotLoadingState label="proxy matrix" />}>

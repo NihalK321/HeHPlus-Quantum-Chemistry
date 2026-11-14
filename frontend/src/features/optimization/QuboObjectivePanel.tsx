@@ -2,15 +2,15 @@ import { Braces, Sigma } from 'lucide-react'
 
 export function QuboObjectivePanel({ gamma, lambda, blendSize }: { gamma: number; lambda: number; blendSize: number }) {
   return (
-    <div className="rounded-lg border border-[#DCE7EC] bg-[#FBFDFD] p-4">
+    <div className="rounded-lg border border-[#D9E0E7] bg-[#F8FAFC] p-4">
       <div className="flex items-start gap-3">
-        <span className="rounded-md bg-[#EAF5F4] p-2 text-teal-700"><Sigma size={16} aria-hidden="true" /></span>
+        <span className="rounded-md bg-[#EAF5F4] p-2 text-blue-700"><Sigma size={16} aria-hidden="true" /></span>
         <div>
-          <p className="text-sm font-semibold text-[#27424E]">Blend-selection objective</p>
+          <p className="text-sm font-semibold text-[#394957]">Blend-selection objective</p>
           <p className="mt-1 text-xs leading-5 text-[#657B85]">A presentation of the proposed model form only. Coefficients and scores await chemistry and quantum-team agreement.</p>
         </div>
       </div>
-      <div className="mt-4 overflow-x-auto rounded-md border border-[#E1ECEE] bg-white px-3 py-3 font-mono text-sm text-[#27424E]">
+      <div className="mt-4 overflow-x-auto rounded-md border border-[#E1ECEE] bg-white px-3 py-3 font-mono text-sm text-[#394957]">
         E(x) = −Σ Sᵢxᵢ + γΣ Pᵢⱼxᵢxⱼ + λ(Σxᵢ − k)²
       </div>
       <dl className="mt-4 grid gap-3 sm:grid-cols-3">

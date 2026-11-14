@@ -20,9 +20,9 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const buttonVariants: Record<ButtonVariant, string> = {
-  primary: 'border-teal-700 bg-teal-700 text-white hover:border-teal-800 hover:bg-teal-800',
-  secondary: 'border-[#BFD2D7] bg-white text-[#172B3A] hover:border-teal-600 hover:bg-teal-50',
-  ghost: 'border-transparent bg-transparent text-[#3E5662] hover:bg-slate-100 hover:text-[#172B3A]',
+  primary: 'border-blue-700 bg-blue-700 text-white hover:border-blue-800 hover:bg-blue-800',
+  secondary: 'border-[#BFD2D7] bg-white text-[#28323C] hover:border-blue-600 hover:bg-blue-50',
+  ghost: 'border-transparent bg-transparent text-[#3E5662] hover:bg-slate-100 hover:text-[#28323C]',
   danger: 'border-red-200 bg-white text-red-700 hover:bg-red-50',
 }
 
@@ -40,10 +40,10 @@ export function Button({ className, variant = 'primary', type = 'button', ...pro
   )
 }
 
-type StatusTone = 'teal' | 'amber' | 'slate' | 'red' | 'demo'
+type StatusTone = 'blue' | 'amber' | 'slate' | 'red' | 'demo'
 
 const statusTones: Record<StatusTone, string> = {
-  teal: 'border-teal-200 bg-teal-50 text-teal-800',
+  blue: 'border-blue-200 bg-blue-50 text-blue-800',
   amber: 'border-amber-200 bg-amber-50 text-amber-800',
   slate: 'border-slate-200 bg-slate-50 text-slate-700',
   red: 'border-red-200 bg-red-50 text-red-700',
@@ -71,10 +71,10 @@ export function SectionHeading({
   action?: ReactNode
 }) {
   return (
-    <div className="flex flex-col gap-4 border-b border-[#DCE7EC] pb-5 sm:flex-row sm:items-end sm:justify-between">
+    <div className="flex flex-col gap-4 border-b border-[#D9E0E7] pb-5 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p className="research-eyebrow">{eyebrow}</p>
-        <h1 className="mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-[#172B3A] sm:text-[1.75rem]">{title}</h1>
+        <h1 className="mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-[#28323C] sm:text-[1.75rem]">{title}</h1>
         {description && <p className="mt-2 max-w-3xl text-sm leading-6 text-[#5E747F]">{description}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
@@ -84,8 +84,8 @@ export function SectionHeading({
 
 export function EmptyState({ title, detail, action }: { title: string; detail: string; action?: ReactNode }) {
   return (
-    <div className="rounded-lg border border-dashed border-[#C9D9DE] bg-[#FBFDFD] px-5 py-8 text-center">
-      <p className="text-sm font-semibold text-[#27424E]">{title}</p>
+    <div className="rounded-lg border border-dashed border-[#C9D9DE] bg-[#F8FAFC] px-5 py-8 text-center">
+      <p className="text-sm font-semibold text-[#394957]">{title}</p>
       <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#657B85]">{detail}</p>
       {action && <div className="mt-4 flex justify-center">{action}</div>}
     </div>
@@ -94,9 +94,9 @@ export function EmptyState({ title, detail, action }: { title: string; detail: s
 
 export function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <article className="rounded-lg border border-[#DCE7EC] bg-white p-4">
+    <article className="rounded-lg border border-[#D9E0E7] bg-white p-4">
       <p className="text-xs font-medium text-[#6B818B]">{label}</p>
-      <p className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[#172B3A]">{value}</p>
+      <p className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[#28323C]">{value}</p>
       <p className="mt-1 text-xs leading-5 text-[#718791]">{detail}</p>
     </article>
   )

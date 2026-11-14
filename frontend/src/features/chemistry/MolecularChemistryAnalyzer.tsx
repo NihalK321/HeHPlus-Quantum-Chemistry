@@ -28,23 +28,23 @@ export function MolecularChemistryAnalyzer() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Candidate context</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]" id="candidate-context-heading">Sequence and substitution record</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]" id="candidate-context-heading">Sequence and substitution record</h2>
             </div>
             <StatusPill tone="demo">Demo record</StatusPill>
           </div>
 
-          <div className="mt-5 rounded-lg border border-[#DCE7EC] bg-[#FBFDFD] p-4">
+          <div className="mt-5 rounded-lg border border-[#D9E0E7] bg-[#F8FAFC] p-4">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-medium text-[#6C818B]">Selected for inspection</p>
                 <p className="mt-1 text-base font-semibold text-[#223E49]">{focalCandidate.label}</p>
               </div>
-              <span className="rounded-md bg-teal-50 px-2 py-1 font-mono text-xs font-semibold text-teal-800">{focalCandidate.id}</span>
+              <span className="rounded-md bg-blue-50 px-2 py-1 font-mono text-xs font-semibold text-blue-800">{focalCandidate.id}</span>
             </div>
             <p className="mt-5 font-mono text-base tracking-[0.12em] text-[#24515B]">{focalCandidate.sequence.split('').join(' ')}</p>
             {focalCandidate.substitution && (
               <div className="mt-4 flex items-start gap-2 rounded-md border border-[#D6E5E8] bg-white p-3">
-                <Sigma className="mt-0.5 h-4 w-4 shrink-0 text-teal-700" aria-hidden="true" />
+                <Sigma className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" aria-hidden="true" />
                 <p className="text-sm leading-5 text-[#46616B]">
                   Position {focalCandidate.substitution.position}: {focalCandidate.substitution.from} → {focalCandidate.substitution.to}. This is a candidate-generation record, not a structural or chemical prediction.
                 </p>
@@ -55,15 +55,15 @@ export function MolecularChemistryAnalyzer() {
           <dl className="mt-5 divide-y divide-[#E7EFF1] text-sm">
             <div className="flex justify-between gap-5 py-3">
               <dt className="text-[#6B818B]">Input origin</dt>
-              <dd className="text-right font-medium capitalize text-[#27424E]">{focalCandidate.origin.replace('-', ' ')}</dd>
+              <dd className="text-right font-medium capitalize text-[#394957]">{focalCandidate.origin.replace('-', ' ')}</dd>
             </div>
             <div className="flex justify-between gap-5 py-3">
               <dt className="text-[#6B818B]">Conditions shown</dt>
-              <dd className="text-right font-medium text-[#27424E]">pH 7.4 · 25 °C (demo settings)</dd>
+              <dd className="text-right font-medium text-[#394957]">pH 7.4 · 25 °C (demo settings)</dd>
             </div>
             <div className="flex justify-between gap-5 py-3">
               <dt className="text-[#6B818B]">Descriptor source</dt>
-              <dd className="text-right font-medium text-[#27424E]">{demoProvenance.label}</dd>
+              <dd className="text-right font-medium text-[#394957]">{demoProvenance.label}</dd>
             </div>
           </dl>
 
@@ -76,7 +76,7 @@ export function MolecularChemistryAnalyzer() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="research-eyebrow">Descriptor record</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]" id="descriptor-heading">Documented display fields</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]" id="descriptor-heading">Documented display fields</h2>
               <p className="mt-1 text-sm text-[#667E88]">A production response must populate every method, unit, condition, source, and uncertainty field.</p>
             </div>
             <StatusPill tone="demo">Display-only</StatusPill>
@@ -96,7 +96,7 @@ export function MolecularChemistryAnalyzer() {
                 {demoDescriptors.filter((descriptor) => descriptor.label !== 'Structure status').map((descriptor) => (
                   <tr key={descriptor.label}>
                     <td>
-                      <p className="font-semibold text-[#27424E]">{descriptor.label}</p>
+                      <p className="font-semibold text-[#394957]">{descriptor.label}</p>
                       <p className="mt-1 text-xs text-[#70858E]">{descriptor.provenance.label}</p>
                     </td>
                     <td>
@@ -113,7 +113,7 @@ export function MolecularChemistryAnalyzer() {
               </tbody>
             </table>
           </div>
-          <div className="mt-6 border-t border-[#DCE7EC] pt-5">
+          <div className="mt-6 border-t border-[#D9E0E7] pt-5">
             <Suspense fallback={<EmptyState detail="Preparing the 3Dmol viewer..." title="Loading molecular visualization tools" />}>
               <GeneratedMolecularStructure />
             </Suspense>
@@ -126,7 +126,7 @@ export function MolecularChemistryAnalyzer() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="research-eyebrow">Pairwise terms</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]" id="proxy-heading">Pairwise proxy registry</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]" id="proxy-heading">Pairwise proxy registry</h2>
               <p className="mt-1 text-sm leading-6 text-[#667E88]">A future QUBO may use defensible pairwise penalties or proxies. These display values are not peptide compatibility evidence.</p>
             </div>
             <StatusPill tone="demo">Demo proxy</StatusPill>
@@ -145,9 +145,9 @@ export function MolecularChemistryAnalyzer() {
               <tbody>
                 {demoPairwiseProxies.map((proxy) => (
                   <tr key={`${proxy.firstCandidateId}-${proxy.secondCandidateId}`}>
-                    <td className="font-mono text-xs text-[#27424E]">{proxy.firstCandidateId} × {proxy.secondCandidateId}</td>
+                    <td className="font-mono text-xs text-[#394957]">{proxy.firstCandidateId} × {proxy.secondCandidateId}</td>
                     <td>{proxy.label}</td>
-                    <td className="font-semibold text-[#27424E]">{proxy.value.toFixed(2)} <span className="font-normal text-[#718791]">a.u.</span></td>
+                    <td className="font-semibold text-[#394957]">{proxy.value.toFixed(2)} <span className="font-normal text-[#718791]">a.u.</span></td>
                     <td className="max-w-xs leading-5 text-[#647B85]">{proxy.limitation}</td>
                   </tr>
                 ))}
@@ -158,17 +158,17 @@ export function MolecularChemistryAnalyzer() {
 
         <Panel aria-labelledby="blend-context-heading" className="p-5">
           <div className="flex items-start gap-3">
-            <Link2 className="mt-0.5 h-5 w-5 text-teal-700" aria-hidden="true" />
+            <Link2 className="mt-0.5 h-5 w-5 text-blue-700" aria-hidden="true" />
             <div>
               <p className="research-eyebrow">Blend context</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]" id="blend-context-heading">Selected whole candidates</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]" id="blend-context-heading">Selected whole candidates</h2>
             </div>
           </div>
           <div className="mt-5 space-y-3">
             {demoCandidates.filter((candidate) => selectedCandidateIds.includes(candidate.id)).map((candidate) => (
-              <div className="rounded-md border border-[#DCE7EC] bg-[#FBFDFD] p-3" key={candidate.id}>
+              <div className="rounded-md border border-[#D9E0E7] bg-[#F8FAFC] p-3" key={candidate.id}>
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-[#27424E]">{candidate.label}</p>
+                  <p className="text-sm font-semibold text-[#394957]">{candidate.label}</p>
                   <span className="font-mono text-xs text-[#087E78]">{candidate.id}</span>
                 </div>
                 <p className="mt-2 font-mono text-xs tracking-[0.1em] text-[#5B737D]">{candidate.sequence.split('').join(' ')}</p>
