@@ -6,6 +6,7 @@ import type { SelectedPeptideCandidate } from '../../types/peptideLibrary'
 import { MockDataNotice } from '../shared/MockDataNotice'
 import { CandidatePoolTable } from './CandidatePoolTable'
 import { PeptideLibraryPanel } from './PeptideLibraryPanel'
+import { PeptideBlendResearch } from './PeptideBlendResearch'
 
 const aminoAcids = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
 
@@ -84,10 +85,12 @@ export function PeptideDesigner() {
         eyebrow="Candidate configuration"
         title="Peptide Designer"
         description="Define a bounded candidate pool and research constraints before blend optimization. Substitutions create candidate variants; the QAOA workflow later selects whole candidates."
-        action={<StatusPill tone="demo">DEMO UI fixture</StatusPill>}
+        action={<StatusPill tone="teal">Database + quantum research</StatusPill>}
       />
 
-      <MockDataNotice detail="The configuration controls, weights, and legacy candidate preview below are centralized display fixtures. They are not a chemistry dataset, a search of sequence space, or a submitted experiment. The imported peptide library is labeled separately and only shows records returned by its local API." />
+      <PeptideBlendResearch />
+
+      <MockDataNotice detail="The older configuration controls, weights, and candidate previews BELOW this notice remain display fixtures. Use the database-backed chemical targets and QAOA workflow ABOVE for actual calculated research runs." />
 
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <Panel className="p-5">

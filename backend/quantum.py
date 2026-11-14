@@ -93,7 +93,7 @@ def cost_hamiltonian(energies) -> SparsePauliOp:
     return SparsePauliOp.from_list(pauli_terms)
 
 
-def build_qaoa_circuit(energies, parameters) -> QuantumCircuit:
+def build_qaoa_circuit(energies, parameters) -> QuantumCircuit: #quantum approximation optimization algorithm
     """Build a fresh circuit using the supplied gamma/beta settings.
 
     One layer uses [gamma, beta]. Two layers use:

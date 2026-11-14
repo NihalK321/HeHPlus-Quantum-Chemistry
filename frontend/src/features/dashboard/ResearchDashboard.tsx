@@ -4,6 +4,7 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YA
 import { demoBlendConfiguration, demoCandidates, demoConvergence, demoProvenance } from '../../demo/researchDemo'
 import { Button, MetricCard, Panel, SectionHeading, StatusPill } from '../../components/ui'
 import { MockDataNotice } from '../shared/MockDataNotice'
+import { LatestBlendRun } from './LatestBlendRun'
 
 const readiness = [
   { label: 'Candidate pool', detail: '8 display-only candidates staged', tone: 'teal' as const, icon: ListChecks },
@@ -36,7 +37,9 @@ export function ResearchDashboard() {
         }
       />
 
-      <MockDataNotice detail={demoProvenance.detail} />
+      <LatestBlendRun />
+
+      <MockDataNotice detail={`The legacy dashboard panels below are demo data. ${demoProvenance.detail}`} />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Experiment summary">
         <MetricCard label="Candidate pool" value={`${demoBlendConfiguration.candidateCount}`} detail="Display-only candidate records" />
