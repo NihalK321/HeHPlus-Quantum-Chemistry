@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Keep the frontend helper despite the repository's Python lib/ ignore rule.
+!src/lib/
+!src/lib/cn.ts

@@ -50,7 +50,9 @@ export class ApiClient {
       requestHeaders.set('accept', 'application/json')
     }
 
-    const response = await this.fetchImplementation(joinUrl(this.baseUrl, path), {
+    // Native browser fetch must not receive the ApiClient instance as `this`.
+    const fetchRequest = this.fetchImplementation
+    const response = await fetchRequest(joinUrl(this.baseUrl, path), {
       ...init,
       headers: requestHeaders,
       body: body === undefined ? undefined : JSON.stringify(body),

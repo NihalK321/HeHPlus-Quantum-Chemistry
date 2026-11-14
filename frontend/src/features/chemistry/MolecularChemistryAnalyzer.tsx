@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react'
-import { FlaskConical, Info, Layers3, Link2, Sigma } from 'lucide-react'
+import { FlaskConical, Link2, Sigma } from 'lucide-react'
 import { Button, EmptyState, Panel, SectionHeading, StatusPill } from '../../components/ui'
 import { demoCandidates, demoDescriptors, demoPairwiseProxies, demoProvenance } from '../../demo/researchDemo'
 import { MockDataNotice } from '../shared/MockDataNotice'
 
-const MolecularStructureViewer = lazy(() =>
-  import('./MolecularStructureViewer').then((module) => ({ default: module.MolecularStructureViewer })),
+const GeneratedMolecularStructure = lazy(() =>
+  import('./GeneratedMolecularStructure').then((module) => ({ default: module.GeneratedMolecularStructure })),
 )
 
 const focalCandidate = demoCandidates[1]
@@ -15,16 +15,16 @@ export function MolecularChemistryAnalyzer() {
   return (
     <div className="space-y-6">
       <SectionHeading
-        action={<StatusPill tone="amber">Chemistry service pending</StatusPill>}
+        action={<StatusPill tone="amber">Descriptor service pending</StatusPill>}
         description="Inspect descriptors, structural provenance, and cautiously scoped pairwise proxies. This workspace separates supplied evidence from interface-only display data."
         eyebrow="Chemistry workspace"
         title="Molecular chemistry analysis"
       />
 
-      <MockDataNotice detail="All numeric descriptor and proxy values on this screen are centralized DEMO UI fixtures. They are not calculated chemistry, measured structure, or evidence of peptide compatibility." />
+      <MockDataNotice detail="Descriptor and pairwise-proxy values are DEMO UI fixtures, not calculated chemistry or compatibility evidence. The Structure Stats viewer loads a separate, explicitly labeled model calculated by the backend." />
 
-      <div className="grid gap-5 xl:grid-cols-[0.82fr_1.18fr]">
-        <Panel aria-labelledby="candidate-context-heading" className="p-5">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+        <Panel aria-labelledby="candidate-context-heading" className="min-w-0 p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Candidate context</p>
@@ -72,7 +72,7 @@ export function MolecularChemistryAnalyzer() {
           </div>
         </Panel>
 
-        <Panel aria-labelledby="descriptor-heading" className="p-5">
+        <Panel aria-labelledby="descriptor-heading" className="min-w-0 p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="research-eyebrow">Descriptor record</p>
@@ -93,7 +93,7 @@ export function MolecularChemistryAnalyzer() {
                 </tr>
               </thead>
               <tbody>
-                {demoDescriptors.map((descriptor) => (
+                {demoDescriptors.filter((descriptor) => descriptor.label !== 'Structure status').map((descriptor) => (
                   <tr key={descriptor.label}>
                     <td>
                       <p className="font-semibold text-[#27424E]">{descriptor.label}</p>
@@ -113,33 +113,13 @@ export function MolecularChemistryAnalyzer() {
               </tbody>
             </table>
           </div>
+          <div className="mt-6 border-t border-[#DCE7EC] pt-5">
+            <Suspense fallback={<EmptyState detail="Preparing the 3Dmol viewer..." title="Loading molecular visualization tools" />}>
+              <GeneratedMolecularStructure />
+            </Suspense>
+          </div>
         </Panel>
       </div>
-
-      <Panel aria-labelledby="structure-heading" className="p-5">
-        <div className="flex flex-col gap-3 border-b border-[#DCE7EC] pb-4 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex gap-3">
-            <Layers3 className="mt-0.5 h-5 w-5 text-teal-700" aria-hidden="true" />
-            <div>
-              <p className="research-eyebrow">Optional structural analysis</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]" id="structure-heading">Supplied molecular structure</h2>
-              <p className="mt-1 max-w-3xl text-sm leading-6 text-[#667E88]">Use a research-approved structure file only. A visual conformer is a hypothesis and does not establish folding, docking, blend stability, or compatibility.</p>
-            </div>
-          </div>
-          <StatusPill tone="slate">Local-file viewer</StatusPill>
-        </div>
-
-        <Suspense fallback={<div className="mt-5"><EmptyState detail="Preparing the optional 3Dmol viewer…" title="Loading molecular visualization tools" /></div>}>
-          <div className="mt-5">
-            <MolecularStructureViewer />
-          </div>
-        </Suspense>
-
-        <div className="mt-4 flex items-start gap-2 rounded-md border border-[#DCE7EC] bg-[#FBFDFD] p-3 text-sm leading-6 text-[#596F79]">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#52717B]" aria-hidden="true" />
-          Residue substitution highlighting requires an agreed sequence-to-structure mapping. PepperQ does not infer that mapping from a file name or a sequence preview.
-        </div>
-      </Panel>
 
       <div className="grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
         <Panel aria-labelledby="proxy-heading" className="p-5">
