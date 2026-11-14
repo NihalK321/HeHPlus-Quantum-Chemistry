@@ -22,9 +22,10 @@ The original implementation is preserved in quantum_reference.py.
 
 import sys
 from itertools import product
+from pathlib import Path
 
 import numpy as np
-from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit, qasm2
 from qiskit.circuit.library import DiagonalGate
 from qiskit.quantum_info import SparsePauliOp, Statevector
 
@@ -206,6 +207,20 @@ def _console_diagram(circuit: QuantumCircuit) -> str:
     return str(drawing).translate(translation)
 
 
+def export_composer_circuit(circuit: QuantumCircuit, filename="quantum_circuit.qasm") -> Path:
+    """Save the circuit as OpenQASM 2 for IBM Quantum Composer.
+
+    Expand the bundled cost gate into H/RZ/RX/CX operations so Composer can
+    display the individual gates. OpenQASM 2 omits global phase, which does
+    not affect this circuit's outcome probabilities. Parameters are the fitted
+    numerical values for this run; this file does not contain the optimizer.
+    """
+    expanded_circuit = _expand_for_display(circuit)
+    output_path = Path(filename).resolve()
+    qasm2.dump(expanded_circuit, output_path)
+    return output_path
+
+
 def print_qaoa_circuit(energies, parameters, sequence: str, torsion_names: list[str]) -> None:
     """DISPLAY ONLY: print the fitted parameters and two circuit views.
 
@@ -232,6 +247,10 @@ def print_qaoa_circuit(energies, parameters, sequence: str, torsion_names: list[
     safe_output_text = output_text.encode(encoding, errors="replace").decode(encoding)
     print(safe_output_text, flush=True)
 
+    # Write the same fitted circuit for opening in IBM Quantum Composer.
+    # Do this before image rendering so QASM export does not require Matplotlib.
+    composer_path = export_composer_circuit(circuit)
+    print(f"Saved IBM Composer circuit: {composer_path}", flush=True)
 
     import matplotlib.pyplot as plt
 

@@ -15,6 +15,22 @@ from .quantum import build_qaoa_circuit, cost_hamiltonian, qaoa_probabilities
 from .schema import Configuration, OptimizationRequest
 
 
+def test_composer_export_preserves_circuit(tmp_path):
+    from qiskit import qasm2
+    from qiskit.quantum_info import Operator
+    from .quantum import export_composer_circuit
+
+    # Multiple layers and an asymmetric table exercise gate order and qubit order.
+    circuit = build_qaoa_circuit([3, 0, 2, 1], [1.0, 0.3, -0.7, 0.2])
+    path = export_composer_circuit(circuit, tmp_path / "circuit.qasm")
+    text = path.read_text()
+    assert text.startswith("OPENQASM 2.0;")
+    assert 'include "qelib1.inc";' in text
+    assert "diagonal(" not in text.lower()
+    imported = qasm2.load(path)
+    assert Operator(circuit).equiv(Operator(imported))
+
+
 @pytest.fixture(scope="module")
 def problem():
     return build_problem(OptimizationRequest())

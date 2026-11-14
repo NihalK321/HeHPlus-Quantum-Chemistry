@@ -115,6 +115,18 @@ parameters, an overview, and an equivalent circuit expanded into H, RZ, RX,
 and CX gates. It prints once after fitting, not on every optimizer evaluation.
 Classical requests do not construct or print a quantum circuit.
 
+Every QAOA run also writes `quantum_circuit.qasm` in the working directory,
+alongside the circuit PNGs. From `Peptide-Project`, that means the file appears
+in the repository root. Each run replaces the previous export. The console
+prints its absolute path.
+
+In IBM Quantum Composer, use **File → Upload .qasm file** and select
+`quantum_circuit.qasm`. If choosing a new circuit's language manually, select
+**OpenQASM 2**. The export contains the final fitted circuit expanded into
+H, RZ, RX, and CX gates, without the classical optimization loop or measurements.
+OpenQASM 2 omits global phase; relative phases and outcome probabilities are
+preserved. Reference: [IBM Composer guide](https://quantum.cloud.ibm.com/docs/en/guides/composer).
+
 Try `POST /optimize` in `/docs` with `{"sequence":"GAGA","method":"qaoa"}`,
 then look at the server terminal. If running tests, use pytest's `-s` option to
 see console output that pytest normally captures.
