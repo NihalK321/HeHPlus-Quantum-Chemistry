@@ -1,189 +1,209 @@
-# PepperQ — Repository Instructions for Codex and Coding Assistants
+# PepperQ: Repository Instructions for Codex and Coding Assistants
 
-## 1. Mission and scientific scope
+## 1. Mission and scope
 
 **Project:** PepperQ (`peptide-project` repository)
+**Event:** USC x IBM Qiskit Fall Fest 2026
 
-**Event:** USC × IBM Qiskit Fall Fest 2026
+PepperQ is a quantum-assisted molecular research prototype with two independent research modules:
 
-**Primary focus:** Quantum optimization applied to peptide chemistry and research-oriented peptide-blend selection.
+1. **Quantum Optimization - Peptide Blend Research**: QAOA-based selection of whole peptide candidates for a research blend, informed by documented chemistry-derived objectives and compared with exact classical optimization for small instances.
+2. **Quantum Chemistry - HeH+ Potential Energy Surface**: VQE-based electronic-structure studies of the helium hydride ion across multiple bond distances, compared with a classical reference within the same molecular model and basis.
 
-**Secondary focus:** Quantum noise and error mitigation, only after the core workflow works.
+These are scientifically distinct tasks. QAOA selects peptide candidates according to a mathematical objective; VQE estimates electronic-structure energies. A molecular visualization alone is not an electronic-structure calculation.
 
-PepperQ helps **laboratory researchers** explore short peptide sequences and prioritize **combinations of peptide candidates** for further study. A researcher defines chemical targets and experimental constraints; the application analyzes a manageable candidate pool, builds a chemically motivated optimization objective, and uses QAOA (via IBM Qiskit) to select candidate blends. It compares results with exact classical optimization for small instances.
+PepperQ is a research prototype, not medical advice. It must not claim clinical safety, therapeutic efficacy, proven peptide compatibility, synergy, binding, or laboratory validation without supporting evidence.
 
-This is a **research prototype**, not an application that recommends peptides for personal use or claims clinical safety, therapeutic efficacy, proven synergy, or laboratory-confirmed blend compatibility.
+## 2. Module A - Quantum Optimization: peptide blend research
 
-**Central research question:** Can sequence substitutions, peptide descriptors, and cautiously modeled structural or pairwise information help formulate a meaningful quantum optimization problem for selecting peptide research blends?
+### Canonical workflow
 
-## 2. Canonical workflow
+1. A researcher specifies target pH, chemical-property goals, candidate pool, desired blend size, and justified research constraints.
+2. Candidate generation imports or creates short peptide sequences and may explore position-specific substitutions. Do not imply an exhaustive sequence search unless one actually occurred.
+3. Chemistry computes documented sequence descriptors with methods, units, source/version, conditions, and uncertainty.
+4. Optional structural analysis may examine supplied or classically modeled conformers, atomic positions, steric contacts, or electrostatic descriptors for a limited candidate set. These remain hypotheses, not validated blend-interaction predictions.
+5. QAOA selects a subset of whole peptide candidates using a chemistry-derived QUBO. One core binary variable means "select this peptide candidate," not "choose this amino acid at a sequence position."
+6. The small problem is checked against exhaustive classical enumeration; report feasibility and objective score rather than unsupported quantum speedup.
+7. Results expose selected sequences, component scores, pairwise terms, constraints, classical reference, provenance, and limitations.
+8. Noise and error-mitigation studies are optional stretch work after the core workflow is verified.
 
-1. **Research inputs:** Researcher specifies target pH, chemical property goals, candidate pool, desired blend size, and any justified experimental constraints.
-2. **Candidate generation:** Generate or import short peptide sequences; permit position-specific amino-acid substitutions. Never imply all possible sequences were searched unless they actually were.
-3. **Chemistry:** Calculate sequence-derived properties with documented methods and units (e.g., molecular mass, estimated charge at specified pH, hydropathy using a named scale); track sources and uncertainty.
-4. **Optional structural analysis:** For a limited candidate subset, examine approximate conformers, atomic positions, steric contacts, or electrostatic descriptors **using suitable classical modeling tools** and clearly state assumptions. These are hypotheses, not validated blend interaction predictions.
-5. **Optimization:** Select a subset of entire peptide **candidates** using a chemistry-derived QUBO and QAOA. In the core blend model, one binary variable represents whether a peptide is selected, **not** which amino acid occupies a position.
-6. **Verification:** Compare results to exhaustive classical enumeration for small problems; report feasibility and objective score, not unsupported quantum speedup.
-7. **Results:** Show selected sequences, component scores, pairwise terms, constraints, reference solution, and limitations in the research interface.
-8. **Optional noise study:** Investigate noisy simulations and error mitigation once items 1–7 are working and tested.
+### Minimum validated hackathon experiment
 
-**Important distinction:** Sequence design/substitution creates or filters candidates; **blend selection** is the primary QAOA task. QAOA is not itself an atomic simulation engine or a quantum chemistry calculation.
-
-## 3. Minimum validated hackathon experiment
-
-- Begin with **8** small, chemically documented peptide candidates.
+- Start with **8** small, chemically documented peptide candidates.
 - Select exactly **3** candidates for a proposed research blend.
-- There are **56 feasible** three-of-eight selections; an unconstrained 8-qubit binary encoding has **256** bitstrings.
-- Use a stated scoring model, normalization, and (only where defensible) pairwise penalties.
-- Produce the **exact classical optimum** by enumerating all feasible subsets.
-- Implement a real **QAOA** circuit with Qiskit and show its observed optimization results.
-- Display the classical comparison and explain possible QAOA shortcomings.
-- Keep actual calculations separate from mock/demo data; never present placeholders as measured results.
+- There are **56** feasible three-of-eight subsets and **256** unconstrained bitstrings in an 8-qubit binary encoding.
+- Use a stated normalization and documented scoring model; use pairwise penalties or proxies only when defensible.
+- Produce the exact classical optimum by enumerating feasible subsets.
+- Implement a real QAOA circuit with Qiskit and report observed optimization results.
+- Compare QAOA and classical results under the same objective and constraints. Do not claim quantum advantage without rigorous evidence.
+- Keep calculated, predicted, measured, simulated, and illustrative/demo values visibly separate.
 
-Do not block the working MVP on 3D prediction, all 20 amino acids at every position, a large search space, real hardware, or error mitigation.
+### Preliminary blend objective
 
-### Initial mathematical model (subject to chemistry review)
+For peptide candidates indexed by `i`, let `x_i` mean inclusion in a blend. A proposed minimization form is:
 
-For peptide candidates indexed by `i`, let `x_i ∈ {0,1}` indicate inclusion in a blend. A preliminary minimization objective is:
-
-`E(x) = -Σ_i S_i x_i + γ Σ_{i<j} P_ij x_i x_j + λ (Σ_i x_i - k)^2`
+`E(x) = -sum_i S_i x_i + gamma sum_(i<j) P_ij x_i x_j + lambda (sum_i x_i - k)^2`
 
 - `S_i`: documented, normalized research-property score.
-- `P_ij`: documented pairwise **penalty or proxy**, **not assumed biological incompatibility**.
-- `k`: target number of peptides (initially 3).
-- `γ, λ`: documented weights, with penalty strength checked for constraint enforcement.
+- `P_ij`: documented pairwise penalty or proxy; never assume it proves biological incompatibility.
+- `k`: target blend size, initially 3.
+- `gamma` and `lambda`: documented weights, checked for correct constraint enforcement.
 
-The chemistry researcher and quantum developer must **agree on the scoring contract and example** before finalizing QUBO coefficients. Any extra constraints need an explicit correct formulation and test. Benchmark the QUBO objective against a direct implementation of the chemical scoring rules.
+The chemistry researcher and quantum developer must agree on the scoring contract and example before QUBO coefficients are finalized. Validate the direct chemical objective, QUBO coefficients, Ising mapping, sampled-bitstring interpretation, feasibility, and ranking.
 
-## 4. Team roles and file ownership
+## 3. Module B - Quantum Chemistry: HeH+ potential energy surface
 
-There are **three teammates** working concurrently in one GitHub repository.
+### Research objective
 
-### Project lead — frontend and integration (repository owner using this assistant)
+Study the electronic ground-state energy of the helium hydride ion (`HeH+`) at multiple He-H bond distances using VQE and compare it with an appropriate classical reference **within the same molecular model and basis set**.
 
-**Owns:** `frontend/`, `backend/api.py`, and frontend integration code that has been explicitly assigned.
+The frontend must clearly document and visualize, when supplied by verified backend outputs:
 
-Tasks: React/TypeScript application, Research Dashboard, Peptide Designer, optimization settings, Peptide Results Explorer, Trade-Off Explorer, chemistry displays, quantum-vs-classical comparison, experiment visualization, API integration, and final demo.
+- molecule identity: `HeH+`;
+- molecular charge: `+1`;
+- electron count: `2`;
+- bond distance in angstroms;
+- VQE and classical-reference energies in Hartrees;
+- energy convention: electronic energy or total molecular energy, with nuclear repulsion treatment explicit;
+- basis set;
+- fermion-to-qubit mapping;
+- ansatz;
+- classical optimizer;
+- qubit count, parameter count, circuit depth, iteration count, convergence, and circuit metadata;
+- calculation status, provenance, uncertainty, limitations, and relevant execution context.
 
-### Quantum/backend teammate
+### Scientific requirements
 
-**Owns:** `backend/optimizer.py`, `backend/quantum.py`, `backend/benchmark.py`, `experiments/`, plus any agreed optimization tests.
+- Use an actual VQE workflow in Qiskit or a compatible quantum-chemistry stack; React must not perform or pretend to perform the calculation.
+- Keep the Hamiltonian, molecular charge, electron count, basis, unit system, and energy convention consistent across all points in a potential-energy curve.
+- Generate the curve only from verified outputs. Never invent molecular energies, convergence traces, minimum-energy geometries, or error values.
+- A 2D or 3D molecular structure diagram may show valid atomic coordinates, but it is not itself an electronic-structure result.
+- Explain why the selected ansatz, mapping, optimizer, and basis are appropriate using actual calculation metadata. If a choice is unknown, display **Not yet specified**.
+- Compare VQE against a classical reference computed in the same model and basis. Report error only where mathematically meaningful.
+- Do not conflate this module with peptide QAOA, peptide descriptors, or the peptide compatibility proxy.
 
-Tasks: QUBO construction, QUBO-to-Ising conversion, QAOA, exact enumeration, score and feasibility validation, noise experiments, optional error mitigation.
+## 4. Technology and frontend architecture
 
-### Chemistry/peptide teammate
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS.
+- **Scientific UI:** Recharts for compact summary charts; Plotly for lazy-loaded interactive scientific plots; 3Dmol.js only for valid supplied molecular structures.
+- **Backend:** Python and FastAPI.
+- **Quantum:** IBM Qiskit, Qiskit Aer, QAOA, VQE, and verified classical reference routines.
+- **Chemistry:** documented peptide descriptors, trustworthy datasets, and appropriately scoped classical molecular-modeling tools.
 
-**Owns:** `research/`, `data/`, source references, and chemical scoring specifications. Implemented chemistry code in `backend/chemistry.py` requires coordination with the backend teammate.
+Keep API adapters isolated under `frontend/src/services/`. Before frontend code consumes a new endpoint, agree with the backend teammate on a versioned request/response shape. Do not silently change shared schemas or backend public interfaces.
 
-Tasks: candidate sourcing, amino acid property data, substitutions and sequence positioning, charge and hydropathy conventions, documented chemistry objectives, scientific limitations, and optional structural-model methodology.
+Frontend data models must preserve explicit provenance such as `demo`, `calculated`, `simulated`, `hardware`, or `unavailable`. Demo values must never be labeled as chemistry calculations, Qiskit results, or classical references.
 
-**Shared files** such as `backend/schemas.py`, `backend/chemistry.py`, root configuration files, `README.md`, and integration tests require agreement before editing. Existing repository contents take precedence over this proposed ownership scheme until the team confirms responsibilities.
+## 5. Expected project organization
 
-## 5. Expected project organization (not proof these files exist)
+Relevant working areas normally include:
 
 ```text
 peptide-project/
-├── frontend/
-│   ├── src/components/
-│   ├── src/pages/
-│   ├── src/services/api.ts
-│   └── src/types/
-├── backend/
-│   ├── api.py
-│   ├── schemas.py
-│   ├── chemistry.py
-│   ├── optimizer.py
-│   ├── quantum.py
-│   └── benchmark.py
-├── experiments/
-├── data/
-├── research/
-├── tests/
-├── docs/
-├── AGENTS.md
-├── .gitignore
-├── requirements.txt
-└── README.md
+|-- frontend/
+|   `-- src/
+|       |-- components/
+|       |-- features/
+|       |-- services/
+|       `-- types/
+|-- backend/
+|-- experiments/
+|-- data/
+|-- research/
+|-- tests/
+`-- AGENTS.md
 ```
 
-Do **not** create all files by default, overwrite working code, or restructure the repository just to match this illustration. Inspect first.
+This is an architectural guide, not proof that every file exists. Do not create, move, or restructure files merely to match this illustration.
 
-## 6. Planned product features
+## 6. Team ownership and collaboration
 
-1. **Research Dashboard** — overview of experiments and results.
-2. **Peptide Designer** — chemical targets, candidate selection, substitutions, and positional variants.
-3. **Quantum Optimization Engine** — chemistry-derived QUBO + QAOA blend selection.
-4. **Molecular Chemistry Analyzer** — sequence descriptors; limited clearly labeled structural modeling when available.
-5. **Quantum vs. Classical Comparison** — objective value, optimality gap, constraint satisfaction, and measured run metadata.
-6. **Peptide Results Explorer** — ranked blends with transparent score breakdowns.
-7. **Optimization Trade-Off Explorer** — how changing research objectives affects selected blends.
-8. **Quantum Noise & Error Mitigation Lab** — optional, measured experiment, not a prerequisite for the MVP.
+There are three teammates working concurrently.
 
-The frontend may use **clearly labeled mock data** while integration is incomplete. Never label mock data as computed Qiskit results or verified chemistry.
+### Frontend developer and integration lead
 
-## 7. Technical stack and API coordination
+Owns `frontend/`, `backend/api.py`, and explicitly approved integration code.
 
-- **Frontend:** React, TypeScript, Vite, Tailwind CSS; chart library as warranted by existing code.
-- **Backend:** Python and FastAPI.
-- **Quantum:** IBM Qiskit, Qiskit Aer, QAOA and classical optimization routines.
-- **Chemistry:** documented peptide descriptors, trustworthy datasets, and optional appropriately scoped classical molecular modeling tools.
-- **Collaboration:** GitHub, feature branches, reviewed pull requests.
+Responsibilities include React/TypeScript UX, all research views, scientific visualization, frontend API integration, and final demo preparation.
 
-**Before independently building API-consuming code**, agree with the backend teammate on a versioned request/response shape (candidate IDs, sequences, descriptors and units, selection count, weights, selected IDs, method, scores, constraints, runtime metadata, errors, and explicit `mock`/`simulated`/`hardware` provenance). Keep API adapters isolated under `frontend/src/services/`. Do not silently change shared schemas.
+May edit `frontend/` and approved API integration files, including agreed changes to `backend/api.py`. Shared schemas and API contracts still require coordination with the backend developer before they change.
 
-## 8. Strict rules to protect teammates' code
+### Quantum/backend teammate
 
-**Before any edit:**
+Owns their assigned backend optimization, quantum, benchmark, VQE, experiment, and related test files. This normally includes `backend/optimizer.py`, `backend/quantum.py`, `backend/benchmark.py`, `experiments/`, and agreed optimization or quantum-chemistry tests.
 
-1. Inspect `git status`, the current branch, repository structure, and applicable instructions.
-2. Confirm work is on the project lead's **feature branch** (for example, `feature/frontend-integration`), **not `main`**.
-3. Check whether targeted files are owned by someone else or already modified.
-4. For work beyond the approved scope, first explain proposed files and request approval.
+Responsibilities include QUBO construction, QAOA, exact enumeration, VQE/electronic-structure workflows, mappings, ansatz/optimizer choices, classical references, noise studies, and validation.
 
-**Always:**
+May edit the files explicitly assigned to that role. They do not need frontend approval to work in their owned backend or experiment files.
 
-- Work only in the files explicitly assigned or approved for the current task.
-- Preserve teammates' commits, uncommitted work, and public interfaces.
-- Never overwrite, delete, rename, reformat, or "clean up" other people's files incidentally.
-- Do not silently switch branches, merge, rebase, or resolve conflicts by discarding work.
-- Do not run destructive Git operations (including `reset --hard`, `clean -fd`, forced push, or checkout/restore that discards changes).
-- Do not commit, push, create pull requests, or merge without the user's explicit instruction.
-- Do not use `git add .` indiscriminately; stage only approved paths.
+### Chemistry/peptide teammate
+
+Owns `research/`, `data/`, source references, chemical scoring specifications, and research methodology. `backend/chemistry.py` requires coordination with the backend teammate.
+
+Responsibilities include candidate sourcing, amino-acid properties, substitutions and positioning, charge/hydropathy conventions, chemical objectives, data limitations, and optional structural-model methodology.
+
+May edit `research/`, `data/`, and their assigned chemistry code. They do not need frontend approval to work in their owned research, data, or chemistry files.
+
+Shared files such as backend schemas, `backend/chemistry.py`, root configuration, README, and integration tests require explicit agreement before editing. Protect teammates' files and all uncommitted changes; do not overwrite, delete, rename, reformat, or clean up another person's work incidentally.
+
+## 7. Branch, ownership, and collaboration rules
+
+### Feature-branch policy
+
+- Every teammate works on their own assigned feature branch. Nobody edits directly on `main`.
+- The frontend developer works on `feature/frontend-integration`.
+- The quantum/backend developer works on their own assigned backend feature branch.
+- The chemistry developer works on their own assigned chemistry feature branch.
+- Never require a backend or chemistry developer to work on `feature/frontend-integration`, and never require the frontend developer to work on another teammate's branch.
+- Do not switch branches automatically. If the current branch is not the developer's assigned feature branch, stop and ask for direction.
+
+Before every edit:
+
+1. Inspect Git status, current branch, repository structure, and applicable instructions.
+2. Confirm work is on the current developer's assigned feature branch, never `main`.
+3. Check ownership and preserve any teammate changes or uncommitted work.
+4. For work beyond the current approved scope, state proposed files and obtain approval.
+
+Always:
+
+- Work only in paths approved for the current task and role. Developers may edit the files they explicitly own.
+- Do not modify a teammate's owned files without that teammate's approval. Shared interfaces and files require coordination.
+- Never overwrite, delete, rename, reformat, or clean up another teammate's files or uncommitted work incidentally.
+- Do not switch branches, merge, rebase, reset, clean, force-push, or discard changes automatically.
+- Do not commit, push, create pull requests, or merge automatically or without explicit instruction.
+- Do not use `git add .` indiscriminately.
 - Avoid broad dependency upgrades or lockfile churn without approval.
-- Run focused builds/tests before declaring a change complete, and report what was actually verified.
-- Never place IBM API keys, CRNs where inappropriate, tokens, `.env`, credentials, `node_modules`, or virtual environment files into commits. Keep `.env.example` placeholder-only.
+- Never expose IBM credentials, tokens, CRNs, local `.env` files, node_modules, or virtual environments.
+- Keep `.env.example` placeholder-only.
 
-**Codex first task in a new session:** Read this file, inspect the repository **read-only**, report branch/status and existing code, propose the smallest next change within the current user's scope, and wait for approval unless the user has already authorized specific edits.
+At the start of a new session, read this file, inspect the repository read-only, report branch/status and relevant existing code, then propose the smallest next change unless the user has already authorized edits.
 
-## 9. Scientific accuracy and validation
+## 8. Scientific communication standards
 
-- Distinguish measured laboratory properties, published data, calculated sequence descriptors, predicted structural values, and illustrative scores.
-- Always specify units, relevant conditions (e.g., pH, temperature), hydropathy scales, molecular mass conventions, data source, and uncertainty when appropriate.
-- A plausible 3D conformer is **not** a validated fold, peptide-peptide docking solution, or stable formulation.
-- Charge complementarity, sequence similarity, and hydrophobicity are **not by themselves proof** of peptide compatibility, binding affinity, synergy, aggregation resistance, or solubility.
-- Don't invent pairwise interaction data to make the optimizer look impressive. If illustrative proxies are required, mark them clearly and do not imply real-world validity.
-- Validate the direct chemical objective, quadratic QUBO coefficients, Ising mapping, sampled bitstring interpretation, feasibility, and rankings.
-- For the small problem, use exact classical enumeration as ground truth and compare QAOA against it. Do not claim quantum advantage without rigorous evidence.
-- For noise experiments, report shot counts, random seeds, noise assumptions, statistical uncertainty, and mitigation overhead. Mitigation may make performance worse.
-- This platform prioritizes **research candidates**, not medical treatment decisions.
+- Distinguish measured laboratory properties, published data, calculated descriptors, predicted structures, simulator results, hardware results, and illustrative UI fixtures.
+- State units, relevant conditions, methods, source/version, uncertainty, and limitations where applicable.
+- Charge complementarity, sequence similarity, hydropathy, or a plausible conformer do not prove compatibility, affinity, synergy, aggregation resistance, solubility, or safety.
+- For QAOA, compare against exact classical enumeration for the small peptide-blend problem.
+- For VQE, state the molecule, charge, electron count, basis, mapping, ansatz, optimizer, energy convention, and reference method before comparing energies.
+- For noise experiments, report shot counts, seeds, noise assumptions, statistical uncertainty, mitigation overhead, and possible degradation.
 
-## 10. Workflow and definition of done
+## 9. Definition of done
 
-Prioritize in this order:
+Prioritize work in this order:
 
-1. Chemistry scoring specification and candidate dataset agreed upon across the team.
-2. Exact classical baseline and verified QUBO.
-3. Working local QAOA results from real Qiskit execution.
-4. API contract and integrated frontend displaying real outputs.
-5. Clear result explanations and reproducible benchmark visuals.
-6. Limited substitution/3D structural analysis only if valid and affordable.
-7. Error mitigation / IBM hardware only as a stretch goal.
+1. Agree peptide chemistry scoring and candidate data.
+2. Verify peptide classical baseline and QUBO.
+3. Produce real local QAOA results.
+4. Agree and implement frontend API contracts.
+5. Produce verified HeH+ VQE and classical-reference outputs with a documented methodology.
+6. Display reproducible, provenance-rich results and comparisons.
+7. Add limited structural analysis, hardware work, and error mitigation only when justified.
 
-For each authorized coding task:
+For every authorized coding task:
 
-1. State the intended files and scope.
-2. Make minimal, localized changes.
-3. Execute the relevant tests/builds where possible.
-4. Summarize **changed paths**, **what was verified**, **what remains unverified**, and **the next safe step**.
+1. State intended files and scope.
+2. Make minimal localized changes.
+3. Run focused tests/builds.
+4. Report changed paths, verification, known limits, and the next safe step.
 
-**Success for the hackathon:** A working, reproducible, chemically motivated peptide-blend QAOA optimizer that researchers can understand and that the team can defend scientifically—rather than an expansive but unvalidated product demo.
+**Success:** a defensible research demonstration with a reproducible peptide-blend QAOA workflow and a separate, scientifically documented HeH+ VQE potential-energy study - not an expansive demo with fabricated results.
