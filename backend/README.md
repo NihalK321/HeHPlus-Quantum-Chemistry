@@ -193,6 +193,10 @@ Test the catalog integration without network access:
 python -m pytest backend/test_peptide_database.py -q
 ```
 
+Backend tests use unique project-local temporary directories, automatically
+cleaned after each test, to avoid permission conflicts in Windows's shared
+`pytest-of-<user>` temporary folder. These directories are excluded from Git.
+
 DBAASP data is openly usable with acknowledgement under its
 [data usage policy](https://www.dbaasp.org/terms-and-conditions). Acknowledge
 DBAASP in your project and presentation and cite
