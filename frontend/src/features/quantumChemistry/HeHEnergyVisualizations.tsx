@@ -4,7 +4,8 @@ import { EmptyState } from '../../components/ui'
 import type { HeHEnergyPoint, HeHExperiment, VqeConvergencePoint } from '../../types/quantumChemistry'
 
 function formatHartree(value: number | null): string {
-  return value === null ? 'Unavailable' : `${value.toFixed(8)} Ha`
+  if (value === null) return 'Unavailable'
+  return Math.abs(value) > 0 && Math.abs(value) < 1e-6 ? `${value.toExponential(3)} Ha` : `${value.toFixed(12)} Ha`
 }
 
 function energyAxisLabel(convention: HeHExperiment['energyConvention']): string {
@@ -28,6 +29,7 @@ export function PotentialEnergySurfaceChart({
       reference: point.referenceEnergyHartree,
       error: point.absoluteErrorHartree,
     }))
+    .sort((first, second) => first.distance - second.distance)
 
   if (plottedPoints.length === 0) {
     return (
@@ -45,9 +47,12 @@ export function PotentialEnergySurfaceChart({
           <CartesianGrid stroke="#E5EEF0" strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="distance"
+            domain={['dataMin', 'dataMax']}
             label={{ value: 'He–H bond distance (Å)', position: 'insideBottom', offset: -6, fill: '#607680', fontSize: 11 }}
+            scale="linear"
             tick={{ fill: '#607680', fontSize: 11 }}
             tickLine={false}
+            type="number"
           />
           <YAxis
             label={{ value: energyAxisLabel(energyConvention), angle: -90, position: 'insideLeft', fill: '#607680', fontSize: 11 }}
@@ -62,8 +67,8 @@ export function PotentialEnergySurfaceChart({
             labelFormatter={(label) => `Bond distance: ${Number(label).toFixed(3)} Å`}
           />
           <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
-          <Line connectNulls dataKey="vqe" dot={{ r: 3, fill: '#087E78' }} name="VQE energy" stroke="#087E78" strokeWidth={2.25} type="monotone" />
-          <Line connectNulls dataKey="reference" dot={{ r: 3, fill: '#657B85' }} name="Classical reference" stroke="#657B85" strokeDasharray="5 4" strokeWidth={2} type="monotone" />
+          <Line connectNulls dataKey="vqe" dot={{ r: 3, fill: '#087E78' }} name="VQE total energy" stroke="#087E78" strokeWidth={2.25} type="linear" />
+          <Line connectNulls dataKey="reference" dot={{ r: 3, fill: '#657B85' }} name="Exact classical total" stroke="#657B85" strokeDasharray="5 4" strokeWidth={2} type="linear" />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -78,6 +83,7 @@ export function EnergyErrorChart({ points }: { points: HeHEnergyPoint[] }) {
       absoluteError: point.absoluteErrorHartree,
       uncertainty: point.vqeEnergyUncertaintyHartree,
     }))
+    .sort((first, second) => first.distance - second.distance)
 
   if (plottedPoints.length === 0) {
     return (
@@ -95,9 +101,12 @@ export function EnergyErrorChart({ points }: { points: HeHEnergyPoint[] }) {
           <CartesianGrid stroke="#E5EEF0" strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="distance"
+            domain={['dataMin', 'dataMax']}
             label={{ value: 'He–H bond distance (Å)', position: 'insideBottom', offset: -6, fill: '#607680', fontSize: 11 }}
+            scale="linear"
             tick={{ fill: '#607680', fontSize: 11 }}
             tickLine={false}
+            type="number"
           />
           <YAxis
             label={{ value: 'Absolute error (Ha)', angle: -90, position: 'insideLeft', fill: '#607680', fontSize: 11 }}
@@ -112,15 +121,21 @@ export function EnergyErrorChart({ points }: { points: HeHEnergyPoint[] }) {
             labelFormatter={(label) => `Bond distance: ${Number(label).toFixed(3)} Å`}
           />
           <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
-          <Line connectNulls dataKey="absoluteError" dot={{ r: 3, fill: '#C66B22' }} name="Absolute error" stroke="#C66B22" strokeWidth={2.25} type="monotone" />
-          <Line connectNulls dataKey="uncertainty" dot={{ r: 3, fill: '#8A98A1' }} name="VQE uncertainty" stroke="#8A98A1" strokeDasharray="4 4" strokeWidth={1.75} type="monotone" />
+          <Line connectNulls dataKey="absoluteError" dot={{ r: 3, fill: '#C66B22' }} name="Absolute error" stroke="#C66B22" strokeWidth={2.25} type="linear" />
+          <Line connectNulls dataKey="uncertainty" dot={{ r: 3, fill: '#8A98A1' }} name="VQE uncertainty" stroke="#8A98A1" strokeDasharray="4 4" strokeWidth={1.75} type="linear" />
         </LineChart>
       </ResponsiveContainer>
     </div>
   )
 }
 
-export function VqeConvergenceChart({ points }: { points: VqeConvergencePoint[] }) {
+export function VqeConvergenceChart({
+  points,
+  energyConvention,
+}: {
+  points: VqeConvergencePoint[]
+  energyConvention: HeHExperiment['energyConvention']
+}) {
   const plottedPoints = points.filter((point) => point.estimatedEnergyHartree !== null || point.referenceEnergyHartree !== null)
 
   if (plottedPoints.length === 0) {
@@ -144,7 +159,7 @@ export function VqeConvergenceChart({ points }: { points: VqeConvergencePoint[] 
             tickLine={false}
           />
           <YAxis
-            label={{ value: 'Estimated energy (Ha)', angle: -90, position: 'insideLeft', fill: '#607680', fontSize: 11 }}
+            label={{ value: energyAxisLabel(energyConvention), angle: -90, position: 'insideLeft', fill: '#607680', fontSize: 11 }}
             tick={{ fill: '#607680', fontSize: 11 }}
             tickFormatter={(value: number) => value.toFixed(4)}
             tickLine={false}
@@ -156,8 +171,8 @@ export function VqeConvergenceChart({ points }: { points: VqeConvergencePoint[] 
             labelFormatter={(label) => `Iteration ${label}`}
           />
           <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
-          <Line connectNulls dataKey="estimatedEnergyHartree" dot={{ r: 3, fill: '#087E78' }} name="VQE estimate" stroke="#087E78" strokeWidth={2.25} type="monotone" />
-          <Line connectNulls dataKey="referenceEnergyHartree" dot={false} name="Classical reference" stroke="#657B85" strokeDasharray="5 4" strokeWidth={2} type="monotone" />
+          <Line connectNulls dataKey="estimatedEnergyHartree" dot={{ r: 3, fill: '#087E78' }} name="VQE total estimate" stroke="#087E78" strokeWidth={2.25} type="linear" />
+          <Line connectNulls dataKey="referenceEnergyHartree" dot={false} name="Exact classical total" stroke="#657B85" strokeDasharray="5 4" strokeWidth={2} type="linear" />
         </LineChart>
       </ResponsiveContainer>
     </div>

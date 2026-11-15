@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import {
   Activity,
@@ -13,6 +14,8 @@ import {
 } from 'lucide-react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { navigationItems } from '../../app/navigation'
+import { ApiClient, isApiClientError } from '../../api/client'
+import { proposedEndpoints } from '../../api/endpoints'
 import { StatusPill } from '../ui'
 import { cn } from '../../lib/cn'
 
@@ -26,6 +29,40 @@ const routeIcons: Record<string, LucideIcon> = {
   '/results': ListTree,
   '/tradeoffs': SlidersHorizontal,
   '/noise-lab': Activity,
+}
+
+type ApiConnection = {
+  label: string
+  tone: 'teal' | 'amber' | 'slate'
+}
+
+const checkingApiConnection: ApiConnection = { label: 'API checking', tone: 'slate' }
+
+function useApiConnection(): ApiConnection {
+  const [connection, setConnection] = useState<ApiConnection>(checkingApiConnection)
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    void new ApiClient().request<{ status?: string }>(proposedEndpoints.health, { signal: controller.signal })
+      .then((response) => {
+        if (!controller.signal.aborted) {
+          setConnection(response.status === 'ok'
+            ? { label: 'API connected', tone: 'teal' }
+            : { label: 'API unavailable', tone: 'amber' })
+        }
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted) {
+          const suffix = isApiClientError(error) ? ` (HTTP ${error.status})` : ''
+          setConnection({ label: `API unavailable${suffix}`, tone: 'amber' })
+        }
+      })
+
+    return () => controller.abort()
+  }, [])
+
+  return connection
 }
 
 function navigationClassName(isActive: boolean, compact = false): string {
@@ -42,6 +79,7 @@ function navigationClassName(isActive: boolean, compact = false): string {
 export function AppShell() {
   const location = useLocation()
   const activeItem = navigationItems.find((item) => item.to === location.pathname) ?? navigationItems[0]
+  const apiConnection = useApiConnection()
 
   return (
     <div className="min-h-svh bg-[#F3F5F7] lg:grid lg:grid-cols-[16.5rem_minmax(0,1fr)]">
@@ -99,7 +137,7 @@ export function AppShell() {
             </div>
             <div className="flex items-center gap-3">
               <span className="hidden text-xs text-[#72858E] sm:inline">USC × IBM Qiskit Fall Fest 2026</span>
-              <StatusPill tone="amber">API pending</StatusPill>
+              <StatusPill tone={apiConnection.tone}>{apiConnection.label}</StatusPill>
             </div>
           </div>
 

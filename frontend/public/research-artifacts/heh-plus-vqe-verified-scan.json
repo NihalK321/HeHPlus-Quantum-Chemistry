@@ -1,0 +1,125 @@
+{
+  "artifactVersion": 1,
+  "artifactType": "pepperq.verified_heh_plus_vqe_potential_energy_scan",
+  "artifactProvenance": {
+    "calculationSource": {
+      "fileName": "heh_plus_potential_energy_scan_2026-11-14T224924.704683+0000.json",
+      "sha256": "f0c7c5d78d7b75342724099f8e19394c7542de881cb68c01e82a2173d01af3c5",
+      "createdAtUtc": "2026-11-14T22:49:24.704683+00:00"
+    },
+    "circuitImageSource": {
+      "fileName": "hehplus_vqe_circuit.png",
+      "sha256": "a587165a5ec7ffae7b9dfd59063b13d69878ee578b423693c10e1bf2076ef030",
+      "bondDistanceAngstrom": 1.0
+    },
+    "packageVersions": {
+      "python": "3.14.5",
+      "qiskit": "2.6.2",
+      "qiskit-algorithms": "0.4.0",
+      "qiskit-nature": "0.8.0",
+      "pyscf": "2.15.0",
+      "numpy": "2.5.1",
+      "scipy": "1.18.1"
+    }
+  },
+  "experiment": {
+    "experimentId": "heh-plus-vqe-sto3g-statevector-pes-2026-11-14",
+    "molecule": "HeH+",
+    "molecularCharge": 1,
+    "electronCount": 2,
+    "calculationStatus": "completed",
+    "energyConvention": "total_molecular_energy",
+    "nuclearRepulsionTreatment": "included",
+    "energyUnit": "hartree",
+    "distanceUnit": "angstrom",
+    "method": {
+      "basisSet": "STO-3G",
+      "fermionToQubitMapping": "JordanWignerMapper (no qubit reduction)",
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "classicalOptimizer": "SLSQP (maxiter=200, ftol=1e-10)",
+      "classicalReferenceMethod": "NumPyMinimumEigensolver exact diagonalization with Qiskit Nature physical-sector filter",
+      "estimator": "StatevectorEstimator",
+      "executionContext": "Local ideal-state quantum simulation; not IBM physical hardware",
+      "qubitCount": 4,
+      "variationalParameterCount": 3,
+      "circuitDepth": 112,
+      "optimizerIterations": 21
+    },
+    "bondDistancesAngstrom": [0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.5, 1.8, 2.0],
+    "vqeEnergiesHartree": [-2.830482959040519, -2.855708627223734, -2.862617578795527, -2.8602051225712977, -2.853516188401112, -2.84542533786208, -2.837496879670728, -2.8246826761864274, -2.8139960345516704, -2.8107800991341914],
+    "referenceEnergiesHartree": [-2.8304829590638896, -2.855708627228009, -2.8626175787977766, -2.8602051225798046, -2.853516188404373, -2.8454253378627286, -2.8374968796708897, -2.824682676189801, -2.8139960345553234, -2.8107800991343743],
+    "energyPoints": [
+      {"bondDistanceAngstrom": 0.7, "vqeEnergyHartree": -2.830482959040519, "referenceEnergyHartree": -2.8304829590638896, "absoluteErrorHartree": 2.3370638757569395e-11, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 0.8, "vqeEnergyHartree": -2.855708627223734, "referenceEnergyHartree": -2.855708627228009, "absoluteErrorHartree": 4.274802734016703e-12, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 0.9, "vqeEnergyHartree": -2.862617578795527, "referenceEnergyHartree": -2.8626175787977766, "absoluteErrorHartree": 2.2497559371004172e-12, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 1.0, "vqeEnergyHartree": -2.8602051225712977, "referenceEnergyHartree": -2.8602051225798046, "absoluteErrorHartree": 8.5069729038878e-12, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 1.1, "vqeEnergyHartree": -2.853516188401112, "referenceEnergyHartree": -2.853516188404373, "absoluteErrorHartree": 3.2609470679290098e-12, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 1.2, "vqeEnergyHartree": -2.84542533786208, "referenceEnergyHartree": -2.8454253378627286, "absoluteErrorHartree": 6.483702463810914e-13, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 1.3, "vqeEnergyHartree": -2.837496879670728, "referenceEnergyHartree": -2.8374968796708897, "absoluteErrorHartree": 1.616484723854228e-13, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 1.5, "vqeEnergyHartree": -2.8246826761864274, "referenceEnergyHartree": -2.824682676189801, "absoluteErrorHartree": 3.3737457272309257e-12, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 1.8, "vqeEnergyHartree": -2.8139960345516704, "referenceEnergyHartree": -2.8139960345553234, "absoluteErrorHartree": 3.653077840226615e-12, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}},
+      {"bondDistanceAngstrom": 2.0, "vqeEnergyHartree": -2.8107800991341914, "referenceEnergyHartree": -2.8107800991343743, "absoluteErrorHartree": 1.829647544582258e-13, "relativeError": null, "vqeEnergyUncertaintyHartree": null, "notes": "Total molecular energy; nuclear repulsion included.", "calculationStatus": "completed", "provenance": {"kind": "simulated", "label": "Verified local ideal-state VQE simulation", "detail": "Calculated with Qiskit StatevectorEstimator VQE and a matched exact classical reference in STO-3G.", "source": "Verified 10-point PepperQ HeH+ scan", "generatedAt": "2026-11-14T22:49:24.704683+00:00", "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"}}
+    ],
+    "convergenceHistory": [
+      {
+        "bondDistanceAngstrom": 1.0,
+        "points": [
+          {"iteration": 1, "estimatedEnergyHartree": -2.8529210783245995, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 2, "estimatedEnergyHartree": -2.8529210783246395, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 3, "estimatedEnergyHartree": -2.8529210783246386, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 4, "estimatedEnergyHartree": -2.852921074833355, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 5, "estimatedEnergyHartree": -2.7974780281581566, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 6, "estimatedEnergyHartree": -2.859724313318859, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 7, "estimatedEnergyHartree": -2.8597243129048175, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 8, "estimatedEnergyHartree": -2.8597243129048193, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 9, "estimatedEnergyHartree": -2.859724313335194, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 10, "estimatedEnergyHartree": -2.8600359535146547, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 11, "estimatedEnergyHartree": -2.8600359537647124, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 12, "estimatedEnergyHartree": -2.8600359537647124, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 13, "estimatedEnergyHartree": -2.8600359534698834, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 14, "estimatedEnergyHartree": -2.8602050576529088, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 15, "estimatedEnergyHartree": -2.860205057651112, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 16, "estimatedEnergyHartree": -2.860205057651113, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 17, "estimatedEnergyHartree": -2.860205057663684, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 18, "estimatedEnergyHartree": -2.8602051225712977, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 19, "estimatedEnergyHartree": -2.860205122571246, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 20, "estimatedEnergyHartree": -2.860205122571238, "referenceEnergyHartree": -2.8602051225798046},
+          {"iteration": 21, "estimatedEnergyHartree": -2.8602051225713403, "referenceEnergyHartree": -2.8602051225798046}
+        ],
+        "provenance": {
+          "kind": "simulated",
+          "label": "Verified local ideal-state VQE simulation",
+          "detail": "Actual 1.000 Angstrom SLSQP objective history, expressed as total molecular energy by adding the recorded nuclear repulsion.",
+          "source": "Verified 1.000 Angstrom HeH+ result",
+          "generatedAt": "2026-11-14T20:48:28.301124+00:00",
+          "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"
+        }
+      }
+    ],
+    "circuitMetadata": {
+      "qubitCount": 4,
+      "depth": 112,
+      "gateCount": null,
+      "diagramSvg": null,
+      "imageUrl": "hehplus-vqe-circuit-verified.png",
+      "imageAlt": "Verified four-qubit HeH+ VQE circuit drawn by Qiskit at a 1.000 Angstrom bond distance",
+      "imageCaption": "Qiskit circuit drawing for the verified 1.000 Angstrom local statevector run. Ansatz depth: 1; decomposed circuit depth: 112; 3 variational parameters.",
+      "provenance": {
+        "kind": "simulated",
+        "label": "Verified local ideal-state VQE simulation",
+        "detail": "Circuit image copied from the verified 1.000 Angstrom StatevectorEstimator VQE result.",
+        "source": "hehplus_vqe_circuit.png",
+        "generatedAt": "2026-11-14T20:48:28.301124+00:00",
+        "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"
+      }
+    },
+    "provenance": {
+      "kind": "simulated",
+      "label": "Verified calculated local ideal-state VQE simulation",
+      "detail": "Ten completed HeH+ STO-3G calculations. VQE used StatevectorEstimator and SLSQP; each point is compared with an exact classical diagonalization in the same molecular model and physical two-electron sector. This is not IBM physical hardware execution.",
+      "source": "heh_plus_potential_energy_scan_2026-11-14T224924.704683+0000.json",
+      "generatedAt": "2026-11-14T22:49:24.704683+00:00",
+      "softwareVersion": "Qiskit 2.6.2; Qiskit Algorithms 0.4.0; Qiskit Nature 0.8.0; PySCF 2.15.0"
+    }
+  }
+}
