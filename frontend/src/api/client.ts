@@ -3,12 +3,14 @@ import { apiBaseUrl } from './config'
 export class ApiClientError extends Error {
   readonly status: number
   readonly detail?: unknown
+  readonly url: string
 
-  constructor(message: string, status: number, detail?: unknown) {
+  constructor(message: string, status: number, detail: unknown, url: string) {
     super(message)
     this.name = 'ApiClientError'
     this.status = status
     this.detail = detail
+    this.url = url
   }
 }
 
@@ -52,7 +54,8 @@ export class ApiClient {
 
     // Native browser fetch must not receive the ApiClient instance as `this`.
     const fetchRequest = this.fetchImplementation
-    const response = await fetchRequest(joinUrl(this.baseUrl, path), {
+    const url = joinUrl(this.baseUrl, path)
+    const response = await fetchRequest(url, {
       ...init,
       headers: requestHeaders,
       body: body === undefined ? undefined : JSON.stringify(body),
@@ -66,7 +69,7 @@ export class ApiClient {
           ? String(payload.detail)
           : `Request failed with status ${response.status}`
 
-      throw new ApiClientError(message, response.status, payload)
+      throw new ApiClientError(message, response.status, payload, url)
     }
 
     return payload as T
