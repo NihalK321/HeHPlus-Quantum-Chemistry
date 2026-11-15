@@ -147,19 +147,19 @@ export function PeptideLibraryPanel({ selectedIds, onToggle, maxSelections }: Pe
 
   return (
     <Panel className="overflow-hidden" aria-labelledby="peptide-library-heading">
-      <div className="border-b border-[#DCE7EC] px-5 py-5">
+      <div className="border-b border-[#D9E0E7] px-5 py-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex items-start gap-3">
-            <span className="rounded-lg bg-teal-50 p-2 text-teal-700"><Database size={18} aria-hidden="true" /></span>
+            <span className="rounded-lg bg-blue-50 p-2 text-blue-700"><Database size={18} aria-hidden="true" /></span>
             <div>
               <p className="research-eyebrow">Imported scientific records</p>
-              <h2 className="mt-1 text-lg font-semibold text-[#172B3A]" id="peptide-library-heading">Peptide library</h2>
+              <h2 className="mt-1 text-lg font-semibold text-[#28323C]" id="peptide-library-heading">Peptide library</h2>
               <p className="mt-1 max-w-2xl text-sm leading-6 text-[#657B85]">Search the original and additive local catalogs together. Exact sequence matches are merged by the backend while retaining source provenance; modified compounds stay visible but are not sequence-only scoring candidates.</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            <StatusPill tone={isLoadingStats ? 'slate' : stats ? 'teal' : 'amber'}>{isLoadingStats ? 'Loading catalog status' : stats ? `${stats.deduplicatedCandidateCount.toLocaleString()} deduplicated candidates` : 'Catalog status unavailable'}</StatusPill>
-            <StatusPill tone={selectedIds.size === maxSelections ? 'teal' : 'slate'}>{selectedIds.size} of {maxSelections} future candidates</StatusPill>
+            <StatusPill tone={isLoadingStats ? 'slate' : stats ? 'blue' : 'amber'}>{isLoadingStats ? 'Loading catalog status' : stats ? `${stats.deduplicatedCandidateCount.toLocaleString()} deduplicated candidates` : 'Catalog status unavailable'}</StatusPill>
+            <StatusPill tone={selectedIds.size === maxSelections ? 'blue' : 'slate'}>{selectedIds.size} of {maxSelections} future candidates</StatusPill>
           </div>
         </div>
 
@@ -179,7 +179,7 @@ export function PeptideLibraryPanel({ selectedIds, onToggle, maxSelections }: Pe
         {stats && <p className="mt-3 text-xs leading-5 text-[#718791]" role="status">{stats.sequenceCandidateCount.toLocaleString()} sequence candidates · {stats.modifiedCandidateCount.toLocaleString()} modified record{stats.modifiedCandidateCount === 1 ? '' : 's'} · exact sequence overlap is not counted as separate candidates.</p>}
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E7EFF1] bg-[#FBFDFD] px-5 py-3"><p className="text-sm font-medium text-[#36505C]">{totalLabel}</p>{isLoading && <span className="inline-flex items-center gap-2 text-xs text-[#657B85]"><LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> Loading imported records</span>}</div>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E7EFF1] bg-[#F8FAFC] px-5 py-3"><p className="text-sm font-medium text-[#36505C]">{totalLabel}</p>{isLoading && <span className="inline-flex items-center gap-2 text-xs text-[#657B85]"><LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> Loading imported records</span>}</div>
 
       {error && <div className="m-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950" role="alert"><div className="flex items-start gap-2"><AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><div><p className="font-semibold">Catalog search unavailable</p><p className="mt-1 leading-6">{error}</p><p className="mt-1 text-xs leading-5">No demonstration peptide records are substituted for an unavailable source.</p></div></div><Button className="mt-3" onClick={() => { setIsLoading(true); setError(null); setActiveParams({ ...activeParams }) }} variant="secondary">Retry search</Button></div>}
 
@@ -201,14 +201,50 @@ function LibraryRow({ record, selectedIds, maxSelections, onToggle, onDetails, d
   const isSelectable = record.selectableForOptimization && record.sequenceOnlyScoringEligible && record.sequence !== null && !atLimit
   const scoringNotice = sequenceScoringNotice(record)
 
-  return <tr><td><Button aria-label={`${selected ? 'Remove' : 'Add'} ${record.name}`} className="min-w-20 px-2.5 py-1.5 text-xs" disabled={!selected && !isSelectable} onClick={() => onToggle(toSelectedCatalogCandidate(record))} variant={selected ? 'secondary' : 'primary'}>{selected ? <><Check className="h-3.5 w-3.5" aria-hidden="true" /> Added</> : <><Plus className="h-3.5 w-3.5" aria-hidden="true" /> Add</>}</Button></td><td><div className="font-semibold text-[#27424E]">{record.name}</div><div className="mt-0.5 font-mono text-[11px] text-[#7B9099]">{record.id}</div></td><td><span className={`font-mono text-xs tracking-[0.07em] ${record.sequence ? 'text-[#27424E]' : 'text-[#8A9DA5]'}`} title={record.sequence ?? 'No linear sequence supplied'}>{sequencePreview(record.sequence)}</span></td><td>{record.sequenceLength ?? '—'}</td><td>{source ? <div><span className="font-medium text-[#36505C]">{sourceLabel(source)}</span>{source.sourceUrl && <a className="ml-1 inline-flex align-middle text-teal-700 hover:text-teal-900" href={source.sourceUrl} rel="noreferrer" target="_blank" title={`Open ${sourceLabel(source)}`}><ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div> : <span className="text-[#8A9DA5]">Unavailable</span>}</td><td><div className="space-y-1">{record.sequenceOnlyScoringEligible ? <StatusPill tone="teal">Sequence candidate</StatusPill> : <StatusPill tone="amber">Modified / unavailable</StatusPill>}{scoringNotice && <p className="max-w-52 text-[11px] leading-4 text-[#8A5A0A]">{scoringNotice}</p>}</div></td><td className="text-right"><Button className="px-2.5 py-1.5 text-xs" onClick={onDetails} variant="ghost">{detailId === record.id ? 'Close' : 'View'}</Button></td></tr>
+  return (
+    <tr>
+      <td>
+        <Button aria-label={`${selected ? 'Remove' : 'Add'} ${record.name}`} className="min-w-20 px-2.5 py-1.5 text-xs" disabled={!selected && !isSelectable} onClick={() => onToggle(toSelectedCatalogCandidate(record))} variant={selected ? 'secondary' : 'primary'}>
+          {selected ? <><Check className="h-3.5 w-3.5" aria-hidden="true" /> Added</> : <><Plus className="h-3.5 w-3.5" aria-hidden="true" /> Add</>}
+        </Button>
+      </td>
+      <td><div className="font-semibold text-[#394957]">{record.name}</div><div className="mt-0.5 font-mono text-[11px] text-[#7B9099]">{record.id}</div></td>
+      <td><span className={`font-mono text-xs tracking-[0.07em] ${record.sequence ? 'text-[#394957]' : 'text-[#8A9DA5]'}`} title={record.sequence ?? 'No linear sequence supplied'}>{sequencePreview(record.sequence)}</span></td>
+      <td>{record.sequenceLength ?? '—'}</td>
+      <td>
+        {source ? (
+          <div>
+            <span className="font-medium text-[#36505C]">{sourceLabel(source)}</span>
+            {source.sourceUrl && <a className="ml-1 inline-flex align-middle text-blue-700 hover:text-blue-900" href={source.sourceUrl} rel="noreferrer" target="_blank" title={`Open ${sourceLabel(source)}`}><ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></a>}
+          </div>
+        ) : <span className="text-[#8A9DA5]">Unavailable</span>}
+      </td>
+      <td><div className="space-y-1">{record.sequenceOnlyScoringEligible ? <StatusPill tone="blue">Sequence candidate</StatusPill> : <StatusPill tone="amber">Modified / unavailable</StatusPill>}{scoringNotice && <p className="max-w-52 text-[11px] leading-4 text-[#8A5A0A]">{scoringNotice}</p>}</div></td>
+      <td className="text-right"><Button className="px-2.5 py-1.5 text-xs" onClick={onDetails} variant="ghost">{detailId === record.id ? 'Close' : 'View'}</Button></td>
+    </tr>
+  )
 }
 
 function PeptideDetailPanel({ record, isLoading, error, onClose }: { record: PeptideCatalogRecord; isLoading: boolean; error: string | null; onClose: () => void }) {
   const scoringNotice = sequenceScoringNotice(record)
   const aliases = record.aliases.filter((alias) => alias.toLocaleLowerCase() !== record.name.toLocaleLowerCase())
 
-  return <aside className="border-t border-[#DCE7EC] bg-[#FBFDFD] p-5" aria-labelledby="peptide-detail-heading"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="research-eyebrow">Record provenance</p><h3 className="mt-1 text-base font-semibold text-[#172B3A]" id="peptide-detail-heading">{record.name}</h3></div><Button onClick={onClose} variant="ghost">Close details</Button></div>{isLoading && <p className="mt-3 inline-flex items-center gap-2 text-sm text-[#657B85]"><LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> Loading complete record</p>}{error && <p className="mt-3 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-950"><Info className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" /> The detail endpoint was unavailable, so the currently loaded search result is shown. {error}</p>}{scoringNotice && <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950"><p className="font-semibold">{record.kind === 'modified_peptide' ? 'Modified peptide' : 'Sequence-only scoring unavailable'}</p><p className="mt-1">{scoringNotice}</p>{record.sequenceOnlyScoringExclusionReason && record.sequenceOnlyScoringExclusionReason !== scoringNotice && <p className="mt-1 text-xs leading-5">Source caveat: {record.sequenceOnlyScoringExclusionReason}</p>}</div>}<div className="mt-4 grid gap-4 lg:grid-cols-[0.75fr_1.25fr]"><div className="space-y-4"><section className="rounded-lg border border-[#DCE7EC] bg-white p-4"><p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B818B]">Sequence</p>{record.sequence ? <><p className="mt-2 break-all font-mono text-sm tracking-[0.09em] text-[#27424E]">{record.sequence}</p><p className="mt-3 text-xs leading-5 text-[#657B85]">{record.sequenceLength} residues · {record.selectableForOptimization ? 'standard sequence candidate' : 'special handling required'}</p></> : <p className="mt-2 text-sm leading-6 text-[#657B85]">No linear sequence is supplied for this compound.</p>}</section>{aliases.length > 0 && <section className="rounded-lg border border-[#DCE7EC] bg-white p-4"><p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B818B]">Names and synonyms</p><p className="mt-2 text-sm leading-6 text-[#36505C]">{aliases.join(' · ')}</p></section>}{record.molecularInformation && <MolecularInformationCard information={record.molecularInformation} />}</div><div className="space-y-3"><p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B818B]">Source references ({record.sourceReferences.length})</p>{record.sourceReferences.map((reference) => <SourceReferenceCard key={reference.id} reference={reference} />)}</div></div></aside>
+  return (
+    <aside className="border-t border-[#D9E0E7] bg-[#F8FAFC] p-5" aria-labelledby="peptide-detail-heading">
+      <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="research-eyebrow">Record provenance</p><h3 className="mt-1 text-base font-semibold text-[#28323C]" id="peptide-detail-heading">{record.name}</h3></div><Button onClick={onClose} variant="ghost">Close details</Button></div>
+      {isLoading && <p className="mt-3 inline-flex items-center gap-2 text-sm text-[#657B85]"><LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> Loading complete record</p>}
+      {error && <p className="mt-3 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-950"><Info className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" /> The detail endpoint was unavailable, so the currently loaded search result is shown. {error}</p>}
+      {scoringNotice && <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950"><p className="font-semibold">{record.kind === 'modified_peptide' ? 'Modified peptide' : 'Sequence-only scoring unavailable'}</p><p className="mt-1">{scoringNotice}</p>{record.sequenceOnlyScoringExclusionReason && record.sequenceOnlyScoringExclusionReason !== scoringNotice && <p className="mt-1 text-xs leading-5">Source caveat: {record.sequenceOnlyScoringExclusionReason}</p>}</div>}
+      <div className="mt-4 grid gap-4 lg:grid-cols-[0.75fr_1.25fr]">
+        <div className="space-y-4">
+          <section className="rounded-lg border border-[#D9E0E7] bg-white p-4"><p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B818B]">Sequence</p>{record.sequence ? <><p className="mt-2 break-all font-mono text-sm tracking-[0.09em] text-[#394957]">{record.sequence}</p><p className="mt-3 text-xs leading-5 text-[#657B85]">{record.sequenceLength} residues · {record.selectableForOptimization ? 'standard sequence candidate' : 'special handling required'}</p></> : <p className="mt-2 text-sm leading-6 text-[#657B85]">No linear sequence is supplied for this compound.</p>}</section>
+          {aliases.length > 0 && <section className="rounded-lg border border-[#D9E0E7] bg-white p-4"><p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B818B]">Names and synonyms</p><p className="mt-2 text-sm leading-6 text-[#36505C]">{aliases.join(' · ')}</p></section>}
+          {record.molecularInformation && <MolecularInformationCard information={record.molecularInformation} />}
+        </div>
+        <div className="space-y-3"><p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B818B]">Source references ({record.sourceReferences.length})</p>{record.sourceReferences.map((reference) => <SourceReferenceCard key={reference.id} reference={reference} />)}</div>
+      </div>
+    </aside>
+  )
 }
 
 function MolecularInformationCard({ information }: { information: NonNullable<PeptideCatalogRecord['molecularInformation']> }) {
@@ -218,7 +254,24 @@ function MolecularInformationCard({ information }: { information: NonNullable<Pe
 
 function SourceReferenceCard({ reference }: { reference: CatalogSourceReference }) {
   const coordinates = reference.peptideFeatureCoordinates
-  return <article className="rounded-lg border border-[#DCE7EC] bg-white p-4"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold text-[#27424E]">{sourceLabel(reference)}</p><p className="mt-1 text-xs leading-5 text-[#6B818B]">{reference.sourceRecordKey ?? 'Source record key unavailable'}{reference.catalogs.length > 0 ? ` · present in ${reference.catalogs.join(', ')}` : ''}</p></div>{reference.sourceUrl && <a className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900" href={reference.sourceUrl} rel="noreferrer" target="_blank">Open source <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></a>}</div>{reference.description && <p className="mt-3 text-sm leading-6 text-[#5E747F]">{reference.description}</p>}<dl className="mt-3 grid gap-3 text-xs text-[#657B85] sm:grid-cols-2"><div><dt className="font-semibold text-[#526A75]">Parent / feature</dt><dd className="mt-1">{reference.parentProteinAccession ?? 'Not applicable'}{coordinates ? ` · ${coordinates.start}-${coordinates.end}${coordinates.coordinateSystem ? ` (${coordinates.coordinateSystem})` : ''}` : ''}</dd></div><div><dt className="font-semibold text-[#526A75]">Catalog provenance</dt><dd className="mt-1">{reference.catalogs.join(', ') || 'Unavailable'}</dd></div></dl><AnnotationList label="Annotations" values={reference.annotations} /><AnnotationList label="Modifications" values={reference.modifications} /></article>
+  return (
+    <article className="rounded-lg border border-[#D9E0E7] bg-white p-4">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-semibold text-[#394957]">{sourceLabel(reference)}</p>
+          <p className="mt-1 text-xs leading-5 text-[#6B818B]">{reference.sourceRecordKey ?? 'Source record key unavailable'}{reference.catalogs.length > 0 ? ` · present in ${reference.catalogs.join(', ')}` : ''}</p>
+        </div>
+        {reference.sourceUrl && <a className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900" href={reference.sourceUrl} rel="noreferrer" target="_blank">Open source <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></a>}
+      </div>
+      {reference.description && <p className="mt-3 text-sm leading-6 text-[#5E747F]">{reference.description}</p>}
+      <dl className="mt-3 grid gap-3 text-xs text-[#657B85] sm:grid-cols-2">
+        <div><dt className="font-semibold text-[#65717D]">Parent / feature</dt><dd className="mt-1">{reference.parentProteinAccession ?? 'Not applicable'}{coordinates ? ` · ${coordinates.start}-${coordinates.end}${coordinates.coordinateSystem ? ` (${coordinates.coordinateSystem})` : ''}` : ''}</dd></div>
+        <div><dt className="font-semibold text-[#65717D]">Catalog provenance</dt><dd className="mt-1">{reference.catalogs.join(', ') || 'Unavailable'}</dd></div>
+      </dl>
+      <AnnotationList label="Annotations" values={reference.annotations} />
+      <AnnotationList label="Modifications" values={reference.modifications} />
+    </article>
+  )
 }
 
 function AnnotationList({ label, values }: { label: string; values: CatalogAnnotation[] }) {

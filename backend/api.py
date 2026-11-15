@@ -13,6 +13,7 @@ from .peptide_library.catalog_router import router as peptide_catalog_router
 from .peptide_library.extra_api import router as peptide_extras_router
 from .schema import OptimizationRequest, OptimizationResult, PeptideLookupRequest
 from .peptide_database import PeptideDatabase
+from .blends.api import router as blend_router
 
 
 app = FastAPI(title="Peptide Reference Lookup and Shape Optimization", version="0.2.0")
@@ -30,6 +31,7 @@ app.add_middleware(
 # `/api/peptides` surface and a `/api/v1` alias for the React API client.
 app.include_router(peptide_library_router, prefix="/api", tags=["Peptide library"])
 app.include_router(peptide_library_router, prefix="/api/v1", include_in_schema=False)
+app.include_router(blend_router, prefix="/api/v1")
 
 # Keep the supplied extra router available as an additive, source-shaped API.
 # The separate merged router is what the Designer uses: it reads both local

@@ -42,25 +42,25 @@ export function CandidatePoolTable({ candidates, selectedIds, selectionLimit, on
                   <input
                     aria-label={`Select ${candidate.label}`}
                     checked={isSelected}
-                    className="h-4 w-4 rounded border-[#B9CDD3] text-teal-700 accent-[#087E78]"
+                    className="h-4 w-4 rounded border-[#B9CDD3] text-blue-700 accent-[#087E78]"
                     disabled={disableSelection}
                     onChange={() => onToggle(candidate.id)}
                     type="checkbox"
                   />
                 </td>
                 <td>
-                  <div className="font-semibold text-[#27424E]">{candidate.label}</div>
+                  <div className="font-semibold text-[#394957]">{candidate.label}</div>
                   <div className="mt-0.5 font-mono text-[11px] text-[#7B9099]">{candidate.id}</div>
                 </td>
                 <td>
-                  <span className="font-mono text-xs tracking-[0.08em] text-[#27424E]">{candidate.sequence}</span>
+                  <span className="font-mono text-xs tracking-[0.08em] text-[#394957]">{candidate.sequence}</span>
                 </td>
                 <td>
                   <span className="text-xs text-[#607680]">{originLabel(candidate)}</span>
                 </td>
                 <td className="text-right">
                   {isSelected ? (
-                    <StatusPill tone="teal"><Check size={12} aria-hidden="true" /> Included</StatusPill>
+                    <StatusPill tone="blue"><Check size={12} aria-hidden="true" /> Included</StatusPill>
                   ) : disableSelection ? (
                     <span className="text-xs text-[#8A9DA5]">Selection limit reached</span>
                   ) : (

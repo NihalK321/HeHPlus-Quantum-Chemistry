@@ -62,7 +62,7 @@ export function PotentialEnergySurfaceChart({
             width={72}
           />
           <Tooltip
-            contentStyle={{ border: '1px solid #DCE7EC', borderRadius: 8, boxShadow: '0 8px 18px rgb(23 43 58 / 8%)', fontSize: 12 }}
+            contentStyle={{ border: '1px solid #D9E0E7', borderRadius: 8, boxShadow: '0 8px 18px rgb(23 43 58 / 8%)', fontSize: 12 }}
             formatter={(value, name) => [formatHartree(typeof value === 'number' ? value : null), name]}
             labelFormatter={(label) => `Bond distance: ${Number(label).toFixed(3)} Å`}
           />
@@ -116,7 +116,7 @@ export function EnergyErrorChart({ points }: { points: HeHEnergyPoint[] }) {
             width={72}
           />
           <Tooltip
-            contentStyle={{ border: '1px solid #DCE7EC', borderRadius: 8, boxShadow: '0 8px 18px rgb(23 43 58 / 8%)', fontSize: 12 }}
+            contentStyle={{ border: '1px solid #D9E0E7', borderRadius: 8, boxShadow: '0 8px 18px rgb(23 43 58 / 8%)', fontSize: 12 }}
             formatter={(value, name) => [formatHartree(typeof value === 'number' ? value : null), name === 'absoluteError' ? 'Absolute error' : 'VQE uncertainty']}
             labelFormatter={(label) => `Bond distance: ${Number(label).toFixed(3)} Å`}
           />
@@ -166,7 +166,7 @@ export function VqeConvergenceChart({
             width={72}
           />
           <Tooltip
-            contentStyle={{ border: '1px solid #DCE7EC', borderRadius: 8, boxShadow: '0 8px 18px rgb(23 43 58 / 8%)', fontSize: 12 }}
+            contentStyle={{ border: '1px solid #D9E0E7', borderRadius: 8, boxShadow: '0 8px 18px rgb(23 43 58 / 8%)', fontSize: 12 }}
             formatter={(value, name) => [formatHartree(typeof value === 'number' ? value : null), name]}
             labelFormatter={(label) => `Iteration ${label}`}
           />
@@ -182,7 +182,7 @@ export function VqeConvergenceChart({
 export function ChartContextNote({ children }: { children: string }) {
   return (
     <div className="mt-4 flex items-start gap-2 border-t border-[#E5EEF0] pt-3 text-xs leading-5 text-[#6B818B]">
-      <ChartNoAxesCombined className="mt-0.5 h-4 w-4 shrink-0 text-teal-700" aria-hidden="true" />
+      <ChartNoAxesCombined className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" aria-hidden="true" />
       <span>{children}</span>
     </div>
   )

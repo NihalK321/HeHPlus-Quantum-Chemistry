@@ -18,7 +18,7 @@ export function HeHStructureDiagram({ bondDistanceAngstrom }: HeHStructureDiagra
   const midpoint = (heX + hX) / 2
 
   return (
-    <figure className="overflow-hidden rounded-lg border border-[#DCE7EC] bg-[#FCFEFE] p-4">
+    <figure className="overflow-hidden rounded-lg border border-[#D9E0E7] bg-[#FCFEFE] p-4">
       <svg
         aria-labelledby="heh-structure-title heh-structure-description"
         className="h-auto w-full"

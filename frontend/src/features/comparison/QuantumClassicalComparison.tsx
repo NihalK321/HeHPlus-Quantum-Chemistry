@@ -41,7 +41,7 @@ export function QuantumClassicalComparison() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="research-eyebrow">Objective comparison</p>
-              <h2 id="objective-chart-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">Display-only objective values</h2>
+              <h2 id="objective-chart-heading" className="mt-1 text-lg font-semibold text-[#28323C]">Display-only objective values</h2>
               <p className="mt-1 text-xs text-[#718791]">Arbitrary units. Not evidence of speedup, accuracy, or chemical validity.</p>
             </div>
             <StatusPill tone="demo">DEMO</StatusPill>
@@ -52,7 +52,7 @@ export function QuantumClassicalComparison() {
                 <CartesianGrid stroke="#E5EEF0" strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="method" tick={{ fill: '#5E747F', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#C9D9DE' }} />
                 <YAxis domain={[0, 0.8]} tick={{ fill: '#5E747F', fontSize: 11 }} tickLine={false} axisLine={false} label={{ value: 'Demo objective (a.u.)', angle: -90, position: 'insideLeft', fill: '#6B818B', fontSize: 11, dx: -2 }} />
-                <Tooltip formatter={(value) => [`${Number(value).toFixed(2)} a.u.`, 'Display value']} contentStyle={{ border: '1px solid #DCE7EC', borderRadius: 8, boxShadow: '0 4px 16px rgba(23,43,58,0.08)' }} />
+                <Tooltip formatter={(value) => [`${Number(value).toFixed(2)} a.u.`, 'Display value']} contentStyle={{ border: '1px solid #D9E0E7', borderRadius: 8, boxShadow: '0 4px 16px rgba(23,43,58,0.08)' }} />
                 <Legend wrapperStyle={{ fontSize: 12, color: '#5E747F' }} />
                 <Bar dataKey="objective" name="Demo objective" fill="#087E78" radius={[4, 4, 0, 0]} maxBarSize={64} />
               </BarChart>
@@ -62,15 +62,15 @@ export function QuantumClassicalComparison() {
 
         <Panel className="p-5" aria-labelledby="run-context-heading">
           <p className="research-eyebrow">Run context</p>
-          <h2 id="run-context-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">Required benchmark metadata</h2>
+          <h2 id="run-context-heading" className="mt-1 text-lg font-semibold text-[#28323C]">Required benchmark metadata</h2>
           <dl className="mt-5 grid gap-x-6 gap-y-4 sm:grid-cols-2">
-            <div><dt className="text-xs font-medium text-[#6B818B]">Shot count</dt><dd className="mt-1 text-sm font-semibold text-[#172B3A]">{demoBenchmark.shots.toLocaleString()} <span className="font-normal text-[#718791]">(demo)</span></dd></div>
-            <div><dt className="text-xs font-medium text-[#6B818B]">Random seed</dt><dd className="mt-1 text-sm font-semibold text-[#172B3A]">{demoBenchmark.seed} <span className="font-normal text-[#718791]">(demo)</span></dd></div>
-            <div><dt className="text-xs font-medium text-[#6B818B]">QAOA runtime</dt><dd className="mt-1 text-sm font-semibold text-[#172B3A]">{demoBenchmark.qaoaRuntimeMs} ms <span className="font-normal text-[#718791]">(demo)</span></dd></div>
-            <div><dt className="text-xs font-medium text-[#6B818B]">Classical runtime</dt><dd className="mt-1 text-sm font-semibold text-[#172B3A]">{demoBenchmark.classicalRuntimeMs} ms <span className="font-normal text-[#718791]">(demo)</span></dd></div>
+            <div><dt className="text-xs font-medium text-[#6B818B]">Shot count</dt><dd className="mt-1 text-sm font-semibold text-[#28323C]">{demoBenchmark.shots.toLocaleString()} <span className="font-normal text-[#718791]">(demo)</span></dd></div>
+            <div><dt className="text-xs font-medium text-[#6B818B]">Random seed</dt><dd className="mt-1 text-sm font-semibold text-[#28323C]">{demoBenchmark.seed} <span className="font-normal text-[#718791]">(demo)</span></dd></div>
+            <div><dt className="text-xs font-medium text-[#6B818B]">QAOA runtime</dt><dd className="mt-1 text-sm font-semibold text-[#28323C]">{demoBenchmark.qaoaRuntimeMs} ms <span className="font-normal text-[#718791]">(demo)</span></dd></div>
+            <div><dt className="text-xs font-medium text-[#6B818B]">Classical runtime</dt><dd className="mt-1 text-sm font-semibold text-[#28323C]">{demoBenchmark.classicalRuntimeMs} ms <span className="font-normal text-[#718791]">(demo)</span></dd></div>
           </dl>
-          <div className="mt-5 rounded-lg border border-[#DCE7EC] bg-[#FAFCFC] p-4">
-            <p className="text-sm font-semibold text-[#27424E]">Selected display blend</p>
+          <div className="mt-5 rounded-lg border border-[#D9E0E7] bg-[#FAFCFC] p-4">
+            <p className="text-sm font-semibold text-[#394957]">Selected display blend</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {selectedCandidates.map((candidate) => <span key={candidate.id} className="rounded-md border border-[#D6E3E6] bg-white px-2 py-1 font-mono text-xs text-[#36505C]">{candidate.id}</span>)}
             </div>
@@ -83,7 +83,7 @@ export function QuantumClassicalComparison() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="research-eyebrow">Comparison controls</p>
-            <h2 id="parity-heading" className="mt-1 text-lg font-semibold text-[#172B3A]">Parity checklist</h2>
+            <h2 id="parity-heading" className="mt-1 text-lg font-semibold text-[#28323C]">Parity checklist</h2>
           </div>
           <StatusPill tone="amber">Contract pending</StatusPill>
         </div>
@@ -91,16 +91,16 @@ export function QuantumClassicalComparison() {
           <table className="research-table min-w-[42rem]">
             <thead><tr><th>Metric</th><th>QAOA / quantum</th><th>Exact classical</th><th>Interpretation</th></tr></thead>
             <tbody>
-              {parityRows.map((row) => <tr key={row.metric}><td className="font-semibold text-[#27424E]">{row.metric}</td><td>{row.quantum}</td><td>{row.classical}</td><td className="text-[#718791]">{row.note}</td></tr>)}
+              {parityRows.map((row) => <tr key={row.metric}><td className="font-semibold text-[#394957]">{row.metric}</td><td>{row.quantum}</td><td>{row.classical}</td><td className="text-[#718791]">{row.note}</td></tr>)}
             </tbody>
           </table>
         </div>
       </Panel>
 
       <section className="grid gap-4 md:grid-cols-3" aria-label="Benchmarking guardrails">
-        <Panel className="p-4"><Equal className="text-teal-700" size={18} /><h3 className="mt-3 text-sm font-semibold text-[#27424E]">Same objective</h3><p className="mt-1 text-xs leading-5 text-[#718791]">The direct scoring function and QUBO must agree before comparison.</p></Panel>
-        <Panel className="p-4"><CheckCircle2 className="text-teal-700" size={18} /><h3 className="mt-3 text-sm font-semibold text-[#27424E]">Feasibility first</h3><p className="mt-1 text-xs leading-5 text-[#718791]">Report constraint satisfaction alongside objective values and selected candidates.</p></Panel>
-        <Panel className="p-4"><ShieldCheck className="text-teal-700" size={18} /><h3 className="mt-3 text-sm font-semibold text-[#27424E]">No advantage claim</h3><p className="mt-1 text-xs leading-5 text-[#718791]">Runtime and sampling context inform a study; they do not alone establish quantum advantage.</p></Panel>
+        <Panel className="p-4"><Equal className="text-blue-700" size={18} /><h3 className="mt-3 text-sm font-semibold text-[#394957]">Same objective</h3><p className="mt-1 text-xs leading-5 text-[#718791]">The direct scoring function and QUBO must agree before comparison.</p></Panel>
+        <Panel className="p-4"><CheckCircle2 className="text-blue-700" size={18} /><h3 className="mt-3 text-sm font-semibold text-[#394957]">Feasibility first</h3><p className="mt-1 text-xs leading-5 text-[#718791]">Report constraint satisfaction alongside objective values and selected candidates.</p></Panel>
+        <Panel className="p-4"><ShieldCheck className="text-blue-700" size={18} /><h3 className="mt-3 text-sm font-semibold text-[#394957]">No advantage claim</h3><p className="mt-1 text-xs leading-5 text-[#718791]">Runtime and sampling context inform a study; they do not alone establish quantum advantage.</p></Panel>
       </section>
 
       <div className="flex items-center gap-2 text-xs text-[#718791]"><Clock3 size={14} /> Backend benchmark data will replace this fixture once an agreed response contract exists.</div>

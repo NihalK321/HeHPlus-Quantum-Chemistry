@@ -71,8 +71,8 @@ function navigationClassName(isActive: boolean, compact = false): string {
       ? 'shrink-0 rounded-md border px-3 py-2 text-xs font-semibold transition-colors'
       : 'group flex items-start gap-3 rounded-lg border px-3 py-2.5 transition-colors',
     isActive
-      ? 'border-[#B9DCD8] bg-[#EAF6F4] text-[#05635F]'
-      : 'border-transparent text-[#526A75] hover:border-[#DCE7EC] hover:bg-[#F6FAFA] hover:text-[#172B3A]',
+      ? 'border-[#B9D5EF] bg-[#EAF3FB] text-[#05635F]'
+      : 'border-transparent text-[#65717D] hover:border-[#D9E0E7] hover:bg-[#EDF4FA] hover:text-[#28323C]',
   )
 }
 
@@ -82,15 +82,15 @@ export function AppShell() {
   const apiConnection = useApiConnection()
 
   return (
-    <div className="min-h-svh bg-[#F8FAFC] lg:grid lg:grid-cols-[16.5rem_minmax(0,1fr)]">
+    <div className="min-h-svh bg-[#F3F5F7] lg:grid lg:grid-cols-[16.5rem_minmax(0,1fr)]">
       <a
-        className="sr-only fixed left-4 top-4 z-50 rounded-md bg-teal-700 px-3 py-2 text-sm font-semibold text-white focus:not-sr-only"
+        className="sr-only fixed left-4 top-4 z-50 rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white focus:not-sr-only"
         href="#main-content"
       >
         Skip to content
       </a>
 
-      <aside className="hidden border-r border-[#DCE7EC] bg-white px-4 py-5 lg:flex lg:min-h-svh lg:flex-col">
+      <aside className="hidden border-r border-[#D9E0E7] bg-white px-4 py-5 lg:flex lg:min-h-svh lg:flex-col">
         <Brand />
         <p className="mt-7 px-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#81939B]">Research workspace</p>
 
@@ -115,8 +115,8 @@ export function AppShell() {
           })}
         </nav>
 
-        <div className="mt-auto rounded-lg border border-[#DCE7EC] bg-[#FBFDFD] p-4">
-          <p className="text-xs font-semibold text-[#27424E]">Research-use prototype</p>
+        <div className="mt-auto rounded-lg border border-[#D9E0E7] bg-[#F8FAFC] p-4">
+          <p className="text-xs font-semibold text-[#394957]">Research-use prototype</p>
           <p className="mt-1.5 text-xs leading-5 text-[#6B818B]">
             Interface fixtures are always labeled and are not experimental evidence or medical guidance.
           </p>
@@ -124,14 +124,14 @@ export function AppShell() {
       </aside>
 
       <div className="min-w-0">
-        <header className="sticky top-0 z-20 border-b border-[#DCE7EC] bg-white/95 backdrop-blur">
+        <header className="sticky top-0 z-20 border-b border-[#D9E0E7] bg-white/95 backdrop-blur">
           <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
             <div className="flex min-w-0 items-center gap-4">
               <div className="lg:hidden">
                 <Brand compact />
               </div>
               <div className="hidden min-w-0 lg:block">
-                <p className="text-xs font-semibold text-[#27424E]">{activeItem.label}</p>
+                <p className="text-xs font-semibold text-[#394957]">{activeItem.label}</p>
                 <p className="mt-0.5 truncate text-xs text-[#7A8D96]">{activeItem.description}</p>
               </div>
             </div>
@@ -163,7 +163,7 @@ export function AppShell() {
           <Outlet />
         </main>
 
-        <footer className="mx-auto flex w-full max-w-[100rem] flex-col gap-2 border-t border-[#DCE7EC] px-4 py-5 text-xs text-[#71848D] sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <footer className="mx-auto flex w-full max-w-[100rem] flex-col gap-2 border-t border-[#D9E0E7] px-4 py-5 text-xs text-[#71848D] sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <span>PepperQ is a research prototype, not medical advice.</span>
           <span>Results require documented source, method, conditions, and provenance.</span>
         </footer>
@@ -179,7 +179,7 @@ function Brand({ compact = false }: { compact?: boolean }) {
         PQ
       </span>
       <span className={compact ? 'hidden sm:block' : ''}>
-        <span className="block text-base font-semibold tracking-[-0.02em] text-[#172B3A]">PepperQ</span>
+        <span className="block text-base font-semibold tracking-[-0.02em] text-[#28323C]">PepperQ</span>
         <span className="block text-[10px] font-medium uppercase tracking-[0.12em] text-[#6D838D]">Quantum molecular research</span>
       </span>
     </div>
