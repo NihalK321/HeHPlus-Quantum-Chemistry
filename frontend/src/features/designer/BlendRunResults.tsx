@@ -3,11 +3,11 @@ import { Button, MetricCard, Panel, StatusPill } from '../../components/ui'
 import type { BlendResult } from '../../services/blendResearch'
 
 export function BlendRunResults({ result }: { result: BlendResult }) {
-  function downloadCircuit() {
-    const url = URL.createObjectURL(new Blob([result.circuit_qasm], { type: 'text/plain' }))
+  function downloadFile(content: string, filename: string, type: string) {
+    const url = URL.createObjectURL(new Blob([content], { type }))
     const anchor = document.createElement('a')
     anchor.href = url
-    anchor.download = 'peptide_blend_qaoa.qasm'
+    anchor.download = filename
     anchor.click()
     window.setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
@@ -61,9 +61,25 @@ export function BlendRunResults({ result }: { result: BlendResult }) {
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-3 text-xs text-[#607883]">
-        <Button onClick={downloadCircuit} variant="secondary">Download blend circuit for IBM Composer</Button>
+        <Button onClick={() => downloadFile(result.circuit_qasm, 'peptide_blend_qaoa.qasm', 'text/plain')} variant="secondary">Download blend circuit for IBM Composer</Button>
+        <Button onClick={() => downloadFile(JSON.stringify(result, null, 2), 'peptide_blend_result.json', 'application/json')} variant="secondary">Download complete result JSON</Button>
         <span>{result.evaluations} evaluations · {result.elapsed_seconds.toFixed(2)} s · seed {result.goals.seed} · depth {result.circuit_depth}</span>
       </div>
+      {result.qubo && <details className="space-y-3 text-sm leading-6" aria-label="Actual QUBO coefficients">
+        <summary className="cursor-pointer font-semibold">Inspect actual QUBO coefficients and fitted angles</summary>
+        <p>Backend cardinality penalty lambda: {result.qubo.cardinality_penalty.toFixed(6)}. Constant offset: {result.qubo.constant.toFixed(6)}. Evaluate E(x) = constant + xᵀQx using the upper triangle below; each pair is counted once.</p>
+        {result.validation && <p>Exhaustive validation: {result.validation.passed ? 'passed' : 'failed'} across {result.validation.checked_binary_states} binary states and {result.validation.checked_feasible_subsets} feasible subsets.</p>}
+        {result.ising && <p>Ising constant offset: {result.ising.offset.toFixed(6)}; it changes global phase and is omitted from the circuit gates.</p>}
+        {result.parameters && <p>Fitted [gamma, beta] pairs in radians: <code>{result.parameters.map((value) => value.toFixed(6)).join(', ')}</code>.</p>}
+        <div className="overflow-x-auto"><table className="research-table"><caption className="sr-only">Actual upper-triangular QUBO matrix in candidate qubit order</caption><thead><tr><th>Q</th>{result.candidates.map((candidate, index) => <th key={candidate.id}>q{index}</th>)}</tr></thead><tbody>{result.candidates.map((candidate, i) => <tr key={candidate.id}><th>q{i}</th>{result.candidates.map((other, j) => <td className="font-mono text-xs" key={other.id}>{(result.qubo!.matrix_upper_triangle?.[i]?.[j] ?? (i === j ? result.qubo!.linear[i] : result.qubo!.quadratic_upper_triangle[i][j])).toFixed(4)}</td>)}</tr>)}</tbody></table></div>
+      </details>}
+      <details className="space-y-3 text-sm leading-6"><summary className="cursor-pointer font-semibold">Inspect calculated descriptors for all candidates</summary>
+        <div className="overflow-x-auto"><table className="research-table"><thead><tr><th>Variable</th><th>Peptide</th><th>Score</th><th>Charge (e)</th><th>GRAVY</th><th>Mass (Da)</th></tr></thead><tbody>{result.candidates.map((candidate, index) => <tr key={candidate.id}><td>q{index}</td><td>{candidate.name}</td><td>{candidate.score?.toFixed(5) ?? 'Unavailable'}</td><td>{candidate.charge?.toFixed(4) ?? 'Unavailable'}</td><td>{candidate.hydropathy?.toFixed(4) ?? 'Unavailable'}</td><td>{candidate.mass_da?.toFixed(2) ?? 'Unavailable'}</td></tr>)}</tbody></table></div>
+      </details>
+      {result.counts && <details className="space-y-3 text-sm leading-6"><summary className="cursor-pointer font-semibold">Inspect simulated shot counts</summary>
+        <p>Counts are simulated measurements. Frequencies below are count / {result.shots}, rather than exact statevector probabilities. {result.sampling && `${result.sampling.feasible_shots} feasible shots; ${result.sampling.infeasible_shots} infeasible shots.`}</p>
+        <div className="max-h-72 overflow-auto"><table className="research-table"><thead><tr><th>Bitstring</th><th>Count</th><th>Observed frequency</th><th>Cardinality</th></tr></thead><tbody>{Object.entries(result.counts).sort((a, b) => b[1] - a[1]).map(([bits, count]) => <tr key={bits}><td className="font-mono">{bits}</td><td>{count}</td><td>{percent(count / result.shots)}</td><td>{[...bits].filter((bit) => bit === '1').length === result.goals.blend_size ? 'Feasible' : 'Infeasible'}</td></tr>)}</tbody></table></div>
+      </details>}
       <details className="text-xs leading-6 text-[#607883]"><summary className="cursor-pointer font-semibold">Scoring methods and limitations</summary>
         <dl className="mt-3 space-y-2">{Object.entries(result.scoring_method).map(([key, value]) => <div key={key}><dt className="font-semibold">{key.replaceAll('_', ' ')}</dt><dd>{value}</dd></div>)}</dl>
         <ul className="mt-4 list-disc space-y-1 pl-5">{result.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul>

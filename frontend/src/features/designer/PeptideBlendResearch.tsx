@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react'
-import { Database, LoaderCircle, Play, Search, WandSparkles, X } from 'lucide-react'
+import { Database, LoaderCircle, ArrowRight, Search, WandSparkles, X } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { Button, Panel, StatusPill } from '../../components/ui'
-import { blendResearch, saveLatestBlend } from '../../services/blendResearch'
-import type { BlendCandidate, BlendResult, CatalogPage, ChemicalGoals } from '../../services/blendResearch'
-import { BlendRunResults } from './BlendRunResults'
-
-const initialGoals: ChemicalGoals = { ph: 7.4, target_charge: 0, target_hydropathy: 0, charge_weight: 0.5, hydropathy_weight: 0.5, diversity_weight: 0.3 }
+import { blendResearch } from '../../services/blendResearch'
+import type { BlendCandidate, CatalogPage, ChemicalGoals } from '../../services/blendResearch'
+import { isWorkspacePersisted, updateBlendWorkspace, validateBlendWorkspace } from '../../services/blendWorkspace'
+import { useBlendWorkspace } from '../shared/useBlendWorkspace'
 
 export function PeptideBlendResearch() {
-  const [goals, setGoals] = useState(initialGoals)
+  const draft = useBlendWorkspace()
+  const { goals, pool, blendSize } = draft
+  const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [search, setSearch] = useState({ query: '', page: 1, revision: 0 })
   const [catalog, setCatalog] = useState<CatalogPage | null>(null)
-  const [pool, setPool] = useState<BlendCandidate[]>([])
-  const [blendSize, setBlendSize] = useState(3)
   const [loading, setLoading] = useState(true)
-  const [busy, setBusy] = useState<'shortlist' | 'qaoa' | null>(null)
+  const [busy, setBusy] = useState<'shortlist' | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [note, setNote] = useState('')
-  const [result, setResult] = useState<BlendResult | null>(null)
+  function setPool(update: BlendCandidate[] | ((previous: BlendCandidate[]) => BlendCandidate[])) {
+    updateBlendWorkspace((previous) => ({ ...previous, pool: typeof update === 'function' ? update(previous.pool) : update }))
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -30,10 +32,9 @@ export function PeptideBlendResearch() {
   }, [search])
 
   function updateGoal(key: keyof ChemicalGoals, value: number) {
-    setGoals((previous) => ({ ...previous, [key]: value }))
-    setResult(null)
-    setPool((previous) => previous.map(({ score: _score, charge: _charge, hydropathy: _hydropathy, ...candidate }) => candidate))
-    setNote('Targets changed. Rerank the catalog or run the selected pool again; previous scores are no longer current.')
+    updateBlendWorkspace((previous) => ({ ...previous, goals: { ...previous.goals, [key]: value },
+      pool: previous.pool.map(({ score: _score, charge: _charge, hydropathy: _hydropathy, ...candidate }) => candidate) }))
+    setNote('Targets changed. Rerank the catalog or continue to Optimization; previous scores are no longer current.')
   }
 
   function browse(page = 1) {
@@ -43,14 +44,13 @@ export function PeptideBlendResearch() {
   }
 
   function toggle(candidate: BlendCandidate) {
-    setResult(null)
     setPool((previous) => previous.some((item) => item.id === candidate.id)
       ? previous.filter((item) => item.id !== candidate.id)
       : previous.length < 8 ? [...previous, candidate] : previous)
   }
 
   async function autoShortlist() {
-    setBusy('shortlist'); setError(null); setResult(null)
+    setBusy('shortlist'); setError(null)
     try {
       if (goals.charge_weight + goals.hydropathy_weight <= 0) throw new Error('Set at least one property weight above zero.')
       const response = await blendResearch.shortlist(goals, query.trim())
@@ -58,19 +58,6 @@ export function PeptideBlendResearch() {
       setNote(`Classically scored ${response.scored_count.toLocaleString()} matching, eligible sequences and shortlisted ${response.candidates.length}. ${response.shortlist_method}`)
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Shortlisting failed.')
-    } finally { setBusy(null) }
-  }
-
-  async function runQaoa() {
-    setBusy('qaoa'); setError(null); setResult(null)
-    try {
-      if (goals.charge_weight + goals.hydropathy_weight <= 0) throw new Error('Set at least one property weight above zero.')
-      const response = await blendResearch.optimize(goals, pool.map((candidate) => candidate.id), blendSize)
-      setResult(response)
-      const saved = saveLatestBlend(response)
-      setNote(saved ? 'Actual simulation complete. This run is also available on the dashboard in this browser.' : 'Simulation complete; browser storage is unavailable, so the result is shown here only.')
-    } catch (reason) {
-      setError(reason instanceof Error ? reason.message : 'QAOA optimization failed.')
     } finally { setBusy(null) }
   }
 
@@ -90,7 +77,7 @@ export function PeptideBlendResearch() {
           <div className="flex items-center gap-3"><Database className="h-5 w-5 text-teal-700" /><div><p className="research-eyebrow">Live local database + QAOA</p><h2 className="mt-1 text-lg font-semibold">Find a chemical-property research blend</h2></div></div>
           <StatusPill tone={catalog ? 'blue' : 'amber'}>{catalog ? `${catalog.catalog.imported_source_records.toLocaleString()} imported source records` : 'Connecting to catalog'}</StatusPill>
         </div>
-        <p className="text-sm leading-6 text-[#526A75]">Set desired chemical properties, shortlist up to eight known peptide sequences, then use a real Qiskit circuit to select whole candidates. Classical filtering searches the large catalog; quantum simulation optimizes only the small pool.</p>
+        <p className="text-sm leading-6 text-[#526A75]">Step 1: set chemical goals and choose up to eight known peptide sequences. Step 2: continue to Blend Optimization to configure and run Qiskit QAOA. Classical shortlisting searches the large catalog; quantum simulation optimizes only your small pool.</p>
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs leading-6 text-amber-900">This selects research candidates by estimated charge, hydropathy, and motif diversity. It does not predict appetite effects, muscle growth, physical compatibility, or efficacy of a mixture. Scores assume linear free-termini sequences; chemical forms are not verified.</div>
         <fieldset className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" disabled={busy !== null}>
           <legend className="sr-only">Chemical goals</legend>
@@ -119,14 +106,14 @@ export function PeptideBlendResearch() {
         )}
         <div className="border-t border-[#DCE7EC] pt-4">
           <div className="flex flex-wrap items-end justify-between gap-3"><div><h3 className="font-semibold">Quantum candidate pool: {pool.length}/8</h3><p className="mt-1 text-xs text-[#607883]">One qubit per peptide. Choose fewer blend members than pool candidates.</p></div>
-            <label className="research-label">Peptides to select<input aria-label="Peptides in blend" className="research-input mt-1 w-24" type="number" min={1} max={7} disabled={busy !== null} value={blendSize} onChange={(event) => { setBlendSize(Number(event.target.value)); setResult(null) }} /></label></div>
+            <label className="research-label">Peptides to select<input aria-label="Peptides in blend" className="research-input mt-1 w-24" type="number" min={1} max={7} disabled={busy !== null} value={blendSize} onChange={(event) => updateBlendWorkspace((previous) => ({ ...previous, blendSize: Number(event.target.value) }))} /></label></div>
           <ul className="mt-3 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">{pool.map((candidate, index) => <li className="rounded-md border border-[#DCE7EC] p-3 text-xs" key={candidate.id}><div className="flex items-start justify-between gap-1"><span className="font-semibold">q{index}: {candidate.name}</span><button aria-label={`Remove ${candidate.name}`} disabled={busy !== null} onClick={() => toggle(candidate)} type="button"><X size={14} /></button></div><p className="mt-2 break-all font-mono">{candidate.sequence}</p>{candidate.score !== undefined && <p className="mt-2 text-teal-800">Calculated score: {candidate.score.toFixed(4)}</p>}</li>)}</ul>
-          <Button className="mt-4" disabled={busy !== null || pool.length <= blendSize || blendSize < 1 || !Number.isInteger(blendSize)} onClick={() => void runQaoa()}><Play size={15} /> {busy === 'qaoa' ? 'Running QAOA simulation…' : 'Optimize blend with QAOA'}</Button>
+          <Button className="mt-4" disabled={busy !== null || pool.length < 2 || pool.length <= blendSize || blendSize < 1 || !Number.isInteger(blendSize)} onClick={() => { const problem = validateBlendWorkspace(draft, false); if (problem) setError(problem); else navigate('/optimization') }}>Continue to Blend Optimization <ArrowRight size={15} /></Button>
+          <p className="mt-2 text-xs text-[#607883]">{isWorkspacePersisted() ? 'Candidates and targets are saved in this browser.' : 'Browser storage is unavailable. Your draft is shared between pages for this visit, but will be lost on refresh.'} QAOA runs on the next page.</p>
           {busy && <LoaderCircle className="ml-3 inline-block h-4 w-4 animate-spin text-teal-700" aria-label="Working" />}
         </div>
         {note && <p className="text-xs leading-6 text-[#607883]" role="status">{note}</p>}
       </Panel>
-      {result && <BlendRunResults result={result} />}
     </div>
   )
 }

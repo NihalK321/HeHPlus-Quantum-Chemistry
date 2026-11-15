@@ -84,13 +84,13 @@ export function PeptideDesigner() {
       <SectionHeading
         eyebrow="Candidate configuration"
         title="Peptide Designer"
-        description="Define a bounded candidate pool and research constraints before blend optimization. Substitutions create candidate variants; the QAOA workflow later selects whole candidates."
+        description="Choose known peptide candidates and chemical goals, then continue to Blend Optimization to run QAOA on the selected pool."
         action={<StatusPill tone="blue">Database + quantum research</StatusPill>}
       />
 
       <PeptideBlendResearch />
 
-      <MockDataNotice detail="The older configuration controls, weights, and candidate previews BELOW this notice remain display fixtures. Use the database-backed chemical targets and QAOA workflow ABOVE for actual calculated research runs." />
+      <MockDataNotice detail="The older configuration controls, weights, and candidate previews BELOW this notice remain display fixtures. Use the live candidate pool ABOVE, then Continue to Blend Optimization for an actual QAOA run." />
 
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <Panel className="p-5">

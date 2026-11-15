@@ -9,6 +9,15 @@ export interface ChemicalGoals {
   diversity_weight: number
 }
 
+export interface QaoaExecution {
+  layers: number
+  max_iterations: number
+  shots: number
+  seed: number
+}
+
+export const defaultQaoaExecution: QaoaExecution = { layers: 1, max_iterations: 60, shots: 2048, seed: 42 }
+
 export interface BlendCandidate {
   id: string
   name: string
@@ -57,7 +66,8 @@ export interface BlendResult {
   provenance: 'simulated'
   status: 'completed' | 'no_feasible_sample'
   execution_backend: string
-  goals: ChemicalGoals & { blend_size: number; shots: number; seed: number; layers: number }
+  goals: ChemicalGoals & QaoaExecution & { blend_size: number }
+  experiment_id?: string
   candidates: BlendCandidate[]
   selected_blend: BlendSelection | null
   classical_reference: BlendSelection
@@ -83,6 +93,19 @@ export interface BlendResult {
   limitations: string[]
   scoring_method: Record<string, string>
   catalog: CatalogStats
+  counts?: Record<string, number>
+  parameters?: number[]
+  qubo?: {
+    constant: number
+    linear: number[]
+    quadratic_upper_triangle: number[][]
+    matrix_upper_triangle?: number[][]
+    cardinality_penalty: number
+    pair_overlap_upper_triangle: number[][]
+  }
+  ising?: { offset: number; fields: number[]; couplings_upper_triangle: number[][] }
+  validation?: { passed: boolean; checked_binary_states: number; checked_feasible_subsets: number }
+  sampling?: { feasible_shots: number; infeasible_shots: number }
 }
 
 const client = new ApiClient()
@@ -95,10 +118,10 @@ export const blendResearch = {
   shortlist(goals: ChemicalGoals, search: string): Promise<ShortlistResult> {
     return client.request('blends/shortlist', { method: 'POST', body: { ...goals, search, pool_size: 8 } })
   },
-  optimize(goals: ChemicalGoals, candidateIds: string[], blendSize: number): Promise<BlendResult> {
+  optimize(goals: ChemicalGoals, candidateIds: string[], blendSize: number, execution: QaoaExecution = defaultQaoaExecution): Promise<BlendResult> {
     return client.request('blends/optimize', {
       method: 'POST',
-      body: { ...goals, candidate_ids: candidateIds, blend_size: blendSize, layers: 1, max_iterations: 60, shots: 2048, seed: 42 },
+      body: { ...goals, candidate_ids: candidateIds, blend_size: blendSize, ...execution },
     })
   },
 }

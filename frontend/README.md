@@ -1,5 +1,40 @@
 # React + TypeScript + Vite
 
+## Live blend optimization
+
+Start FastAPI from the repository root with
+`python -m uvicorn backend.api:app --reload`, and start Vite from `frontend/`
+with `npm run dev`.
+
+1. Open **Peptide Designer** (`/designer`), set chemical targets, and select
+   up to eight supported peptides or click **Auto-shortlist 8**.
+2. Set how many whole peptides to select (initial experiment: three of eight).
+3. Click **Continue to Blend Optimization** (`/optimization`).
+4. Set QAOA layers (1-2), objective evaluation budget (10-120), simulated shots
+   (128-8192), and seed, then click **Run Quantum Optimization**.
+5. Inspect the real simulated selection, exact classical reference, feasibility,
+   objective gap, and actual optimization history. Expand the details for QUBO
+   coefficients, fitted angles, all candidate descriptors, and shot counts.
+   Download the full result JSON or the Composer-compatible OpenQASM circuit.
+
+The existing `POST /api/v1/blends/optimize` contract is reused. Peptide
+selection and targets live in Designer; QAOA submission lives in Optimization.
+The draft survives navigation and refresh via browser local storage. If storage
+is blocked, the draft still transfers between pages during the visit and the UI
+explains the persistence limitation. The latest completed result is separately
+saved for the dashboard. Results are marked as a previous-run snapshot whenever
+candidate IDs, sequences, goals, cardinality, or execution settings differ.
+
+No request runs on page load or on a settings change. Runs are local ideal
+Qiskit simulations with simulated shot sampling; no IBM QPU job is submitted.
+There are no fabricated fallback candidates, convergence traces, or results.
+The older Designer panels below the demo notice remain separate display fixtures.
+
+Verified with the real local catalog/backend: eight-candidate route handoff,
+two-layer QAOA and custom settings, reload persistence, result exports, stale
+result labeling, invalid-input prevention, failed request/retry, blocked storage,
+dashboard propagation, and desktop/mobile rendering. Build and lint also pass.
+
 ## Automatic molecular structure viewer
 
 The Molecular Analysis page (`/chemistry`) automatically requests a generated
