@@ -1,3 +1,0 @@
-# Kept package-local because the root backend dependency manifest is shared.
-biopython>=1.88,<2
-

@@ -1,0 +1,1931 @@
+{
+  "created_at_utc": "2026-11-15T04:45:18.897328+00:00",
+  "energy_convention": "Electronic qubit-Hamiltonian energy plus the PySCF nuclear repulsion energy equals total molecular energy (Hartree).",
+  "molecule": "HeH+",
+  "result_source": "calculated",
+  "results": [
+    {
+      "absolute_electronic_error_hartree": 2.3370638757569395e-11,
+      "absolute_total_energy_error_hartree": 2.3370638757569395e-11,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                         \u251c\n     \u2502                                          \u2502\nq_1: \u25241                                         \u251c\n     \u2502  EvolvedOps(-0.01052,-0.01052,-0.064675) \u2502\nq_2: \u25242                                         \u251c\n     \u2502                                          \u2502\nq_3: \u25243                                         \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -4.342417847406747,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8304829590638896,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 0.7,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -4.332551498826789,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.332551498826846,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.332551498826847,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.332551494278871,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.202000222729153,
+          "evaluation": 5,
+          "parameters": [
+            3.814697265625e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342156647206326,
+          "evaluation": 6,
+          "parameters": [
+            7.942291064523924e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342156646833904,
+          "evaluation": 7,
+          "parameters": [
+            8.091302676462401e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.3421566468338995,
+          "evaluation": 8,
+          "parameters": [
+            7.942291064523924e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342156647255496,
+          "evaluation": 9,
+          "parameters": [
+            7.942291064523924e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.341942708515594,
+          "evaluation": 10,
+          "parameters": [
+            -0.024724573378181403
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342417650104276,
+          "evaluation": 11,
+          "parameters": [
+            -0.010523765041484345
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342417650102629,
+          "evaluation": 12,
+          "parameters": [
+            -0.01052375014032315
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342417650102633,
+          "evaluation": 13,
+          "parameters": [
+            -0.010523765041484345
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.34241765012492,
+          "evaluation": 14,
+          "parameters": [
+            -0.010523765041484345
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342417847383376,
+          "evaluation": 15,
+          "parameters": [
+            -0.01052018842710374
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342417847383491,
+          "evaluation": 16,
+          "parameters": [
+            -0.010520173525942545
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.3424178473834845,
+          "evaluation": 17,
+          "parameters": [
+            -0.01052018842710374
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.342417847383319,
+          "evaluation": 18,
+          "parameters": [
+            -0.01052018842710374
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:11.651194+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -4.342417847383376,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 1.5119348883428574,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.01052018842710374,
+        -0.010520001164108356,
+        -0.06467460146878316
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 18,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.830482959040519
+    },
+    {
+      "absolute_electronic_error_hartree": 4.274802734016703e-12,
+      "absolute_total_energy_error_hartree": 4.274802734016703e-12,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                         \u251c\n     \u2502                                          \u2502\nq_1: \u25241                                         \u251c\n     \u2502  EvolvedOps(-0.01333,-0.01333,-0.066527) \u2502\nq_2: \u25242                                         \u251c\n     \u2502                                          \u2502\nq_3: \u25243                                         \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -4.178651654528009,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.855708627228009,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 0.8,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -4.169174277654714,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.169174277654768,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.169174277654768,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.169174273403968,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.07013696608416,
+          "evaluation": 5,
+          "parameters": [
+            3.5762786865234375e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178286383567815,
+          "evaluation": 6,
+          "parameters": [
+            8.065396697272743e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178286383156811,
+          "evaluation": 7,
+          "parameters": [
+            8.214408309211219e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178286383156812,
+          "evaluation": 8,
+          "parameters": [
+            8.065396697272743e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178286383603237,
+          "evaluation": 9,
+          "parameters": [
+            8.065396697272743e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178247077217286,
+          "evaluation": 10,
+          "parameters": [
+            -0.02735308200791392
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651630164938,
+          "evaluation": 11,
+          "parameters": [
+            -0.013326381614091755
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651630164124,
+          "evaluation": 12,
+          "parameters": [
+            -0.013326366712930561
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651630164122,
+          "evaluation": 13,
+          "parameters": [
+            -0.013326381614091755
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651630171904,
+          "evaluation": 14,
+          "parameters": [
+            -0.013326381614091755
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651654523734,
+          "evaluation": 15,
+          "parameters": [
+            -0.013329705822256671
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.17865165452378,
+          "evaluation": 16,
+          "parameters": [
+            -0.013329690921095478
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651654523783,
+          "evaluation": 17,
+          "parameters": [
+            -0.013329705822256671
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.178651654523712,
+          "evaluation": 18,
+          "parameters": [
+            -0.013329705822256671
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:12.467652+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -4.178651654523734,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 1.3229430273,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.013329705822256671,
+        -0.013329796405261435,
+        -0.06652711867506358
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 18,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.855708627223734
+    },
+    {
+      "absolute_electronic_error_hartree": 2.2497559371004172e-12,
+      "absolute_total_energy_error_hartree": 2.2497559371004172e-12,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                           \u251c\n     \u2502                                            \u2502\nq_1: \u25241                                           \u251c\n     \u2502  EvolvedOps(-0.015761,-0.015761,-0.065768) \u2502\nq_2: \u25242                                           \u251c\n     \u2502                                            \u2502\nq_3: \u25243                                           \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -4.0385669363977765,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8626175787977766,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 0.9,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -4.029993098572124,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.029993098572167,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.029993098572165,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.029993094677798,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9554888125191363,
+          "evaluation": 5,
+          "parameters": [
+            2.86102294921875e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038118913295668,
+          "evaluation": 6,
+          "parameters": [
+            6.841836595964499e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.0381189128698125,
+          "evaluation": 7,
+          "parameters": [
+            6.990848207902975e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038118912869811,
+          "evaluation": 8,
+          "parameters": [
+            6.841836595964499e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038118913320194,
+          "evaluation": 9,
+          "parameters": [
+            6.841836595964499e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038278093202325,
+          "evaluation": 10,
+          "parameters": [
+            -0.02839901356415072
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.0385669283082954,
+          "evaluation": 11,
+          "parameters": [
+            -0.015753122242572547
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.0385669283085415,
+          "evaluation": 12,
+          "parameters": [
+            -0.015753107341411353
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038566928308541,
+          "evaluation": 13,
+          "parameters": [
+            -0.015753122242572547
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038566928304433,
+          "evaluation": 14,
+          "parameters": [
+            -0.015753122242572547
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038566936395527,
+          "evaluation": 15,
+          "parameters": [
+            -0.015760659088442694
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038566936395497,
+          "evaluation": 16,
+          "parameters": [
+            -0.0157606441872815
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038566936395493,
+          "evaluation": 17,
+          "parameters": [
+            -0.015760659088442694
+          ]
+        },
+        {
+          "electronic_energy_hartree": -4.038566936395528,
+          "evaluation": 18,
+          "parameters": [
+            -0.015760659088442694
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:13.275348+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -4.038566936395527,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 1.1759493576,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.015760659088442694,
+        -0.015760814823325822,
+        -0.06576814103129083
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 18,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.862617578795527
+    },
+    {
+      "absolute_electronic_error_hartree": 8.5069729038878e-12,
+      "absolute_total_energy_error_hartree": 8.5069729038878e-12,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                           \u251c\n     \u2502                                            \u2502\nq_1: \u25241                                           \u251c\n     \u2502  EvolvedOps(-0.017375,-0.017375,-0.062401) \u2502\nq_2: \u25242                                           \u251c\n     \u2502                                            \u2502\nq_3: \u25243                                           \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.9185595444198045,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8602051225798046,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 1.0,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.9112755001645994,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9112755001646393,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9112755001646384,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9112754966733547,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.855832449998157,
+          "evaluation": 5,
+          "parameters": [
+            2.682209014892578e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9180787351588586,
+          "evaluation": 6,
+          "parameters": [
+            6.672119997576113e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.918078734744818,
+          "evaluation": 7,
+          "parameters": [
+            6.82113160951459e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.918078734744819,
+          "evaluation": 8,
+          "parameters": [
+            6.672119997576113e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.918078735175194,
+          "evaluation": 9,
+          "parameters": [
+            6.672119997576113e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9183903753546545,
+          "evaluation": 10,
+          "parameters": [
+            -0.027655579502806844
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9183903756047123,
+          "evaluation": 11,
+          "parameters": [
+            -0.02765556460164565
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9183903756047127,
+          "evaluation": 12,
+          "parameters": [
+            -0.027655579502806844
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9183903753098837,
+          "evaluation": 13,
+          "parameters": [
+            -0.027655579502806844
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9185594794929086,
+          "evaluation": 14,
+          "parameters": [
+            -0.017362595040809673
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.918559479491112,
+          "evaluation": 15,
+          "parameters": [
+            -0.01736258013964848
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.918559479491113,
+          "evaluation": 16,
+          "parameters": [
+            -0.017362595040809673
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9185594795036844,
+          "evaluation": 17,
+          "parameters": [
+            -0.017362595040809673
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9185595444112975,
+          "evaluation": 18,
+          "parameters": [
+            -0.01737476400201435
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.918559544411246,
+          "evaluation": 19,
+          "parameters": [
+            -0.017374749100853158
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9185595444112384,
+          "evaluation": 20,
+          "parameters": [
+            -0.01737476400201435
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.9185595444113406,
+          "evaluation": 21,
+          "parameters": [
+            -0.01737476400201435
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:14.105065+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.9185595444112975,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 1.05835442184,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.01737476400201435,
+        -0.017374582555707906,
+        -0.062401348712733375
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 21,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.8602051225712977
+    },
+    {
+      "absolute_electronic_error_hartree": 3.2609470679290098e-12,
+      "absolute_total_energy_error_hartree": 3.2609470679290098e-12,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                           \u251c\n     \u2502                                            \u2502\nq_1: \u25241                                           \u251c\n     \u2502  EvolvedOps(-0.017847,-0.017847,-0.056775) \u2502\nq_2: \u25242                                           \u251c\n     \u2502                                            \u2502\nq_3: \u25243                                           \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.815656571895282,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.853516188404373,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 1.1,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.8098560449802696,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.809856044980283,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8098560449802843,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.809856041921483,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7692193125089104,
+          "evaluation": 5,
+          "parameters": [
+            8.940696716308594e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8152050626114775,
+          "evaluation": 6,
+          "parameters": [
+            2.2756724112501753e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8152050622333475,
+          "evaluation": 7,
+          "parameters": [
+            2.424684023188652e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815205062233343,
+          "evaluation": 8,
+          "parameters": [
+            2.2756724112501753e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8152050626219345,
+          "evaluation": 9,
+          "parameters": [
+            2.2756724112501753e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815577396840883,
+          "evaluation": 10,
+          "parameters": [
+            -0.02528913131161056
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815577397003304,
+          "evaluation": 11,
+          "parameters": [
+            -0.025289116410449366
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8155773970033087,
+          "evaluation": 12,
+          "parameters": [
+            -0.02528913131161056
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8155773968042777,
+          "evaluation": 13,
+          "parameters": [
+            -0.02528913131161056
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8156565367381776,
+          "evaluation": 14,
+          "parameters": [
+            -0.017834500708999227
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815656536736779,
+          "evaluation": 15,
+          "parameters": [
+            -0.017834485807838033
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815656536736779,
+          "evaluation": 16,
+          "parameters": [
+            -0.017834500708999227
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815656536745998,
+          "evaluation": 17,
+          "parameters": [
+            -0.017834500708999227
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815656571892021,
+          "evaluation": 18,
+          "parameters": [
+            -0.017847324538094112
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815656571891986,
+          "evaluation": 19,
+          "parameters": [
+            -0.01784730963693292
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.815656571891985,
+          "evaluation": 20,
+          "parameters": [
+            -0.017847324538094112
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.8156565718920588,
+          "evaluation": 21,
+          "parameters": [
+            -0.017847324538094112
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:14.930199+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.815656571892021,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 0.962140383490909,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.017847324538094112,
+        -0.01784736753074671,
+        -0.05677463062111461
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 21,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.853516188401112
+    },
+    {
+      "absolute_electronic_error_hartree": 6.479261571712414e-13,
+      "absolute_total_energy_error_hartree": 6.483702463810914e-13,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                           \u251c\n     \u2502                                            \u2502\nq_1: \u25241                                           \u251c\n     \u2502  EvolvedOps(-0.017081,-0.017081,-0.049542) \u2502\nq_2: \u25242                                           \u251c\n     \u2502                                            \u2502\nq_3: \u25243                                           \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.7273873560627284,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8454253378627286,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 1.2,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.7230593373943273,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7230593373943286,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7230593373943286,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.723059334777431,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6938987644799504,
+          "evaluation": 5,
+          "parameters": [
+            8.940696716308594e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727015482583995,
+          "evaluation": 6,
+          "parameters": [
+            2.2977846604867078e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727015482258842,
+          "evaluation": 7,
+          "parameters": [
+            3.787900779871474e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727015482258842,
+          "evaluation": 8,
+          "parameters": [
+            2.2977846604867078e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727015482590396,
+          "evaluation": 9,
+          "parameters": [
+            2.2977846604867078e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727358956776692,
+          "evaluation": 10,
+          "parameters": [
+            -0.02176739490780232
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7273589568695673,
+          "evaluation": 11,
+          "parameters": [
+            -0.021767380006641125
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7273589568695673,
+          "evaluation": 12,
+          "parameters": [
+            -0.02176739490780232
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727358956749779,
+          "evaluation": 13,
+          "parameters": [
+            -0.02176739490780232
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727387343351364,
+          "evaluation": 14,
+          "parameters": [
+            -0.01706942582582136
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727387343350485,
+          "evaluation": 15,
+          "parameters": [
+            -0.017069410924660165
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7273873433504856,
+          "evaluation": 16,
+          "parameters": [
+            -0.01706942582582136
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727387343356025,
+          "evaluation": 17,
+          "parameters": [
+            -0.01706942582582136
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7273873560620805,
+          "evaluation": 18,
+          "parameters": [
+            -0.0170806570329174
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.7273873560620694,
+          "evaluation": 19,
+          "parameters": [
+            -0.017080642131756207
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727387356062068,
+          "evaluation": 20,
+          "parameters": [
+            -0.0170806570329174
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.727387356062107,
+          "evaluation": 21,
+          "parameters": [
+            -0.0170806570329174
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:15.773605+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.7273873560620805,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 0.8819620182000001,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.0170806570329174,
+        -0.017080627387967378,
+        -0.04954168329673486
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 21,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.84542533786208
+    },
+    {
+      "absolute_electronic_error_hartree": 1.616484723854228e-13,
+      "absolute_total_energy_error_hartree": 1.616484723854228e-13,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                           \u251c\n     \u2502                                            \u2502\nq_1: \u25241                                           \u251c\n     \u2502  EvolvedOps(-0.015246,-0.015246,-0.041517) \u2502\nq_2: \u25242                                           \u251c\n     \u2502                                            \u2502\nq_3: \u25243                                           \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.6516156657016587,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8374968796708897,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 1.3,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.6485871988314966,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6485871988315046,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.648587198831505,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6485871966465484,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.628247851258018,
+          "evaluation": 5,
+          "parameters": [
+            5.364418029785156e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6513458877344966,
+          "evaluation": 6,
+          "parameters": [
+            1.378313249606957e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6513458874704114,
+          "evaluation": 7,
+          "parameters": [
+            1.5273248615454337e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6513458874704097,
+          "evaluation": 8,
+          "parameters": [
+            1.378313249606957e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6513458877382146,
+          "evaluation": 9,
+          "parameters": [
+            1.378313249606957e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.651608539626884,
+          "evaluation": 10,
+          "parameters": [
+            -0.01769218210137734
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6516085396716367,
+          "evaluation": 11,
+          "parameters": [
+            -0.017692167200216147
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.65160853967164,
+          "evaluation": 12,
+          "parameters": [
+            -0.01769218210137734
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.651608539609046,
+          "evaluation": 13,
+          "parameters": [
+            -0.01769218210137734
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6516156629117904,
+          "evaluation": 14,
+          "parameters": [
+            -0.015238473556114993
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6516156629113636,
+          "evaluation": 15,
+          "parameters": [
+            -0.0152384586549538
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.651615662911362,
+          "evaluation": 16,
+          "parameters": [
+            -0.015238473556114993
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6516156629139602,
+          "evaluation": 17,
+          "parameters": [
+            -0.015238473556114993
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.651615665701497,
+          "evaluation": 18,
+          "parameters": [
+            -0.015246015191459043
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6516156657014904,
+          "evaluation": 19,
+          "parameters": [
+            -0.015246000290297849
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.6516156657014918,
+          "evaluation": 20,
+          "parameters": [
+            -0.015246015191459043
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.651615665701509,
+          "evaluation": 21,
+          "parameters": [
+            -0.015246015191459043
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:16.625618+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.651615665701497,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 0.8141187860307693,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.015246015191459043,
+        -0.015246065337477003,
+        -0.04151716148584071
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 21,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.837496879670728
+    },
+    {
+      "absolute_electronic_error_hartree": 3.3737457272309257e-12,
+      "absolute_total_energy_error_hartree": 3.3737457272309257e-12,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                             \u251c\n     \u2502                                              \u2502\nq_1: \u25241                                             \u251c\n     \u2502  EvolvedOps(-0.0099425,-0.0099425,-0.026095) \u2502\nq_2: \u25242                                             \u251c\n     \u2502                                              \u2502\nq_3: \u25243                                             \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.530252290749801,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.824682676189801,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 1.5,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.5290193645937467,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.529019364593783,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.529019364593783,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5290193631806064,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5201873515293065,
+          "evaluation": 5,
+          "parameters": [
+            2.4437904357910156e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5301531227535485,
+          "evaluation": 6,
+          "parameters": [
+            6.164834884813907e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5301531226048546,
+          "evaluation": 7,
+          "parameters": [
+            6.313846496752384e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5301531226048546,
+          "evaluation": 8,
+          "parameters": [
+            6.164834884813907e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530153122754582,
+          "evaluation": 9,
+          "parameters": [
+            6.164834884813907e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530252270939708,
+          "evaluation": 10,
+          "parameters": [
+            -0.009970664066661732
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530252270940767,
+          "evaluation": 11,
+          "parameters": [
+            -0.009970649165500538
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530252270940767,
+          "evaluation": 12,
+          "parameters": [
+            -0.009970664066661732
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5302522709339033,
+          "evaluation": 13,
+          "parameters": [
+            -0.009970664066661732
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.5302522907464273,
+          "evaluation": 14,
+          "parameters": [
+            -0.009942548428549941
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530252290746398,
+          "evaluation": 15,
+          "parameters": [
+            -0.009942533527388747
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530252290746398,
+          "evaluation": 16,
+          "parameters": [
+            -0.009942548428549941
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.530252290746447,
+          "evaluation": 17,
+          "parameters": [
+            -0.009942548428549941
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:17.373241+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.5302522907464273,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 0.70556961456,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.009942548428549941,
+        -0.009942548428549941,
+        -0.026095139787256024
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 17,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.8246826761864274
+    },
+    {
+      "absolute_electronic_error_hartree": 3.652633751016765e-12,
+      "absolute_total_energy_error_hartree": 3.653077840226615e-12,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                            \u251c\n     \u2502                                             \u2502\nq_1: \u25241                                            \u251c\n     \u2502  EvolvedOps(-0.0033722,-0.003372,-0.010429) \u2502\nq_2: \u25242                                            \u251c\n     \u2502                                             \u2502\nq_3: \u25243                                            \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.401970713355323,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8139960345553234,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 1.8,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.401756901711335,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4017569017113742,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.401756901711374,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4017569010997373,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3999598937825257,
+          "evaluation": 5,
+          "parameters": [
+            2.6226043701171875e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019606510267963,
+          "evaluation": 6,
+          "parameters": [
+            6.344787792512357e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.401960650982336,
+          "evaluation": 7,
+          "parameters": [
+            6.493799404450834e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.401960650982334,
+          "evaluation": 8,
+          "parameters": [
+            6.344787792512357e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019606510268816,
+          "evaluation": 9,
+          "parameters": [
+            6.344787792512357e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019705790538084,
+          "evaluation": 10,
+          "parameters": [
+            -0.0029825833586288792
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019705790487134,
+          "evaluation": 11,
+          "parameters": [
+            -0.0029825684574676854
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019705790487182,
+          "evaluation": 12,
+          "parameters": [
+            -0.0029825833586288792
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.401970579053263,
+          "evaluation": 13,
+          "parameters": [
+            -0.0029825833586288792
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019707133516706,
+          "evaluation": 14,
+          "parameters": [
+            -0.0033722043805363994
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019707133516763,
+          "evaluation": 15,
+          "parameters": [
+            -0.0033721894793752056
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019707133516746,
+          "evaluation": 16,
+          "parameters": [
+            -0.0033722043805363994
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.4019707133515884,
+          "evaluation": 17,
+          "parameters": [
+            -0.0033722043805363994
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:18.140315+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.4019707133516706,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 0.5879746788,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.0033722043805363994,
+        -0.0033719606308316693,
+        -0.010428816669581294
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 17,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.8139960345516704
+    },
+    {
+      "absolute_electronic_error_hartree": 1.829647544582258e-13,
+      "absolute_total_energy_error_hartree": 1.829647544582258e-13,
+      "ansatz": "UCCSD with HartreeFock initial state",
+      "calculated_with": "Qiskit StatevectorEstimator VQE (local exact-state simulator)",
+      "calculation_status": "completed",
+      "circuit_depth": 1,
+      "circuit_text": "     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nq_0: \u25240                                              \u251c\n     \u2502                                               \u2502\nq_1: \u25241                                              \u251c\n     \u2502  EvolvedOps(-0.0013102,-0.0013102,-0.0051291) \u2502\nq_2: \u25242                                              \u251c\n     \u2502                                               \u2502\nq_3: \u25243                                              \u251c\n     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "classical_electronic_energy_hartree": -3.3399573100543742,
+      "classical_reference_method": "Qiskit Algorithms NumPyMinimumEigensolver exact diagonalization with Qiskit Nature's default physical-sector filter",
+      "classical_total_molecular_energy_hartree": -2.8107800991343743,
+      "config": {
+        "basis": "sto3g",
+        "bond_distance_angstrom": 2.0,
+        "charge": 1,
+        "ftol": 1e-10,
+        "maxiter": 200,
+        "spin": 0
+      },
+      "convergence_history": [
+        {
+          "electronic_energy_hartree": -3.3399030457440393,
+          "evaluation": 1,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399030457440713,
+          "evaluation": 2,
+          "parameters": [
+            1.4901161193847656e-08
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.339903045744071,
+          "evaluation": 3,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399030454286414,
+          "evaluation": 4,
+          "parameters": [
+            0.0
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3394008364205146,
+          "evaluation": 5,
+          "parameters": [
+            2.1457672119140625e-06
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399558491364894,
+          "evaluation": 6,
+          "parameters": [
+            5.058375243172303e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399558491198804,
+          "evaluation": 7,
+          "parameters": [
+            5.20738685511078e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.339955849119881,
+          "evaluation": 8,
+          "parameters": [
+            5.058375243172303e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399558491364987,
+          "evaluation": 9,
+          "parameters": [
+            5.058375243172303e-07
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399572773037267,
+          "evaluation": 10,
+          "parameters": [
+            -0.0011140442806870116
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.339957277301245,
+          "evaluation": 11,
+          "parameters": [
+            -0.0011140293795258178
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.339957277301245,
+          "evaluation": 12,
+          "parameters": [
+            -0.0011140442806870116
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.33995727730365,
+          "evaluation": 13,
+          "parameters": [
+            -0.0011140442806870116
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399573100541913,
+          "evaluation": 14,
+          "parameters": [
+            -0.0013102099400379558
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399573100541926,
+          "evaluation": 15,
+          "parameters": [
+            -0.001310195038876762
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.339957310054192,
+          "evaluation": 16,
+          "parameters": [
+            -0.0013102099400379558
+          ]
+        },
+        {
+          "electronic_energy_hartree": -3.3399573100541744,
+          "evaluation": 17,
+          "parameters": [
+            -0.0013102099400379558
+          ]
+        }
+      ],
+      "created_at_utc": "2026-11-15T04:45:18.897230+00:00",
+      "decomposed_circuit_depth": 112,
+      "electron_count": 2,
+      "electronic_energy_hartree": -3.3399573100541913,
+      "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+      "estimator": "StatevectorEstimator",
+      "limitations": [
+        "Local statevector simulation is not a hardware result and does not model noise.",
+        "STO-3G is a small basis; the result is only comparable within this stated model.",
+        "The Born-Oppenheimer electronic calculation uses a fixed He-H distance.",
+        "VQE convergence and error are optimizer/model specific, not evidence of quantum advantage."
+      ],
+      "mapping": "JordanWignerMapper (no qubit reduction)",
+      "molecule": "HeH+",
+      "nuclear_repulsion_hartree": 0.52917721092,
+      "num_particles": [
+        1,
+        1
+      ],
+      "optimal_parameters": [
+        -0.0013102099400379558,
+        -0.0013101873446388532,
+        -0.0051291377010650235
+      ],
+      "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+      "optimizer_evaluations": 17,
+      "package_versions": {
+        "numpy": "2.5.1",
+        "pyscf": "2.15.0",
+        "python": "3.14.5",
+        "qiskit": "2.6.2",
+        "qiskit-algorithms": "0.4.0",
+        "qiskit-nature": "0.8.0",
+        "scipy": "1.18.1"
+      },
+      "parameter_count": 3,
+      "qubit_count": 4,
+      "total_molecular_energy_hartree": -2.8107800991341914
+    }
+  ]
+}

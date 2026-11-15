@@ -1,2 +1,4 @@
-.peptide_cache/
-.test-tmp-*/
+# Reproducible local calculation outputs are intentionally not source controlled.
+.local/
+__pycache__/
+.pytest-tmp/

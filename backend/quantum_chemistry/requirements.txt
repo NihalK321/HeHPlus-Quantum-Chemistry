@@ -1,8 +1,0 @@
-# Isolated HeH+ VQE experiment dependencies.
-# Kept package-local so shared backend dependency policy is not changed.
-qiskit>=2.0,<3.0
-qiskit-algorithms>=0.4.0,<0.5.0
-qiskit-nature>=0.8.0,<0.9.0
-pyscf>=2.15.0,<3.0.0
-numpy>=2.0,<3.0
-scipy>=1.13,<2.0

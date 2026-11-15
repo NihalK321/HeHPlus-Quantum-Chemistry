@@ -1,4 +1,0 @@
-# Local calculation artifacts are reproducible through the package CLI but are
-# intentionally not source-controlled. They may contain machine-specific paths
-# and timestamps.
-.local/

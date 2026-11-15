@@ -1,0 +1,4 @@
+# Standalone local-simulator environment for the IBM HeH+ challenge.
+# All scientific dependencies are challenge-owned; no parent project package is used.
+-r backend/requirements.txt
+matplotlib>=3.9,<4.0

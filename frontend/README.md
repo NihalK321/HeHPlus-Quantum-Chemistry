@@ -1,103 +1,28 @@
-# React + TypeScript + Vite
+# HeH+ challenge frontend
 
-## Live blend optimization
+This is an independent React + Vite + TypeScript presentation of the verified
+static artifacts in `../artifacts`. It does not import the main PepperQ
+frontend and it does not run quantum chemistry in the browser.
 
-Start FastAPI from the repository root with
-`python -m uvicorn backend.api:app --reload`, and start Vite from `frontend/`
-with `npm run dev`.
-
-1. Open **Peptide Designer** (`/designer`), set chemical targets, and select
-   up to eight supported peptides or click **Auto-shortlist 8**.
-2. Set how many whole peptides to select (initial experiment: three of eight).
-3. Click **Continue to Blend Optimization** (`/optimization`).
-4. Set QAOA layers (1-2), objective evaluation budget (10-120), simulated shots
-   (128-8192), and seed, then click **Run Quantum Optimization**.
-5. Inspect the real simulated selection, exact classical reference, feasibility,
-   objective gap, and actual optimization history. Expand the details for QUBO
-   coefficients, fitted angles, all candidate descriptors, and shot counts.
-   Download the full result JSON or the Composer-compatible OpenQASM circuit.
-
-The existing `POST /api/v1/blends/optimize` contract is reused. Peptide
-selection and targets live in Designer; QAOA submission lives in Optimization.
-The draft survives navigation and refresh via browser local storage. If storage
-is blocked, the draft still transfers between pages during the visit and the UI
-explains the persistence limitation. The latest completed result is separately
-saved for the dashboard. Results are marked as a previous-run snapshot whenever
-candidate IDs, sequences, goals, cardinality, or execution settings differ.
-
-No request runs on page load or on a settings change. Runs are local ideal
-Qiskit simulations with simulated shot sampling; no IBM QPU job is submitted.
-There are no fabricated fallback candidates, convergence traces, or results.
-The older Designer panels below the demo notice remain separate display fixtures.
-
-Verified with the real local catalog/backend: eight-candidate route handoff,
-two-layer QAOA and custom settings, reload persistence, result exports, stale
-result labeling, invalid-input prevention, failed request/retry, blocked storage,
-dashboard propagation, and desktop/mobile rendering. Build and lint also pass.
-
-## Automatic molecular structure viewer
-
-The Molecular Analysis page (`/chemistry`) automatically requests a generated
-PDB model and displays it under Structure Stats with 3Dmol. No download or file
-upload is required. It initially models `GAGA`; enter another 2–8-residue
-standard sequence and click **Show structure** to update it. The modeled sequence
-is independent of the page's demonstration candidate and descriptor fixtures.
-
-Start the backend from the repository root in one terminal:
+## Run locally
 
 ```powershell
-python -m uvicorn backend.api:app --reload
-```
-
-Start the frontend from `frontend/` in another:
-
-```powershell
-npm ci
+cd challenges/ibm-hehplus/frontend
+npm install
 npm run dev
 ```
 
-The adapter in `src/services/molecularStructure.ts` uses the existing FastAPI
-0.2.0 `POST /optimize` contract and reads `best_structure_pdb`. Its default
-backend URL is `http://127.0.0.1:8000`; set `VITE_STRUCTURE_API_BASE_URL` in
-`.env.local` and restart Vite to change it. This URL is separate from the
-proposed `/api/v1` APIs elsewhere in the UI. The backend allows localhost ports
-5173 and 3000 by default; configure `PEPTIDE_CORS_ORIGINS` if using another origin.
+Run `npm run build` to produce a self-contained static site in `dist/`. Vite's
+`publicDir` is deliberately configured as `../artifacts`, so the build copies
+the checked-in scan JSON, CSV/SVG curve, circuit assets, submission manifest,
+and hardware preflight record alongside the frontend bundle.
 
-Models use classical MMFF94 evaluation, seed 42, and up to three supported
-backbone torsions with two angles each. The UI displays the actual modeled
-sequence and provenance. These are generated conformers, not experimentally
-verified structures, quantum electronic-structure results, or activity predictions.
-If the backend is unavailable, the viewer displays an error and can be retried
-using **Show structure**; it never substitutes a fabricated model. WebGL is
-required. Local PDB/SDF/MOL loading remains available after a model is loaded.
+The interface loads only:
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+- `hehplus_potential_energy_scan.json`
+- `hardware/hehplus_hardware_preflight.json`
+- the verified chart, circuit, CSV, SVG, and manifest linked from the page
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The hardware card reads the preflight record. It must continue to say that no
+hardware result exists unless a completed, auditable hardware record replaces
+that static artifact.

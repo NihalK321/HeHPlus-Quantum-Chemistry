@@ -1,21 +1,24 @@
-import tailwindcss from '@tailwindcss/vite'
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { defineConfig, loadEnv } from 'vite'
 
-// https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-  const environment = loadEnv(mode, process.cwd(), 'VITE_')
-  const backendTarget = environment.VITE_PEPPERQ_BACKEND_URL || 'http://127.0.0.1:8000'
+const directory = fileURLToPath(new URL('.', import.meta.url))
 
-  return {
-    plugins: [react(), tailwindcss()],
-    server: {
-      proxy: {
-        '/api': {
-          target: backendTarget,
-          changeOrigin: true,
-        },
-      },
+/**
+ * The public directory deliberately points to the challenge's verified exports.
+ * Vite copies those files into `dist` for a standalone static build, without
+ * importing or depending on the main PepperQ frontend.
+ */
+export default defineConfig({
+  plugins: [react()],
+  publicDir: fileURLToPath(new URL('../artifacts', import.meta.url)),
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
+  server: {
+    fs: {
+      allow: [directory, fileURLToPath(new URL('..', import.meta.url))],
     },
-  }
+  },
 })

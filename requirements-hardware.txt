@@ -1,0 +1,4 @@
+# Optional IBM Quantum hardware support.  Do not install this file unless a
+# user plans to run hardware_prepare.py with explicit IBM Quantum credentials.
+-r requirements-simulator.txt
+qiskit-ibm-runtime==0.52.1

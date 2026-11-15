@@ -1,0 +1,51 @@
+{
+  "ansatz": "UCCSD with HartreeFock initial state",
+  "artifact_type": "pepperq.ibm_hehplus_challenge_submission",
+  "artifact_version": 1,
+  "basis": "STO-3G",
+  "calculation_context": "Local ideal-state simulation; not IBM hardware execution.",
+  "electron_count": 2,
+  "energy_convention": "Electronic energy is the mapped electronic Hamiltonian expectation; total molecular energy equals electronic energy plus PySCF nuclear repulsion, all in Hartree.",
+  "estimator": "StatevectorEstimator",
+  "files": {
+    "hehplus_potential_energy_curve.csv": {
+      "bytes": 1786,
+      "sha256": "b674c1d5cb6eb708ba2a12324cb05ee0d148cb0b328a7278936c38c0ead744aa"
+    },
+    "hehplus_potential_energy_curve.png": {
+      "bytes": 157465,
+      "sha256": "c75564a5e880e8544a0dc29d9e812ba1ef6e573f6a3038d76cdf50cb899ae608"
+    },
+    "hehplus_potential_energy_curve.svg": {
+      "bytes": 70971,
+      "sha256": "935e47444bc2d25ecada951e552522d996cdb4f8cad1b65435c8097c86bc14b0"
+    },
+    "hehplus_potential_energy_scan.json": {
+      "bytes": 70513,
+      "sha256": "e3db651afa00af097ac10c7e889f9c80dff770f5b89d4530e5d85d1a094ba19c"
+    },
+    "hehplus_vqe_circuit_1.0A.png": {
+      "bytes": 388087,
+      "sha256": "8362a9df8c3c0236c2369d88b9a288b7ec834945623be5d31e62f92bf073b648"
+    },
+    "hehplus_vqe_circuit_1.0A.txt": {
+      "bytes": 19796,
+      "sha256": "bd754b000c5a4c99f22b50b2f1cfe513cb76e6e79c287220ffa867939b2e32c5"
+    }
+  },
+  "generated_at_utc": "2026-11-15T04:45:18.897328+00:00",
+  "mapping": "JordanWignerMapper (no qubit reduction)",
+  "molecular_charge": 1,
+  "molecule": "HeH+",
+  "one_angstrom_check": {
+    "absolute_error_hartree": 8.5069729038878e-12,
+    "exact_classical_total_energy_hartree": -2.8602051225798046,
+    "vqe_total_energy_hartree": -2.8602051225712977
+  },
+  "optimizer": "SLSQP(maxiter=200, ftol=1e-10)",
+  "result_source": "newly calculated local ideal-state Qiskit VQE scan",
+  "sampled_lowest_vqe_point": {
+    "bond_distance_angstrom": 0.9,
+    "total_molecular_energy_hartree": -2.862617578795527
+  }
+}

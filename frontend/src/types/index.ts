@@ -1,5 +1,0 @@
-export * from './api'
-export * from './domain'
-export * from './research'
-export * from './quantumChemistry'
-export * from './peptideLibrary'

@@ -1,0 +1,36 @@
+{
+  "ansatz": "UCCSD with HartreeFock initial state",
+  "backend_name": null,
+  "basis": "sto3g",
+  "bond_distance_angstrom": 1.0,
+  "created_at_utc": "2026-11-15T04:45:28.574891+00:00",
+  "electron_count": 2,
+  "energy_convention": "Measured electronic Hamiltonian expectation plus PySCF nuclear repulsion exactly once equals total molecular energy (Hartree).",
+  "exact_classical_total_energy_hartree": -2.8602051225798046,
+  "execution_status": "not_submitted",
+  "hardware_execution": false,
+  "job_id": null,
+  "local_ideal_vqe_total_energy_hartree": -2.8602051225712977,
+  "local_vqe_vs_classical_absolute_error_hartree": 8.5069729038878e-12,
+  "logical_qubit_count": 4,
+  "mapping": "JordanWignerMapper (no qubit reduction)",
+  "molecular_charge": 1,
+  "molecule": "HeH+",
+  "nuclear_repulsion_hartree": 1.05835442184,
+  "observable_layout_step": "The script calls system.qubit_hamiltonian.apply_layout(isa_circuit.layout) after ISA transpilation, so Pauli observables address the physical qubits used by the circuit.",
+  "record_type": "pepperq.hehplus_hardware_estimator_record",
+  "record_version": 1,
+  "requested_estimator_options": {
+    "default_shots": null,
+    "mitigation_note": "Level 0 requests no Runtime error mitigation/suppression. Higher levels must be interpreted from the returned Runtime metadata and may add measurement or ZNE work.",
+    "precision": 0.02,
+    "resilience_level": 0
+  },
+  "source_scan": {
+    "path": "C:\\Users\\Nihal Katta\\Desktop\\PepperQ-HeHChallenge\\challenges\\ibm-hehplus\\artifacts\\hehplus_potential_energy_scan.json",
+    "point_created_at_utc": "2026-11-15T04:45:14.105065+00:00",
+    "sha256": "e3db651afa00af097ac10c7e889f9c80dff770f5b89d4530e5d85d1a094ba19c"
+  },
+  "submission_safety": "This record is not a hardware result unless hardware_execution is true and a completed job result is present. The script submits only with --submit and an explicit --backend.",
+  "variational_parameter_count": 3
+}
